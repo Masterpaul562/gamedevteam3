@@ -11,4 +11,3 @@ Card game. Player life-based. Players play against each other to win by destroyi
 # Overview of Game #2
 
 # Images of Mockups
-sean diddle combs
