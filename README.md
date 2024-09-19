@@ -1,11 +1,11 @@
 # gamedevteam3
 
 # Team Members and Roles
-Paul Tokhtuev: Coder
-Canon Unguren: Coder
-Oskar Szajnuk: Graphics
-Aiden Felt: Graphics
-Axl Dain: Sounds
+*Paul Tokhtuev: Coder
+*Canon Unguren: Coder
+*Oskar Szajnuk: Graphics
+*Aiden Felt: Graphics
+*Axl Dain: Sounds
 # Overview of Game #1
 Card game. Player life-based. Players play against each other to win by decreasing the opponent's health to 0. Fantasy cards with creatures and monsters. Pixaleted. Cards have abilities that activate with different criteria. Creature cards also have attack power and health. Creatures have to attack the player to do damage. Like magic the gathering.
 # Overview of Game #2
