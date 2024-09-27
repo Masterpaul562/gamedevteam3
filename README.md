@@ -16,17 +16,34 @@ https://app.diagrams.net/
 ![Goblin](https://github.com/user-attachments/assets/54697b71-e64c-49f5-a00f-c641845eb29f)
 
 ## Core Gameplay Mechanics
-
+Combat against hordes of enemies with automatic and manual abilities
+Control of character movement with WASD
+We will give them a lot of visual feedback like the monsters that will each be different. There will also be an audio part when you take damage or heal or do other special abilities.
 ## Story and Settings
-
+You are trying to escape the dungeon 
+Medieval setting in a dungeon with big rooms
+The player will be in a dungeon 
 ## Art and Sound
+It will be in pixel art
+We will create pixel art for both the characters and different enemies. There will be different kinds/classes for enemies, and the variations will look different.
+We will use background music that fits the theme of the game and will also enhance the gameplay for the player. There will also be graphics for the game that fit the music that plays in the background. We will have different sound effects for each of the upgrades as well as sound effects for the enemies.
 
 ## Diffuclty and Progression
-
+There will likely be a timer and during certain points in time, the game will summon stronger enemies depending on how long you have been playing
+Continuous play experience, but the player and the enemies slowly increase in “level” or difficulty.
 ## User Interface and User Experience
-
+key binds and mouse
+yes it is easy to understand
 ## Technical Requirements
-
+Coded in processing
+We will have to create collision detection and it will also be difficult to create a way for the person to stay in the center of the screen while still creating a larger arena they can move around in. It will also be a challenge to make the monsters always come directly towards you. 
 ## Team Roles and Collaboration
-
+Paul Tokhtuev: Coder
+Canon Unguren: Coder
+Oskar Szajnuk: Graphics
+Aiden Felt: Graphics 
+Axl Dain: Sounds
+Discord
 ## Target Audience
+Targeted towards casual gamers
+It has a low-skill floor and is easy to pick up and play while still having enough difficulty to prove entertaining. 
