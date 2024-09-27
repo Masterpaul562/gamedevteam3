@@ -15,3 +15,18 @@ Overview of Game #1
 https://app.diagrams.net/
 ![Goblin](https://github.com/user-attachments/assets/54697b71-e64c-49f5-a00f-c641845eb29f)
 
+## Core Gameplay Mechanics
+
+## Story and Settings
+
+## Art and Sound
+
+## Diffuclty and Progression
+
+## User Interface and User Experience
+
+## Technical Requirements
+
+## Team Roles and Collaboration
+
+## Target Audience
