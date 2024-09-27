@@ -43,6 +43,7 @@ We will have to create collision detection and it will also be difficult to crea
 * Oskar Szajnuk: Graphics
 * Aiden Felt: Graphics
 * Axl Dain: Sounds
+
 Discord
 ## Target Audience
 Targeted towards casual gamers.
