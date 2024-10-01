@@ -53,5 +53,7 @@ It has a low-skill floor and is easy to pick up and play while still having enou
 # Start Screen by Aiden Felt and Axl Dain
 ![UML Document](https://github.com/Masterpaul562/gamedevteam3/blob/main/images/GoblinStart.png?raw=true)
 # Game Over screen
-![GameOverScreen](https://github.com/user-attachments/assets/53496277-d5cc-4d4a-b29e-b6501094b9df)
+by Paul Tokhtuev
+![GameOverScreenByPT](https://github.com/user-attachments/assets/d75e5168-9976-40d0-8ca0-0818cfc11036)
+
 
