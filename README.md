@@ -48,7 +48,8 @@ Discord
 ## Target Audience
 Targeted towards casual gamers.
 It has a low-skill floor and is easy to pick up and play while still having enough difficulty to prove entertaining. 
-
+# UML Document
+![UML Document](https://github.com/Masterpaul562/gamedevteam3/blob/main/images/GoblinSurvivorUML.jpg?raw=true)
 # Game Over screen
 ![GameOverScreen](https://github.com/user-attachments/assets/53496277-d5cc-4d4a-b29e-b6501094b9df)
 
