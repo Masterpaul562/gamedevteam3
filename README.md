@@ -50,6 +50,9 @@ Targeted towards casual gamers.
 It has a low-skill floor and is easy to pick up and play while still having enough difficulty to prove entertaining. 
 # UML Document
 ![UML Document](https://github.com/Masterpaul562/gamedevteam3/blob/main/images/GoblinSurvivorUML.jpg?raw=true)
+# Game Play Screen with Score Panel
+by Oskar Szajnuk
+![Mockup2](https://github.com/user-attachments/assets/684b89bd-644b-40bc-89da-e93d44135460)
 # Start Screen by Aiden Felt and Axl Dain
 ![UML Document](https://github.com/Masterpaul562/gamedevteam3/blob/main/images/GoblinStart.png?raw=true)
 # Game Over screen
