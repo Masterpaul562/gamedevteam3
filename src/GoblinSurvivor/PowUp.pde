@@ -7,14 +7,14 @@ class PowUp {
   
   // Constructor
   PowUp() {
-    orb = loadImage
-    x = 100
-    type = 'e'
+    orb = loadImage;
+    x = 100;
+    type = 'e';
   }
   
   // Member Methods
   void display() {
-    imageMode(CENTER)
+    imageMode(CENTER);
     // g1.resize(50,50)
     image(orb,x,y);
   }
