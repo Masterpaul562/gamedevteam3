@@ -3,7 +3,7 @@ class Projectile {
   // Memebr Varibles
   PImage staby1;
   int x,y,w,h;
-  int speed damage range atkSpeed;
+  int speed, damage, range, atkSpeed;
   boolean unlocked;
   char type;
 
