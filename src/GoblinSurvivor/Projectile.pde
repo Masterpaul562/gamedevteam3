@@ -23,7 +23,7 @@ class Projectile {
   
   // Member Methods
       void display() {
-      imageMode(CENTER)
+      imageMode(CENTER);
        // .resize( , );
       image( ,x,y);
     }
