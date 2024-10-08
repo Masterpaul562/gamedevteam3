@@ -10,7 +10,7 @@ class Goblin {
   health = 10;
   speed = 1;
   alive = true;
-  guy = loadImage(" ");
+  guy = loadImage("Goblin.png");
   }
   //Member Methods
   void display() {
