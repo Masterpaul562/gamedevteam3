@@ -18,7 +18,7 @@ class Enemy {
   speed = 5;
   dmg = 10;
   alive = true;
-  type = 'b'
+  type = 'b';
 }
   
   
