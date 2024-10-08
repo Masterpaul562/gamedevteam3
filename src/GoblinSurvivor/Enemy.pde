@@ -2,7 +2,7 @@
 class Enemy { 
   // Member Variables
   PImage e1;
-  Int x,y,w,h;
+  int x,y,w,h;
   float health,speed,dmg;
   boolean alive;
   char type;
