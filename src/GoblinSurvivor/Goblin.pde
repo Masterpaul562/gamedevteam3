@@ -14,7 +14,7 @@ class Goblin {
   }
   //Member Methods
   void display() {
-    imageMode(Center);
+    imageMode(CENTER);
     image(guy,width/2,height/2);
     //guy.resize(50,50)
   }
