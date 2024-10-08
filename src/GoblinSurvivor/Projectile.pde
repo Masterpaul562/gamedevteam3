@@ -1,8 +1,8 @@
-// Aiden Felt | 3 Oct 2024
+// Aiden Felt, Canon Unguren| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
   PImage staby1;
-  int x,y,w,h;
+  int x, y, w, h;
   int speed, damage, range, atkSpeed;
   boolean unlocked;
   char type;
@@ -11,23 +11,23 @@ class Projectile {
   Projectile() {
     x = width/2;
     y = height/2;
-    w = ;
-    h = ;
-    speed = ;
-    dmg = ;
-    unlocked = false;
-    type = ;
-    range = ;
-    atkSpeed = ;
+    //w = ;
+    //h = ;
+    //speed = ;
+    //dmg = ;
+    //unlocked = false;
+    //type = ;
+    //range = ;
+    //atkSpeed = ;
   }
-  
+
   // Member Methods
-      void display() {
-      imageMode(CENTER);
-       // .resize( , );
-      image( ,x,y);
-    }
-    void move () {
-      x = x + 1;
-    }
+  void display() {
+    imageMode(CENTER);
+    // .resize( , );
+    //image(, x, y);
+  }
+  void move () {
+    x = x + 1;
+  }
 }
