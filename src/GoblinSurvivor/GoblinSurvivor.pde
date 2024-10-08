@@ -1,4 +1,4 @@
-// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
+// Canon Unguren| Oct 3 2024
 Goblin g1;
 int level;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
