@@ -9,7 +9,7 @@ class Enemy {
   
   // Constructor
   Enemy() {
-  e1 =  loadImage("");
+  e1 =  loadImage("enemy.png");
   x = width/2;
   y = height/2;
   w = 50;
@@ -24,7 +24,7 @@ class Enemy {
   
   // Member Methods
   void display() {
-    // e1.resize(50,50);
+     e1.resize(50,50);
     imageMode(CENTER);
     image(e1,x,y);
   }
