@@ -24,10 +24,13 @@ void draw() {
     startScreen();
   } else {
     //you are playing the game!
-
-    tile.display();
-    g1.display();
-    p1.display();
+    //background(127);
+     tile.display();
+     g1.display();
+     p1.display();
+     //p1.move();
+   
+  // tile.display();
   }
 }
 
