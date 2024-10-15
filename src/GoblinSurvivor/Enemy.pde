@@ -24,9 +24,9 @@ class Enemy {
   
   // Member Methods
   void display() {
-     e1.resize(50,50);
+     e1.resize(100,100);
     imageMode(CENTER);
-    image(e1,x,y);
+    image(e1,50,50);
   }
   void move() {
     x = x + 1;

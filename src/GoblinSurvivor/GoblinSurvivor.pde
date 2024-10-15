@@ -1,6 +1,7 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 Goblin g1;
 Tile tile;
+Enemy el;
 Projectile p1;
 int level;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -12,6 +13,7 @@ PImage start1;
 void setup() {
   size(500, 500);
   level = 1;
+  el = new Enemy();
   tile = new Tile();
   g1 = new Goblin();
   p1 = new Projectile();
@@ -24,10 +26,11 @@ void draw() {
     startScreen();
   } else {
     //you are playing the game!
-
+    
     tile.display();
     g1.display();
     p1.display();
+    el.display();
   }
 }
 
