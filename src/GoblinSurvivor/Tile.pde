@@ -12,6 +12,7 @@ class Tile {
   }
 
   void display() {
+    floor.resize(width,height);
     image(floor,x,y);
   }
 }
