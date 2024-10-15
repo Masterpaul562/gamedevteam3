@@ -22,11 +22,9 @@ void draw() {
     startScreen();
   } else {
     //you are playing the game!
-    //background(127);
+
     tile.display();
-   g1.display();
-   
-  // tile.display();
+    g1.display();
   }
 }
 
