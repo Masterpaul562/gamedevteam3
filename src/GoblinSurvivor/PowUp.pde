@@ -9,6 +9,9 @@ class PowUp {
   PowUp() {
     //orb = loadImage;
     x = 100;
+    x = 100;
+    w = 50;
+    h = 50;
     type = 'e';
   }
   
