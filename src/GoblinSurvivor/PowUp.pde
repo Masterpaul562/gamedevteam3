@@ -8,8 +8,8 @@ class PowUp {
   // Constructor
   PowUp() {
     orb = loadImage("Orb.png");
-    x = 100;
-    x = 100;
+    x = 450;
+    y = 450;
     w = 50;
     h = 50;
     type = 'e';
@@ -18,7 +18,7 @@ class PowUp {
   // Member Methods
   void display() {
     imageMode(CENTER);
-    // g1.resize(50,50)
+    orb.resize(25,25);
     image(orb,x,y);
   }
   
