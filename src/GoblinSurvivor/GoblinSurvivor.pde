@@ -3,6 +3,7 @@ Goblin g1;
 Tile tile;
 Enemy el;
 Projectile p1;
+PowUp o1;
 int level;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -17,6 +18,7 @@ void setup() {
   tile = new Tile();
   g1 = new Goblin();
   p1 = new Projectile();
+  o1 = new PowUp();
   play = false;
   start1 = loadImage("GoblinStart.png");
 }
@@ -31,6 +33,7 @@ void draw() {
     g1.display();
     p1.display();
     el.display();
+    o1.display();
   }
 }
 
