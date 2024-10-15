@@ -7,7 +7,7 @@ class PowUp {
   
   // Constructor
   PowUp() {
-    //orb = loadImage;
+    orb = loadImage("Orb.png");
     x = 100;
     x = 100;
     w = 50;
