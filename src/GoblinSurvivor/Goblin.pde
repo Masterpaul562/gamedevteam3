@@ -1,4 +1,4 @@
-//Paul Tokhtuev | 3 Oct 2024
+//Paul Tokhtuev Canon Unguren | 3 Oct 2024
 class Goblin {
   //Member Variables
   float health,speed; 
@@ -15,8 +15,8 @@ class Goblin {
   //Member Methods
   void display() {
     imageMode(CENTER);
+    guy.resize(100,100);
     image(guy,width/2,height/2);
-    //guy.resize(50,50)
   }
   void move() {
     
