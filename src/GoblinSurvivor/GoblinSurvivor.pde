@@ -1,6 +1,5 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 Goblin g1;
-Tile tile;
 Enemy el;
 Projectile p1;
 PowUp o1;
@@ -15,7 +14,6 @@ void setup() {
   size(500, 500);
   level = 1;
   el = new Enemy();
-  tile = new Tile();
   g1 = new Goblin();
   p1 = new Projectile();
   o1 = new PowUp();
