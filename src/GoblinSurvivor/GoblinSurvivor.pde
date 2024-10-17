@@ -7,7 +7,7 @@ int level;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
-//ArrayList<Tile> tiles = new ArrayList<Tile>();
+ArrayList<Tile> tiles = new ArrayList<Tile>();
 boolean play;
 PImage start1;
 void setup() {
@@ -18,6 +18,7 @@ void setup() {
   p1 = new Projectile();
   o1 = new PowUp();
   play = false;
+  tiles.add(new Tile());
   start1 = loadImage("GoblinStart.png");
 }
 
@@ -26,8 +27,12 @@ void draw() {
     startScreen();
   } else {
     //you are playing the game!
+        for (int i = 0; i < tiles.size(); i++) {
+      Tile part = tiles.get(i);
+      part.display();
+    }
     
-    tile.display();
+    //tile.display();
     g1.display();
     p1.display();
     el.display();
