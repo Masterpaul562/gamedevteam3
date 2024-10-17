@@ -13,7 +13,7 @@ PImage start1;
 void setup() {
   size(500, 500);
   level = 1;
-  el = new Enemy();
+  enemies = new ArrayList<Enemy>();
   g1 = new Goblin();
   p1 = new Projectile();
   o1 = new PowUp();
@@ -35,7 +35,7 @@ void draw() {
     //tile.display();
     g1.display();
     p1.display();
-    el.display();
+    //el.display();
     o1.display();
   }
 }
