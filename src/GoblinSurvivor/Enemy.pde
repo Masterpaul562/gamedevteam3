@@ -9,7 +9,7 @@ class Enemy {
   
   // Constructor
   Enemy() {
-  e1 =  loadImage("enemy.png");
+  e1 =  loadImage("Zombie.png");
   x = width/2;
   y = height/2;
   w = 50;
