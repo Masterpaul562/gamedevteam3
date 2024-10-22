@@ -2,7 +2,6 @@
 Goblin g1;
 Projectile p1;
 PowUp o1;
-//Enemy[] enemies;
 Timer eTimer;
 int level;
 int tileSize = 100;
@@ -19,6 +18,7 @@ boolean play;
 PImage start1;
 PVector userPos;
 void setup() {
+   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
   eTimer = new Timer(5000);
   eTimer.start();
@@ -30,12 +30,9 @@ void setup() {
   p1 = new Projectile();
   o1 = new PowUp();
   play = false;
-  //tiles.add(new Tile());
+
   start1 = loadImage("GoblinStart.png");
-  //enemies = new Enemy[10];
-  //for (int i = 0; i < enemies.length; i++) {
-  //  enemies[i] = new Enemy();
-  //}
+ 
 }
 
 void draw() {
