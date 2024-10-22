@@ -11,7 +11,7 @@ boolean play;
 PImage start1;
 PVector userPos;
 void setup() {
-  size(500, 500);
+  size(500,500);
   level = 1;
   userPos = new PVector(width/2, height/2);
   g1 = new Goblin();

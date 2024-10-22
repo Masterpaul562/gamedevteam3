@@ -15,7 +15,7 @@ class Enemy {
   // Constructor
   Enemy() {
 
-    enemyPos = new PVector(random(displayWidth+20|displayWidth-20), random(displayHeight+20|displayHeight-20));
+    enemyPos = new PVector(random(displayWidth+10|displayWidth-10), random(displayHeight+10|displayHeight-10));
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
     e1 =  loadImage("Zombie.png");
@@ -33,10 +33,12 @@ class Enemy {
 
   // Member Methods
     void update() {
-      direction = userPos.copy();
-    direction.sub(enemyPos);
+      direction = enemyPos.copy();
+    direction.sub(userPos);
+    direction.normalize();
+    direction.mult(3);
     velocity= new PVector(1,1);
-    enemyPos.add(velocity);
+    enemyPos.sub(direction);
   }
 
   void display() {
