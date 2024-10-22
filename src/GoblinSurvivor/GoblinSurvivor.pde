@@ -51,10 +51,6 @@ void draw() {
     }
   }
     //you are playing the game!
-    //for (int i = 0; i < tiles.size(); i++) {
-    //  Tile part = tiles.get(i);
-    //  part.display();
-    //}
     for (int x = 0; x < mapWidth; x += tileSize) {
       for (int y = 0; y < mapHeight; y += tileSize) {
         float drawX = x + mapOffsetX;
@@ -84,17 +80,17 @@ void draw() {
   }
 }
 
-//void keyPressed() {
-//  if (keyCode == RIGHT) {
-//    mapOffsetX -= speed;
-//  } else if (keyCode == LEFT) {
-//    mapOffsetX += speed;
-//  } else if (keyCode == UP) {
-//    mapOffsetY += speed;
-//  } else if (keyCode == DOWN) {
-//    mapOffsetY -= speed;
-//  }
-//}
+void keyPressed() {
+  if (keyCode == RIGHT) {
+    mapOffsetX -= speed;
+  } else if (keyCode == LEFT) {
+    mapOffsetX += speed;
+  } else if (keyCode == UP) {
+    mapOffsetY += speed;
+  } else if (keyCode == DOWN) {
+    mapOffsetY -= speed;
+  }
+}
 
 void startScreen() {
   image(start1, 0, 0);
