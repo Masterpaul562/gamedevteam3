@@ -8,7 +8,7 @@ class Enemy {
   char type;
   PVector enemyPos;
   PVector userPos;
-  PVector velocity;
+ 
   PVector direction;
 
 
@@ -37,7 +37,7 @@ class Enemy {
     direction.sub(userPos);
     direction.normalize();
     direction.mult(3);
-    velocity= new PVector(1,1);
+   
     enemyPos.sub(direction);
   }
 
