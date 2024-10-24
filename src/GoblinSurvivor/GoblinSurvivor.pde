@@ -22,7 +22,7 @@ PVector userPos;
 void setup() {
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-  eTimer = new Timer(1000);
+  eTimer = new Timer(5000);
   eTimer.start();
   size(1000,1000);
   level = 1;
@@ -42,7 +42,7 @@ void draw() {
   if (!play) {
     startScreen();
   } else {
-  
+
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -57,6 +57,15 @@ void draw() {
         mapOffsetX -= speed;
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
+      } else if (key == 'e' || key == 'E') {
+        if(frameRate == 0) {
+          frameRate(60);
+          shop1.shopOpen = false;
+        }else {
+          frameRate(0);
+          shop1.shopOpen = true;
+        }
+        
       }
 
 
@@ -99,11 +108,11 @@ void draw() {
       Enemy part = enemies.get(i);
       part.update();
       part.zombiepoof();
-      if(part.poof == true) {
-      enemies.remove(i);
-      }
-      part.display();
       
+      part.display();
+      if (part.poof == true) {
+        enemies.remove(i);
+      }
     }
   }
 }
