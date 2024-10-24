@@ -62,7 +62,7 @@ void draw() {
           frameRate(60);
           shop1.shopOpen = false;
         }else {
-          frameRate(1);
+          frameRate(0);
           shop1.shopOpen = true;
         }
         
