@@ -3,6 +3,7 @@ Goblin g1;
 Projectile p1;
 PowUp o1;
 Timer eTimer;
+Shop shop1;
 int level;
 int tileSize = 100;
 int mapWidth = 2000;
@@ -20,7 +21,7 @@ PVector userPos;
 void setup() {
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-  eTimer = new Timer(5000);
+  eTimer = new Timer(1000);
   eTimer.start();
   size(500, 500);
   level = 1;
@@ -29,6 +30,7 @@ void setup() {
   g1 = new Goblin();
   p1 = new Projectile();
   o1 = new PowUp();
+  shop1 = new Shop();
   play = false;
 
   start1 = loadImage("GoblinStart.png");
@@ -38,6 +40,7 @@ void draw() {
   if (!play) {
     startScreen();
   } else {
+  
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -85,13 +88,19 @@ void draw() {
         }
       }
     }
+    shop1.display();
     g1.display();
     p1.display();
     o1.display();
     for (int i = 0; i < enemies.size(); i++) {
       Enemy part = enemies.get(i);
       part.update();
+      part.zombiepoof();
+      if(part.poof = true) {
+      enemies.remove(i);
+      }
       part.display();
+      
     }
   }
 }
