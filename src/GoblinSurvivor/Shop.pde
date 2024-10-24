@@ -21,9 +21,9 @@ class Shop {
   }
 
   void display() {
-    imageMode(CENTER);
-    image(shopIcon, 450,450);
-    shopIcon.resize(50,25);
+    //imageMode(CENTER);
+    //image(shopIcon, 450,450);
+    //shopIcon.resize(50,25);
 
     if (shopOpen) {
       fill(200);
