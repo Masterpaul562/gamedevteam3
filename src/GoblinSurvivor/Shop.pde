@@ -13,11 +13,7 @@ class Shop {
     //itemImages[1] = loadImage("item2.png");
     //itemImages[2] = loadImage("item3.png");
     
-    if (keyPressed) {
-      if (key == 'e' || key == 'E') {
-        shopOpen = true;
-      }
-    }
+
   }
 
   void display() {

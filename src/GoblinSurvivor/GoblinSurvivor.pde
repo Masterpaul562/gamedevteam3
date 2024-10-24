@@ -42,7 +42,7 @@ void draw() {
   if (!play) {
     startScreen();
   } else {
-  
+
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -57,6 +57,15 @@ void draw() {
         mapOffsetX -= speed;
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
+      } else if (key == 'e' || key == 'E') {
+        //if(frameRate == 0) {
+        //  frameRate(60);
+        //  shop1.shopOpen = false;
+        //}else {
+        //  frameRate(1);
+        //  shop1.shopOpen = true;
+        //}
+        
       }
 
 
@@ -99,11 +108,10 @@ void draw() {
       Enemy part = enemies.get(i);
       part.update();
       part.zombiepoof();
-      if(part.poof == true) {
-      enemies.remove(i);
+      if (part.poof == true) {
+        enemies.remove(i);
       }
       part.display();
-      
     }
   }
 }
