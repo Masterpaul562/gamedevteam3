@@ -43,7 +43,7 @@ class Enemy {
     direction = enemyPos.copy();
     direction.sub(userPos);
     direction.normalize();
-    direction.mult(3);
+    direction.mult(1.5);
     enemyPos.sub(direction);
     
   }
