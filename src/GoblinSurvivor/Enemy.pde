@@ -11,6 +11,7 @@ class Enemy {
   PVector direction;
   PVector playerMovement;
   PVector playerMovement2;
+  boolean poof;
 
 
   // Constructor
@@ -49,5 +50,10 @@ class Enemy {
     e1.resize(100, 100);
     imageMode(CENTER);
     image(e1, enemyPos.x, enemyPos.y);
+  }
+  void zombiepoof() {
+  if(enemyPos==userPos){
+  poof=true;
+  }
   }
 }

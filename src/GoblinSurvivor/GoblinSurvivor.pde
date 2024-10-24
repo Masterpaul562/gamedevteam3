@@ -20,7 +20,7 @@ PVector userPos;
 void setup() {
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-  eTimer = new Timer(5000);
+  eTimer = new Timer(1000);
   eTimer.start();
   size(500, 500);
   level = 1;
@@ -38,6 +38,7 @@ void draw() {
   if (!play) {
     startScreen();
   } else {
+  
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -91,7 +92,12 @@ void draw() {
     for (int i = 0; i < enemies.size(); i++) {
       Enemy part = enemies.get(i);
       part.update();
+      part.zombiepoof();
+      if(part.poof = true) {
+      enemies.remove(i);
+      }
       part.display();
+      
     }
   }
 }
