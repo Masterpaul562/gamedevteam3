@@ -21,11 +21,11 @@ class Shop {
   }
 
   void display() {
-    //imageMode(CENTER);
+    imageMode(CENTER);
     //image(shopIcon, 450,450);
     //shopIcon.resize(50,25);
 
-    if (shopOpen) {
+    if (shopOpen == true) {
       fill(200);
       rect(width / 2 - shopWidth / 2, height / 2 - shopHeight / 2, shopWidth, shopHeight);
       
