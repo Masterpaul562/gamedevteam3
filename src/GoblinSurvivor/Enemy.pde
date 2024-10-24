@@ -2,7 +2,7 @@
 class Enemy {
   // Member Variables
   PImage e1;
-  int x, y, w, h;
+  float x, y, w, h, x2, y2;
   int health, speed, dmg;
   boolean alive;
   char type;
@@ -22,8 +22,10 @@ class Enemy {
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
     e1 =  loadImage("Zombie.png");
-    x = width/2;
-    y = height/2;
+    x = enemyPos.x;
+    y = enemyPos.y;
+    x2= userPos.x;
+    y2 = userPos.y;
     w = 50;
     h = 50;
     health = 100;
@@ -52,7 +54,7 @@ class Enemy {
     image(e1, enemyPos.x, enemyPos.y);
   }
   void zombiepoof() {
-  if(enemyPos.x == x | enemyPos.y == y){
+  if( x == x2| y == y2){
   poof=true;
   }
   }
