@@ -1,7 +1,7 @@
 //Paul Tokhtuev Canon Unguren | 3 Oct 2024
 class Goblin {
   //Member Variables
-  float health, speed;
+  int health, speed;
   boolean alive;
   PImage guy;
 
