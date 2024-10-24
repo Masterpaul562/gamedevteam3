@@ -40,6 +40,7 @@ void setup() {
 
 void draw() {
   if (!play) {
+    
     startScreen();
   } else {
 
@@ -130,6 +131,7 @@ void keyPressed() {
 }
 
 void startScreen() {
+  start1.resize(1000, 1000);
   image(start1, 0, 0);
   if (keyPressed || mousePressed) {
     play = true;
