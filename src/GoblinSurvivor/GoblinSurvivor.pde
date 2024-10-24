@@ -22,7 +22,7 @@ PVector userPos;
 void setup() {
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-  eTimer = new Timer(1000);
+  eTimer = new Timer(5000);
   eTimer.start();
   size(500, 500);
   level = 1;
