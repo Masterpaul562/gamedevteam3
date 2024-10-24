@@ -3,6 +3,7 @@ Goblin g1;
 Projectile p1;
 PowUp o1;
 Timer eTimer;
+Shop shop1;
 int level;
 int tileSize = 100;
 int mapWidth = 2000;
@@ -29,6 +30,7 @@ void setup() {
   g1 = new Goblin();
   p1 = new Projectile();
   o1 = new PowUp();
+  shop1 = new Shop();
   play = false;
 
   start1 = loadImage("GoblinStart.png");
@@ -86,6 +88,7 @@ void draw() {
         }
       }
     }
+    shop1.display();
     g1.display();
     p1.display();
     o1.display();

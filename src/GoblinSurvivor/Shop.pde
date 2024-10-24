@@ -1,4 +1,4 @@
-class shop {
+class Shop {
   //Pimage [] itemImages = new PImage [3]
   //String[] itemNames = {"Item 1", "Item 2", "Item 3"}; // Item names
   boolean shopOpen = false; // Shop state
@@ -7,7 +7,7 @@ class shop {
   int shopHeight = 300; // Height of the shop panel
   PImage shopIcon;
 
-  shop () {
+  Shop() {
     shopIcon = loadImage("Shoplogo.png");
     //itemImages[0] = loadImage("item1.png"); // Replace with your item paths
     //itemImages[1] = loadImage("item2.png");
@@ -23,7 +23,7 @@ class shop {
   void display() {
     imageMode(CENTER);
     image(shopIcon, 450,450);
-    shopIcon.resize(25,25);
+    shopIcon.resize(50,25);
 
     if (shopOpen) {
       fill(200);
