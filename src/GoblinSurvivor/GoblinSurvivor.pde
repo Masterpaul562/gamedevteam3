@@ -4,6 +4,7 @@ Projectile p1;
 PowUp o1;
 Timer eTimer;
 Shop shop1;
+Panel panel;
 int level;
 int tileSize = 100;
 int mapWidth = 2000;
@@ -31,6 +32,7 @@ void setup() {
   p1 = new Projectile();
   o1 = new PowUp();
   shop1 = new Shop();
+  panel = new Panel();
   play = false;
 
   start1 = loadImage("GoblinStart.png");
@@ -40,7 +42,7 @@ void draw() {
   if (!play) {
     startScreen();
   } else {
-  
+
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -55,6 +57,15 @@ void draw() {
         mapOffsetX -= speed;
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
+      } else if (key == 'e' || key == 'E') {
+        if(frameRate == 0) {
+          frameRate(60);
+          shop1.shopOpen = false;
+        }else {
+          frameRate(1);
+          shop1.shopOpen = true;
+        }
+        
       }
 
 
@@ -88,6 +99,7 @@ void draw() {
         }
       }
     }
+    panel.display();
     shop1.display();
     g1.display();
     p1.display();
@@ -96,11 +108,10 @@ void draw() {
       Enemy part = enemies.get(i);
       part.update();
       part.zombiepoof();
-      if(part.poof == true) {
-      enemies.remove(i);
+      if (part.poof == true) {
+        enemies.remove(i);
       }
       part.display();
-      
     }
   }
 }

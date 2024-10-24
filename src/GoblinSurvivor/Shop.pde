@@ -13,19 +13,15 @@ class Shop {
     //itemImages[1] = loadImage("item2.png");
     //itemImages[2] = loadImage("item3.png");
     
-    if (keyPressed) {
-      if (key == 'e' || key == 'E') {
-        shopOpen = true;
-      }
-    }
+
   }
 
   void display() {
     imageMode(CENTER);
-    image(shopIcon, 450,450);
-    shopIcon.resize(50,25);
+    //image(shopIcon, 450,450);
+    //shopIcon.resize(50,25);
 
-    if (shopOpen) {
+    if (shopOpen == true) {
       fill(200);
       rect(width / 2 - shopWidth / 2, height / 2 - shopHeight / 2, shopWidth, shopHeight);
       
