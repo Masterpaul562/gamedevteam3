@@ -58,13 +58,13 @@ void draw() {
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
       } else if (key == 'e' || key == 'E') {
-        //if(frameRate == 0) {
-        //  frameRate(60);
-        //  shop1.shopOpen = false;
-        //}else {
-        //  frameRate(1);
-        //  shop1.shopOpen = true;
-        //}
+        if(frameRate == 0) {
+          frameRate(60);
+          shop1.shopOpen = false;
+        }else {
+          frameRate(1);
+          shop1.shopOpen = true;
+        }
         
       }
 
