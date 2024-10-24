@@ -2,7 +2,7 @@
 Goblin g1;
 Projectile p1;
 PowUp o1;
-Enemy[] enemies;
+Timer eTimer;
 int level;
 int tileSize = 100;
 int mapWidth = 2000;
@@ -13,11 +13,15 @@ float mapOffsetX = -mapWidth/2;
 float mapOffsetY = -mapHeight/2;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
-//ArrayList<Tile> tiles = new ArrayList<Tile>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play;
 PImage start1;
 PVector userPos;
 void setup() {
+  userPos = new PVector(width/2, height/2);
+  enemies.add (new Enemy());
+  eTimer = new Timer(5000);
+  eTimer.start();
   size(500, 500);
   level = 1;
   t1 = loadImage("Tile.png");
@@ -26,30 +30,41 @@ void setup() {
   p1 = new Projectile();
   o1 = new PowUp();
   play = false;
-  //tiles.add(new Tile());
+
   start1 = loadImage("GoblinStart.png");
-  enemies = new Enemy[10];
-  for (int i = 0; i < enemies.length; i++) {
-    enemies[i] = new Enemy();
-  }
 }
 
 void draw() {
   if (!play) {
     startScreen();
   } else {
+    if (eTimer.isFinished()) {
+      enemies.add(new Enemy());
+      eTimer.start();
+    }
     background(115);
     if (keyPressed) {
-    if (keyCode == RIGHT) {
-      mapOffsetX -= speed;
-    } else if (keyCode == LEFT) {
-      mapOffsetX += speed;
-    } else if (keyCode == UP) {
-      mapOffsetY += speed;
-    } else if (keyCode == DOWN) {
-      mapOffsetY -= speed;
+      if (key == 'w' || key == 'W') {
+        mapOffsetY+= speed;
+      } else if (key == 's' || key == 'S') {
+        mapOffsetY -= speed;
+      } else if (key == 'd' || key == 'D') {
+        mapOffsetX -= speed;
+      } else if (key == 'a' || key == 'A') {
+        mapOffsetX += speed;
+      }
+
+
+      if (keyCode == RIGHT) {
+        mapOffsetX -= speed;
+      } else if (keyCode == LEFT) {
+        mapOffsetX += speed;
+      } else if (keyCode == UP) {
+        mapOffsetY += speed;
+      } else if (keyCode == DOWN) {
+        mapOffsetY -= speed;
+      }
     }
-  }
     //you are playing the game!
     for (int x = 0; x < mapWidth; x += tileSize) {
       for (int y = 0; y < mapHeight; y += tileSize) {
@@ -73,9 +88,10 @@ void draw() {
     g1.display();
     p1.display();
     o1.display();
-    for (int i = 0; i < enemies.length; i++) {
-      enemies[i].update();
-      enemies[i].display();
+    for (int i = 0; i < enemies.size(); i++) {
+      Enemy part = enemies.get(i);
+      part.update();
+      part.display();
     }
   }
 }
