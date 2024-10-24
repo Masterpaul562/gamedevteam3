@@ -54,7 +54,7 @@ class Enemy {
     image(e1, enemyPos.x, enemyPos.y);
   }
   void zombiepoof() {
-  if( x == x2| y == y2){
+  if(enemyPos.dist(userPos)<10){
   poof=true;
   }
   }

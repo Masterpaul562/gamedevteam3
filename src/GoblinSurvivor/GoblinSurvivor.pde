@@ -108,10 +108,11 @@ void draw() {
       Enemy part = enemies.get(i);
       part.update();
       part.zombiepoof();
+      
+      part.display();
       if (part.poof == true) {
         enemies.remove(i);
       }
-      part.display();
     }
   }
 }
