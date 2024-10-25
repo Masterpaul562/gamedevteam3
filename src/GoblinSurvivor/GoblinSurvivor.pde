@@ -58,6 +58,7 @@ void draw() {
         mapOffsetX -= speed;
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
+<<<<<<< HEAD
       } else if (key == 'e' || key == 'E') {
         if (frameRate == 0) {
           frameRate(60);
@@ -65,6 +66,12 @@ void draw() {
         } else {
           frameRate(0);
           shop1.shopOpen = true;
+=======
+      } if (key == 'e' || key == 'E') {
+           shop1.shopOpen = true;
+       } if (key == 'q' || key == 'Q') {
+           shop1.shopOpen = false;   
+>>>>>>> 8a5133134461f3914ff3308ec054c24b5ac0360c
         }
       }
 
@@ -122,7 +129,7 @@ void draw() {
       gameOver();
     }
   }
-}
+
 
 void keyPressed() {
   if (keyCode == RIGHT) {
