@@ -113,6 +113,9 @@ void draw() {
       part.display();
       if (part.poof == true) {
         enemies.remove(i);
+        panel.enemiesKilled = panel.enemiesKilled+1;
+        g1.health= g1.health - 15;
+        
       }
     }
   }
