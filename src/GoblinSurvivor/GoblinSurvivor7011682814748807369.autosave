@@ -22,7 +22,7 @@ PVector userPos;
 void setup() {
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-  eTimer = new Timer(5000);
+  eTimer = new Timer(1000);
   eTimer.start();
   size(500, 500);
   level = 1;
@@ -57,10 +57,11 @@ void draw() {
         mapOffsetX -= speed;
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
-      } if (key == 'e' || key == 'E') {
-           shop1.shopOpen = true;
-       } if (key == 'q' || key == 'Q') {
-           shop1.shopOpen = false;   
+        
+      }  if (key == 'e' || key == 'E') {
+          shop1.shopOpen = true;
+        }  if (key == 'q' || key == 'Q') {
+          shop1.shopOpen = false;
         }
         
       }
