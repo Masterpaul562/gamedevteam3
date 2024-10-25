@@ -1,3 +1,5 @@
+//Canon Unguren | 25 Oct 2024
+
 class Panel {
   int seconds;
   int minutes;
