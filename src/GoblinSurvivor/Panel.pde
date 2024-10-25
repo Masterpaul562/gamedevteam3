@@ -21,6 +21,13 @@ class Panel {
     }
     text("Money: 0", 30,30);
     text("Kills: "+enemiesKilled, 200,30);
-    text("Health: "+g1.health,500,30);
+    fill(255,150);
+    rect(400,5,200,30,10);
+    fill(255,0,0,150);
+    rect(400,5,g1.health*2,30, 10);
+    
+    
+    fill(0);
+    text("Health: "+g1.health,425,30);
   }
 }

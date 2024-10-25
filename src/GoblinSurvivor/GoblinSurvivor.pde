@@ -118,6 +118,9 @@ void draw() {
         
       }
     }
+    if(g1.health <= 0) {
+      gameOver();
+    }
   }
 }
 
@@ -142,4 +145,9 @@ void startScreen() {
 }
 
 void gameOver() {
+  background(0);
+  fill(255);
+  textMode(CENTER);
+  text("Game Over", width/2,height/2);
+  noLoop();
 }
