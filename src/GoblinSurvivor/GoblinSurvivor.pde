@@ -52,6 +52,7 @@ void draw() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
         mapOffsetY+= speed;
+        
       } else if (key == 's' || key == 'S') {
         mapOffsetY -= speed;
       } else if (key == 'd' || key == 'D') {
