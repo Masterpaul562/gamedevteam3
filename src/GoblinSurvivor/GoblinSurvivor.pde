@@ -87,7 +87,7 @@ void draw() {
         } else if ( mapOffsetY <= -mapHeight+1000 || mapOffsetY >= -1000) {
           mapOffsetY = -2500;
         }
-        println(mapOffsetX, mapOffsetY);
+        //println(mapOffsetX, mapOffsetY);
         // Only draw tiles that are visible within the screen
         if (drawX > -tileSize && drawX < width && drawY > -tileSize && drawY < height) {
           //fill((x + y) % 255);  // Vary tile color based on position
@@ -106,11 +106,17 @@ void draw() {
       Enemy part = enemies.get(i);
       part.update();
       part.zombiepoof();
-      
+      part.playerMovement();
       part.display();
       if (part.poof == true) {
         enemies.remove(i);
+        panel.enemiesKilled = panel.enemiesKilled+1;
+        g1.health= g1.health - 15;
+        
       }
+    }
+    if(g1.health <= 0) {
+      gameOver();
     }
   }
 
@@ -136,4 +142,9 @@ void startScreen() {
 }
 
 void gameOver() {
+  background(0);
+  fill(255);
+  textMode(CENTER);
+  text("Game Over", width/2,height/2);
+  noLoop();
 }
