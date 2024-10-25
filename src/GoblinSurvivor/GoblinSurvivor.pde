@@ -6,9 +6,9 @@ Timer eTimer;
 Shop shop1;
 Panel panel;
 int level;
-int tileSize = 100;
-int mapWidth = 2000;
-int mapHeight = 2000;
+int tileSize = 150;
+int mapWidth = 5000;
+int mapHeight = 5000;
 PImage t1;
 int speed = 5;
 float mapOffsetX = -mapWidth/2;
@@ -24,7 +24,7 @@ void setup() {
   enemies.add (new Enemy());
   eTimer = new Timer(5000);
   eTimer.start();
-  size(500, 500);
+  size(1000,1000);
   level = 1;
   t1 = loadImage("Tile.png");
   userPos = new PVector(width/2, height/2);
@@ -40,6 +40,7 @@ void setup() {
 
 void draw() {
   if (!play) {
+    
     startScreen();
   } else {
 
@@ -81,10 +82,10 @@ void draw() {
       for (int y = 0; y < mapHeight; y += tileSize) {
         float drawX = x + mapOffsetX;
         float drawY = y + mapOffsetY;
-        if (mapOffsetX <= -mapWidth+500|| mapOffsetX >= -500 ) {
-          mapOffsetX = -1000;
-        } else if ( mapOffsetY <= -mapHeight+500 || mapOffsetY >= -500) {
-          mapOffsetY = -1000;
+        if (mapOffsetX <= -mapWidth+1000|| mapOffsetX >= -1000 ) {
+          mapOffsetX = -2500;
+        } else if ( mapOffsetY <= -mapHeight+1000 || mapOffsetY >= -1000) {
+          mapOffsetY = -2500;
         }
         println(mapOffsetX, mapOffsetY);
         // Only draw tiles that are visible within the screen
@@ -105,10 +106,11 @@ void draw() {
       Enemy part = enemies.get(i);
       part.update();
       part.zombiepoof();
+      
+      part.display();
       if (part.poof == true) {
         enemies.remove(i);
       }
-      part.display();
     }
   }
 
@@ -126,6 +128,7 @@ void keyPressed() {
 }
 
 void startScreen() {
+  start1.resize(1000, 1000);
   image(start1, 0, 0);
   if (keyPressed || mousePressed) {
     play = true;

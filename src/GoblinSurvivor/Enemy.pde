@@ -18,7 +18,7 @@ class Enemy {
   Enemy() {
     playerMovement = new PVector(1, 1);
       playerMovement2 = new PVector(-1, -1);
-    enemyPos = new PVector (100, 100); //new PVector(random(displayWidth+10|displayWidth-10), random(displayHeight+10|displayHeight-10));
+    enemyPos = new PVector(random(displayWidth+10|displayWidth-10), random(displayHeight+10|displayHeight-10));
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
     e1 =  loadImage("Zombie.png");
@@ -43,7 +43,7 @@ class Enemy {
     direction = enemyPos.copy();
     direction.sub(userPos);
     direction.normalize();
-    direction.mult(3);
+    direction.mult(1.5);
     enemyPos.sub(direction);
     
   }
@@ -54,7 +54,7 @@ class Enemy {
     image(e1, enemyPos.x, enemyPos.y);
   }
   void zombiepoof() {
-  if( x == x2| y == y2){
+  if(enemyPos.dist(userPos)<10){
   poof=true;
   }
   }
