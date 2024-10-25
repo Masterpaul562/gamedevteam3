@@ -24,7 +24,7 @@ void setup() {
   enemies.add (new Enemy());
   eTimer = new Timer(5000);
   eTimer.start();
-  size(1000,1000);
+  size(1000, 1000);
   level = 1;
   t1 = loadImage("Tile.png");
   userPos = new PVector(width/2, height/2);
@@ -40,7 +40,7 @@ void setup() {
 
 void draw() {
   if (!play) {
-    
+
     startScreen();
   } else {
 
@@ -59,14 +59,13 @@ void draw() {
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
       } else if (key == 'e' || key == 'E') {
-        if(frameRate == 0) {
+        if (frameRate == 0) {
           frameRate(60);
           shop1.shopOpen = false;
-        }else {
+        } else {
           frameRate(0);
           shop1.shopOpen = true;
         }
-        
       }
 
 
@@ -107,18 +106,19 @@ void draw() {
     o1.display();
     for (int i = 0; i < enemies.size(); i++) {
       Enemy part = enemies.get(i);
+
       part.update();
       part.zombiepoof();
       part.playerMovement();
+
       part.display();
       if (part.poof == true) {
         enemies.remove(i);
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
-        
       }
     }
-    if(g1.health <= 0) {
+    if (g1.health <= 0) {
       gameOver();
     }
   }
@@ -148,6 +148,6 @@ void gameOver() {
   background(0);
   fill(255);
   textMode(CENTER);
-  text("Game Over", width/2,height/2);
+  text("Game Over", width/2, height/2);
   noLoop();
 }
