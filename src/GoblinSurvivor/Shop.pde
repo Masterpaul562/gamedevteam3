@@ -1,3 +1,4 @@
+//Aiden Felt | Oct 23
 class Shop {
   //Pimage [] itemImages = new PImage [3]
   //String[] itemNames = {"Item 1", "Item 2", "Item 3"}; // Item names
