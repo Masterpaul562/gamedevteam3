@@ -52,14 +52,12 @@ void draw() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
         mapOffsetY+= speed;
-        
       } else if (key == 's' || key == 'S') {
         mapOffsetY -= speed;
       } else if (key == 'd' || key == 'D') {
         mapOffsetX -= speed;
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
-<<<<<<< HEAD
       } else if (key == 'e' || key == 'E') {
         if (frameRate == 0) {
           frameRate(60);
@@ -67,12 +65,12 @@ void draw() {
         } else {
           frameRate(0);
           shop1.shopOpen = true;
-=======
-      } if (key == 'e' || key == 'E') {
-           shop1.shopOpen = true;
-       } if (key == 'q' || key == 'Q') {
-           shop1.shopOpen = false;   
->>>>>>> 8a5133134461f3914ff3308ec054c24b5ac0360c
+        }
+        if (key == 'e' || key == 'E') {
+          shop1.shopOpen = true;
+        }
+        if (key == 'q' || key == 'Q') {
+          shop1.shopOpen = false;
         }
       }
 
@@ -130,19 +128,20 @@ void draw() {
       gameOver();
     }
   }
-
-
-void keyPressed() {
-  if (keyCode == RIGHT) {
-    mapOffsetX -= speed;
-  } else if (keyCode == LEFT) {
-    mapOffsetX += speed;
-  } else if (keyCode == UP) {
-    mapOffsetY += speed;
-  } else if (keyCode == DOWN) {
-    mapOffsetY -= speed;
-  }
 }
+
+
+  void keyPressed() {
+    if (keyCode == RIGHT) {
+      mapOffsetX -= speed;
+    } else if (keyCode == LEFT) {
+      mapOffsetX += speed;
+    } else if (keyCode == UP) {
+      mapOffsetY += speed;
+    } else if (keyCode == DOWN) {
+      mapOffsetY -= speed;
+    }
+  }
 
 void startScreen() {
   start1.resize(1000, 1000);
