@@ -90,7 +90,7 @@ void draw() {
         } else if ( mapOffsetY <= -mapHeight+1000 || mapOffsetY >= -1000) {
           mapOffsetY = -2500;
         }
-        println(mapOffsetX, mapOffsetY);
+        //println(mapOffsetX, mapOffsetY);
         // Only draw tiles that are visible within the screen
         if (drawX > -tileSize && drawX < width && drawY > -tileSize && drawY < height) {
           //fill((x + y) % 255);  // Vary tile color based on position
