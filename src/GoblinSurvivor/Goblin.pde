@@ -7,7 +7,7 @@ class Goblin {
 
   //Constructor
   Goblin() {
-    health = 10;
+    health = 100;
     speed = 1;
     alive = true;
     guy = loadImage("Goblin.png");

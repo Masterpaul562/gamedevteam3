@@ -18,6 +18,7 @@ class Panel {
       text("Time Alive: "+int(seconds/60)+":0"+seconds%60, width-250, 30);
     }
     text("Money: 0", 30,30);
-    text("Enemies Killed: "+
+    text("Kills: "+enemiesKilled, 200,30);
+    text("Health: "+g1.health,500,30);
   }
 }
