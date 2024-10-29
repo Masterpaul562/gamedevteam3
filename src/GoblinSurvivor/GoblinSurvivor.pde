@@ -7,9 +7,7 @@ Shop shop1;
 Panel panel;
 Tile tile;
 int level;
-
 int speed = 5;
-
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();

@@ -7,13 +7,11 @@ float mapOffsetY = -mapHeight/2;
 PImage t1;
 class Tile {
   Tile() {
-     t1 = loadImage("Tile.png");
-
-
+    t1 = loadImage("Tile.png");
   }
 
   void display() {
-     for (int x = 0; x < mapWidth; x += tileSize) {
+    for (int x = 0; x < mapWidth; x += tileSize) {
       for (int y = 0; y < mapHeight; y += tileSize) {
         float drawX = x + mapOffsetX;
         float drawY = y + mapOffsetY;
@@ -32,6 +30,5 @@ class Tile {
         }
       }
     }
-
   }
 }
