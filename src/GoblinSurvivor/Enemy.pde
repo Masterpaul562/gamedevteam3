@@ -2,18 +2,18 @@
 class Enemy {
   // Member Variables
   PImage e1;
-  float x, y, w, h, x2, y2;
-  int health, speed, dmg;
-  boolean alive;
+  float x, y, w, h, x2, y2, dist;
+  int health, speed, dmg, side;
+  boolean fall, poof;
   char type;
   PVector enemyPos;
   PVector userPos;
   PVector direction;
   PVector playerMovement;
   PVector playerMovement2;
-  boolean poof;
-  float dist;
-  int side;
+ 
+
+
 
   // Constructor
   Enemy() {
@@ -41,7 +41,6 @@ class Enemy {
     health = 100;
     speed = 5;
     dmg = 10;
-    alive = true;
     type = 'b';
   }
 
@@ -77,6 +76,9 @@ class Enemy {
   void zombiepoof() {
     if (enemyPos.dist(userPos)<10) {
       poof=true;
+    }
+    if (enemyPos.dist(userPos)>1050){
+    fall=true;
     }
   }
 }

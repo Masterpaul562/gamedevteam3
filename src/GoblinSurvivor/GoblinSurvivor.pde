@@ -139,6 +139,9 @@ void draw() {
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
       }
+      if (part.fall == true) {
+        enemies.remove(i);
+      }
     }
     if (g1.health <= 0) {
       gameOver();
