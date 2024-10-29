@@ -2,7 +2,7 @@
 Goblin g1;
 Projectile p1;
 PowUp o1;
-Timer eTimer;
+Timer eTimer,timer1;
 Shop shop1;
 Panel panel;
 Tile tile;
@@ -19,6 +19,8 @@ void setup() {
   enemies.add (new Enemy());
   eTimer = new Timer(5000);
   eTimer.start();
+  timer1 = new Timer(300);
+  timer1.start();
   size(1000, 1000);
   level = 1;
   t1 = loadImage("Tile.png");
@@ -48,16 +50,49 @@ void draw() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
         mapOffsetY+= speed;
-        g1.guy = loadImage("GoblinWalkUp1.png");
+        if(timer1.isFinished()) {
+          if(g1.img1 != "GoblinWalkUp1.png") {
+            g1.img1 = "GoblinWalkUp1.png";
+          }else {
+            g1.img1 =  "GoblinWalkUp2.png";
+          
+          }
+          timer1.start();
+        }
+        
       } else if (key == 's' || key == 'S') {
         mapOffsetY -= speed;
-        g1.guy = loadImage("GoblinWalkDown1.png");
+        if(timer1.isFinished()) {
+          if(g1.img1 != "GoblinWalkDown1.png") {
+            g1.img1 = "GoblinWalkDown1.png";
+          }else {
+            g1.img1 =  "GoblinWalkDown2.png";
+          
+          }
+          timer1.start();
+        }
       } else if (key == 'd' || key == 'D') {
         mapOffsetX -= speed;
-        g1.guy = loadImage("GoblinWalkRight1.png");
+        if(timer1.isFinished()) {
+          if(g1.img1 != "GoblinWalkRight1.png") {
+            g1.img1 = "GoblinWalkRight1.png";
+          }else {
+            g1.img1 =  "GoblinWalkRight2.png";
+          
+          }
+          timer1.start();
+        }
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
-        g1.guy = loadImage("GoblinWalkLeft1.png");
+        if(timer1.isFinished()) {
+          if(g1.img1 != "GoblinWalkLeft1.png") {
+            g1.img1 = "GoblinWalkLeft1.png";
+          }else {
+            g1.img1 =  "GoblinWalkLeft2.png";
+          
+          }
+          timer1.start();
+        }
       } else if (key == 'e' || key == 'E') {
         if (frameRate == 0) {
           frameRate(60);
