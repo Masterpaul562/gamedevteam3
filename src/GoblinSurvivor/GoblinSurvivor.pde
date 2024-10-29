@@ -50,6 +50,7 @@ void draw() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
         mapOffsetY+= speed;
+        o1.y = o1.y + speed;
         if(timer1.isFinished()) {
           if(g1.img1 != "GoblinWalkUp1.png") {
             g1.img1 = "GoblinWalkUp1.png";
@@ -62,6 +63,7 @@ void draw() {
         
       } else if (key == 's' || key == 'S') {
         mapOffsetY -= speed;
+        o1.y = o1.y - speed;
         if(timer1.isFinished()) {
           if(g1.img1 != "GoblinWalkDown1.png") {
             g1.img1 = "GoblinWalkDown1.png";
@@ -73,6 +75,7 @@ void draw() {
         }
       } else if (key == 'd' || key == 'D') {
         mapOffsetX -= speed;
+        o1.x = o1.x - speed;
         if(timer1.isFinished()) {
           if(g1.img1 != "GoblinWalkRight1.png") {
             g1.img1 = "GoblinWalkRight1.png";
@@ -84,6 +87,7 @@ void draw() {
         }
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
+        o1.x = o1.x + speed;
         if(timer1.isFinished()) {
           if(g1.img1 != "GoblinWalkLeft1.png") {
             g1.img1 = "GoblinWalkLeft1.png";
