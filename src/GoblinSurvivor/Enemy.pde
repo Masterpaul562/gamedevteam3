@@ -12,11 +12,9 @@ class Enemy {
   PVector playerMovement;
   PVector playerMovement2;
  
-
-
-
   // Constructor
   Enemy() {
+    fall = false; 
     side = int(random(1, 5));
     playerMovement = new PVector(1, 1);
     playerMovement2 = new PVector(-1, -1);
@@ -77,7 +75,7 @@ class Enemy {
     if (enemyPos.dist(userPos)<10) {
       poof=true;
     }
-    if (enemyPos.dist(userPos)>1050){
+    if (enemyPos.x == width+0 || enemyPos.x ==-10||enemyPos.y == -10 || enemyPos.y == height +10){
     fall=true;
     }
   }
