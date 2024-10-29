@@ -12,12 +12,12 @@ class Enemy {
   PVector playerMovement;
   PVector playerMovement2;
   boolean poof;
-
+  float dist;
 
   // Constructor
   Enemy() {
     playerMovement = new PVector(1, 1);
-      playerMovement2 = new PVector(-1, -1);
+    playerMovement2 = new PVector(-1, -1);
     enemyPos = new PVector(random(displayWidth+10|displayWidth-10), random(displayHeight+10|displayHeight-10));
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
@@ -39,13 +39,23 @@ class Enemy {
   // Member Methods
   void update() {
     
-    
     direction = enemyPos.copy();
     direction.sub(userPos);
     direction.normalize();
     direction.mult(1.5);
     enemyPos.sub(direction);
-    
+  }
+  void playerMovement() {
+  
+  if(key == 'a'||key == 'A') {
+  enemyPos.x = enemyPos.x + 2;
+  }else if(key == 'd'||key == 'D') {
+  enemyPos.x = enemyPos.x - 2;
+  }else if(key == 'w'||key == 'W') {
+  enemyPos.y = enemyPos.y + 2;
+  }else if(key == 's'||key == 'S') {
+  enemyPos.y = enemyPos.y - 2;
+  }
   }
 
   void display() {
@@ -54,8 +64,8 @@ class Enemy {
     image(e1, enemyPos.x, enemyPos.y);
   }
   void zombiepoof() {
-  if(enemyPos.dist(userPos)<10){
-  poof=true;
-  }
+    if (enemyPos.dist(userPos)<10) {
+      poof=true;
+    }
   }
 }

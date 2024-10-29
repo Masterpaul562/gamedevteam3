@@ -1,3 +1,4 @@
+//Aiden Felt | Oct 23
 class Shop {
   //Pimage [] itemImages = new PImage [3]
   //String[] itemNames = {"Item 1", "Item 2", "Item 3"}; // Item names
@@ -18,11 +19,8 @@ class Shop {
 
   void display() {
     imageMode(CENTER);
-    //image(shopIcon, 450,450);
-    //shopIcon.resize(50,25);
-
     if (shopOpen == true) {
-      fill(200);
+      fill(255);
       rect(width / 2 - shopWidth / 2, height / 2 - shopHeight / 2, shopWidth, shopHeight);
       
       
