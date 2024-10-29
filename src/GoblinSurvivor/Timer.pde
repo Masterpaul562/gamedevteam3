@@ -1,5 +1,5 @@
 // Canon Unguren | Oct 8
-  // Canon Unguren Paul Tokhtuev| Oct 8
+// Canon Unguren Paul Tokhtuev| Oct 8
 // Example 10-5: Object-oriented timer
 
 class Timer {
@@ -17,9 +17,9 @@ class Timer {
     savedTime = millis();
   }
 
-  // The function isFinished() returns true if 5,000 ms have passed. 
+  // The function isFinished() returns true if 5,000 ms have passed.
   // The work of the timer is farmed out to this method.
-  boolean isFinished() { 
+  boolean isFinished() {
     // Check how much time has passed
     int passedTime = millis()- savedTime;
     if (passedTime > totalTime) {

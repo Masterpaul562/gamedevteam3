@@ -1,7 +1,7 @@
 // Aiden Felt, Canon Unguren| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
-  PImage staby1; 
+  PImage staby1;
   int x, y, w, h;
   int speed, damage, range, atkSpeed;
   boolean unlocked;
@@ -25,7 +25,7 @@ class Projectile {
   // Member Methods
   void display() {
     imageMode(CENTER);
-     staby1.resize(50,50);
+    staby1.resize(50, 50);
     image(staby1, x, y);
   }
   void move () {
