@@ -13,8 +13,6 @@ class Shop {
     //itemImages[0] = loadImage("item1.png"); // Replace with your item paths
     //itemImages[1] = loadImage("item2.png");
     //itemImages[2] = loadImage("item3.png");
-    
-
   }
 
   void display() {
@@ -22,8 +20,6 @@ class Shop {
     if (shopOpen == true) {
       fill(255);
       rect(width / 2 - shopWidth / 2, height / 2 - shopHeight / 2, shopWidth, shopHeight);
-      
-      
     }
   }
 }
