@@ -13,12 +13,22 @@ class Enemy {
   PVector playerMovement2;
   boolean poof;
   float dist;
+  int side;
 
   // Constructor
   Enemy() {
+    side = int(random(1, 5));
     playerMovement = new PVector(1, 1);
     playerMovement2 = new PVector(-1, -1);
-    enemyPos = new PVector(random(displayWidth+10|displayWidth-10), random(displayHeight+10|displayHeight-10));
+    if (side ==1) {
+      enemyPos = new PVector (random(width), -10);
+    } else if (side == 2) {
+      enemyPos = new PVector (width+10, random(height));
+    } else if (side == 3) {
+      enemyPos = new PVector (random(width), height+10);
+    } else if (side == 4) {
+      enemyPos = new PVector (-10, random(height));
+    }
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
     e1 =  loadImage("Zombie.png");
