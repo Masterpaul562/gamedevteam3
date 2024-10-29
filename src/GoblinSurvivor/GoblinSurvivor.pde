@@ -48,12 +48,16 @@ void draw() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
         mapOffsetY+= speed;
+        g1.guy = loadImage("GoblinWalkUp1.png");
       } else if (key == 's' || key == 'S') {
         mapOffsetY -= speed;
+        g1.guy = loadImage("GoblinWalkDown1.png");
       } else if (key == 'd' || key == 'D') {
         mapOffsetX -= speed;
+        g1.guy = loadImage("GoblinWalkRight1.png");
       } else if (key == 'a' || key == 'A') {
         mapOffsetX += speed;
+        g1.guy = loadImage("GoblinWalkLeft1.png");
       } else if (key == 'e' || key == 'E') {
         if (frameRate == 0) {
           frameRate(60);
