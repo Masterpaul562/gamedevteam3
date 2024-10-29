@@ -75,7 +75,7 @@ class Enemy {
     if (enemyPos.dist(userPos)<10) {
       poof=true;
     }
-    if (enemyPos.x == width+0 || enemyPos.x ==-10||enemyPos.y == -10 || enemyPos.y == height +10){
+    if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40){
     fall=true;
     }
   }
