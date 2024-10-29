@@ -38,7 +38,7 @@ class Enemy {
 
   // Member Methods
   void update() {
-    
+
     direction = enemyPos.copy();
     direction.sub(userPos);
     direction.normalize();
@@ -46,16 +46,17 @@ class Enemy {
     enemyPos.sub(direction);
   }
   void playerMovement() {
-  
-  if(key == 'a'||key == 'A') {
-  enemyPos.x = enemyPos.x + 2;
-  }else if(key == 'd'||key == 'D') {
-  enemyPos.x = enemyPos.x - 2;
-  }else if(key == 'w'||key == 'W') {
-  enemyPos.y = enemyPos.y + 2;
-  }else if(key == 's'||key == 'S') {
-  enemyPos.y = enemyPos.y - 2;
-  }
+    if (keyPressed) {
+      if (key == 'a'||key == 'A') {
+        enemyPos.x = enemyPos.x + 2;
+      } else if (key == 'd'||key == 'D') {
+        enemyPos.x = enemyPos.x - 2;
+      } else if (key == 'w'||key == 'W') {
+        enemyPos.y = enemyPos.y + 2;
+      } else if (key == 's'||key == 'S') {
+        enemyPos.y = enemyPos.y - 2;
+      }
+    }
   }
 
   void display() {
