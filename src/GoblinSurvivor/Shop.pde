@@ -16,12 +16,18 @@ class Shop {
     itemImages[2] = loadImage("fireball.png");
     x = 250;
     y = 350;
+
+    //itemImages[0] = loadImage("item1.png"); // Replace with your item paths
+    //itemImages[1] = loadImage("item2.png");
+    //itemImages[2] = loadImage("item3.png");
+
   }
 
   void display() {
     imageMode(CENTER);
     if (shopOpen == true) {
       fill(255);
+
       rect(200, 250, shopWidth, shopHeight);
       for (int i = 0; i>=3; i++) {
         itemImages[i].resize(100, 150);
@@ -29,6 +35,9 @@ class Shop {
         x = x+100;
         
       }
+
+     
+
     }
   }
 }
