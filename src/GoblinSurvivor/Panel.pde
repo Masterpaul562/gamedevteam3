@@ -4,9 +4,11 @@ class Panel {
   int seconds;
   int minutes;
   int enemiesKilled;
+  int xp;
   Panel() {
     seconds = millis()/1000;
     minutes = 0;
+    xp = 0;
   }
   void display() {
     seconds = millis()/1000;

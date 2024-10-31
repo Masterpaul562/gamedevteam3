@@ -2,12 +2,13 @@
 Goblin g1;
 Projectile p1;
 PowUp o1;
-Timer eTimer,timer1;
+Timer eTimer, timer1;
 Shop shop1;
 Panel panel;
 Tile tile;
 int level;
 int speed = 5;
+
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -15,8 +16,10 @@ boolean play;
 PImage start1;
 PVector userPos;
 void setup() {
+
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
+  powUps.add (new PowUp(0, 0));
   eTimer = new Timer(5000);
   eTimer.start();
   timer1 = new Timer(300);
@@ -27,7 +30,6 @@ void setup() {
   userPos = new PVector(width/2, height/2);
   g1 = new Goblin();
   p1 = new Projectile();
-  o1 = new PowUp();
   shop1 = new Shop();
   panel = new Panel();
   play = false;
@@ -50,50 +52,65 @@ void draw() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
         mapOffsetY+= speed;
-        o1.y = o1.y + speed;
-        if(timer1.isFinished()) {
-          if(g1.img1 != "GoblinWalkUp1.png") {
+        for (int i = 0; i < powUps.size(); i++) {
+          PowUp powUp = powUps.get(i);
+          powUp.y = powUp.y+ speed;
+          powUp.display();
+        }
+        //o1.y = o1.y + speed;
+        if (timer1.isFinished()) {
+          if (g1.img1 != "GoblinWalkUp1.png") {
             g1.img1 = "GoblinWalkUp1.png";
-          }else {
+          } else {
             g1.img1 =  "GoblinWalkUp2.png";
-          
           }
           timer1.start();
         }
-        
       } else if (key == 's' || key == 'S') {
         mapOffsetY -= speed;
-        o1.y = o1.y - speed;
-        if(timer1.isFinished()) {
-          if(g1.img1 != "GoblinWalkDown1.png") {
+        for (int i = 0; i < powUps.size(); i++) {
+          PowUp powUp = powUps.get(i);
+          powUp.y = powUp.y- speed;
+          powUp.display();
+        }
+        //o1.y = o1.y - speed;
+        if (timer1.isFinished()) {
+          if (g1.img1 != "GoblinWalkDown1.png") {
             g1.img1 = "GoblinWalkDown1.png";
-          }else {
+          } else {
             g1.img1 =  "GoblinWalkDown2.png";
-          
           }
           timer1.start();
         }
       } else if (key == 'd' || key == 'D') {
         mapOffsetX -= speed;
-        o1.x = o1.x - speed;
-        if(timer1.isFinished()) {
-          if(g1.img1 != "GoblinWalkRight1.png") {
+        for (int i = 0; i < powUps.size(); i++) {
+          PowUp powUp = powUps.get(i);
+          powUp.x = powUp.x- speed;
+          powUp.display();
+        }
+        //o1.x = o1.x - speed;
+        if (timer1.isFinished()) {
+          if (g1.img1 != "GoblinWalkRight1.png") {
             g1.img1 = "GoblinWalkRight1.png";
-          }else {
+          } else {
             g1.img1 =  "GoblinWalkRight2.png";
-          
           }
           timer1.start();
         }
       } else if (key == 'a' || key == 'A') {
+        for (int i = 0; i < powUps.size(); i++) {
+          PowUp powUp = powUps.get(i);
+          powUp.x = powUp.x+ speed;
+          powUp.display();
+        }
         mapOffsetX += speed;
-        o1.x = o1.x + speed;
-        if(timer1.isFinished()) {
-          if(g1.img1 != "GoblinWalkLeft1.png") {
+        //o1.x = o1.x + speed;
+        if (timer1.isFinished()) {
+          if (g1.img1 != "GoblinWalkLeft1.png") {
             g1.img1 = "GoblinWalkLeft1.png";
-          }else {
+          } else {
             g1.img1 =  "GoblinWalkLeft2.png";
-          
           }
           timer1.start();
         }
@@ -114,15 +131,15 @@ void draw() {
       }
 
 
-      if (keyCode == RIGHT) {
-        mapOffsetX -= speed;
-      } else if (keyCode == LEFT) {
-        mapOffsetX += speed;
-      } else if (keyCode == UP) {
-        mapOffsetY += speed;
-      } else if (keyCode == DOWN) {
-        mapOffsetY -= speed;
-      }
+      //if (keyCode == RIGHT) {
+      //  mapOffsetX -= speed;
+      //} else if (keyCode == LEFT) {
+      //  mapOffsetX += speed;
+      //} else if (keyCode == UP) {
+      //  mapOffsetY += speed;
+      //} else if (keyCode == DOWN) {
+      //  mapOffsetY -= speed;
+      //}
     }
     //you are playing the game!
 
@@ -131,7 +148,15 @@ void draw() {
     shop1.display();
     g1.display();
     p1.display();
-    o1.display();
+
+    for (int i = 0; i < powUps.size(); i++) {
+      PowUp powUp = powUps.get(i);
+      if (powUp.x < width/2+12 && powUp.x > width/2-12 && powUp.y < height/2+12 && powUp.y > height/2-12) {
+        powUps.remove(i);
+        panel.xp +=1;
+      }
+      powUp.display();
+    }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
       enemy.update();
@@ -140,6 +165,7 @@ void draw() {
       enemy.display();
       if (enemy.poof == true) {
         enemies.remove(i);
+        powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
       }
