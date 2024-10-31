@@ -133,17 +133,17 @@ void draw() {
     p1.display();
     o1.display();
     for (int i = 0; i < enemies.size(); i++) {
-      Enemy part = enemies.get(i);
-      part.update();
-      part.zombiepoof();
-      part.playerMovement();
-      part.display();
-      if (part.poof == true) {
+      Enemy enemy = enemies.get(i);
+      enemy.update();
+      enemy.zombiepoof();
+      enemy.playerMovement();
+      enemy.display();
+      if (enemy.poof == true) {
         enemies.remove(i);
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
       }
-      if (part.fall == true) {
+      if (enemy.fall == true) {
         enemies.remove(i);
       }
     }
