@@ -19,7 +19,7 @@ void setup() {
 
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-  powUps.add (new PowUp(0, 0));
+
   eTimer = new Timer(5000);
   eTimer.start();
   timer1 = new Timer(300);
