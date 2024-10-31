@@ -16,7 +16,9 @@ class Goblin {
   }
   //Member Methods
   void display() {
+
     guy = loadImage(img1);
+
     imageMode(CENTER);
     guy.resize(100, 100);
     image(guy, width/2, height/2);
