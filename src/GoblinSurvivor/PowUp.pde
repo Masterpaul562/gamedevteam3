@@ -2,16 +2,17 @@
 class PowUp {
   // Member Variables
   PImage orb;
-  int x, y, w, h;
+  int x, y, w, h,xp;
   char type;
 
   // Constructor
-  PowUp() {
+  PowUp(int x, int y) {
     orb = loadImage("Orb.png");
-    x = 20;
-    y = 450;
+    this.x = x;
+    this.y = y;
     w = 50;
     h = 50;
+    xp = 0; 
     type = 'e';
   }
 
@@ -20,5 +21,16 @@ class PowUp {
     imageMode(CENTER);
     orb.resize(25, 25);
     image(orb, x, y);
+  }
+  void collect() {
+    
+  }
+  boolean offScreen() {
+    if (y >height+50 || y < -50 || x >width+50 || x <-50 ) {
+      return true;
+    }else {
+      return false;
+    }
+
   }
 }
