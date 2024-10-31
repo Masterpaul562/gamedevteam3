@@ -1,7 +1,7 @@
 // Axl Dain Paul Tokhtuev | 3 Oct 2024
 class Enemy {
   // Member Variables
-  PImage e1;
+  PImage e1, e2;
   float x, y, w, h, x2, y2, dist;
   int health, speed, dmg, side;
   boolean fall, poof;
@@ -11,10 +11,10 @@ class Enemy {
   PVector direction;
   PVector playerMovement;
   PVector playerMovement2;
- 
+
   // Constructor
   Enemy() {
-    fall = false; 
+    fall = false;
     side = int(random(1, 5));
     playerMovement = new PVector(1, 1);
     playerMovement2 = new PVector(-1, -1);
@@ -30,6 +30,9 @@ class Enemy {
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
     e1 =  loadImage("Zombie.png");
+    e2 = loadImage("ZombieFlip.png");
+    e2.resize(100, 100);
+    e1.resize(100, 100);
     x = enemyPos.x;
     y = enemyPos.y;
     x2= userPos.x;
@@ -67,16 +70,20 @@ class Enemy {
   }
 
   void display() {
-    e1.resize(100, 100);
+
     imageMode(CENTER);
-    image(e1, enemyPos.x, enemyPos.y);
+    if (enemyPos.x >width/2) {
+      image(e2, enemyPos.x, enemyPos.y);
+    } else {
+      image(e1, enemyPos.x, enemyPos.y);
+    }
   }
   void zombiepoof() {
     if (enemyPos.dist(userPos)<10) {
       poof=true;
     }
-    if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40){
-    fall=true;
+    if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
+      fall=true;
     }
   }
 }
