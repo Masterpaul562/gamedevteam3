@@ -2,7 +2,7 @@
 Goblin g1;
 Projectile p1;
 PowUp o1;
-Timer eTimer, timer1;
+Timer eTimer, timer1, zWalk;
 Shop shop1;
 Panel panel;
 Tile tile;
@@ -19,7 +19,8 @@ void setup() {
 
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
-
+  zWalk = new Timer(500);
+  zWalk.start();
   eTimer = new Timer(5000);
   eTimer.start();
   timer1 = new Timer(300);
@@ -159,9 +160,18 @@ void draw() {
     }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
+      if (zWalk.isFinished()) {
+        if (enemy.walk != "Zombie2.png") {
+          enemy.walk = "Zombie2.png";
+        } else {
+          enemy.walk =  "Zombie.png";
+        }
+        zWalk.start();
+      }
       enemy.update();
       enemy.zombiepoof();
       enemy.playerMovement();
+
       enemy.display();
       if (enemy.poof == true) {
         enemies.remove(i);
