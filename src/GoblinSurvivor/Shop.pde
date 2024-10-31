@@ -12,10 +12,10 @@ class Shop {
   Shop() {
     shopIcon = loadImage("Shoplogo.png");
     itemImages[0] = loadImage("Bananaproj.png"); // Replace with your item paths
-    itemImages[1] = loadImage("enemy.png");
+    itemImages[1] = loadImage("BowCard.png");
     itemImages[2] = loadImage("fireball.png");
     x = 250;
-    y = 350;
+    y = 325;
 
     //itemImages[0] = loadImage("item1.png"); // Replace with your item paths
     //itemImages[1] = loadImage("item2.png");
@@ -29,11 +29,14 @@ class Shop {
       fill(255);
 
       rect(200, 250, shopWidth, shopHeight);
-      for (int i = 0; i>=3; i++) {
+      for (int i = 0; i<=2; i++) {
         itemImages[i].resize(100, 150);
         image(itemImages[i], x, y);
         x = x+100;
-        
+        if(x >= 600) {
+          x = 250;
+          y +=150;
+        }
       }
 
      

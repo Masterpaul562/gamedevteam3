@@ -1,4 +1,4 @@
-// Oskar Szajnuk | October 3 2024
+// Oskar Szajnuk, Canon Unguren| October 3 2024
 class PowUp {
   // Member Variables
   PImage orb;
