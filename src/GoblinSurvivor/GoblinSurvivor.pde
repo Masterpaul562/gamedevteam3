@@ -183,6 +183,8 @@ void draw() {
         enemies.remove(i);
       }
     }
+  
+
     if (g1.health <= 0) {
       gameOver();
     }
