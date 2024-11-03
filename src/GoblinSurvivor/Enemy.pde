@@ -78,12 +78,12 @@ class Enemy {
         walk = "SCAMMER.png";
       } else if (flip == false) {
         walk =  "Zombie.png";
-      }
-      if (flip == true && walk != "ZombieFlip2.png") {
-        walk = "ZombieFlip2.png";
-      } else if (flip == true) {
-        walk = "ZombieFlip.png";
-      }
+      } else
+        if (flip == true && walk != "ZombieFlip2.png") {
+          walk = "ZombieFlip2.png";
+        } else if (flip == true) {
+          walk = "ZombieFlip.png";
+        }
       zWalk.start();
     }
     e1 = loadImage(walk);
