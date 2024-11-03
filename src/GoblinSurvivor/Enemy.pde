@@ -73,17 +73,20 @@ class Enemy {
 
   void display() {
 
-    if (zWalk.isFinished()) {
-      if (flip == false&&walk != "SCAMMER.png") {
+    if (zWalk.isFinished() && enemyPos.x < width/2) {
+      if (walk != "SCAMMER.png") {
         walk = "SCAMMER.png";
-      } else if (flip == false) {
+      } else {
         walk =  "Zombie.png";
-      } else
-        if (flip == true && walk != "ZombieFlip2.png") {
-          walk = "ZombieFlip2.png";
-        } else if (flip == true) {
-          walk = "ZombieFlip.png";
-        }
+      }
+      zWalk.start();
+    }
+    if (zWalk.isFinished() && enemyPos.x > width/2) {
+      if (walk != "ZombieFlip2.png") {
+        walk = "ZombieFlip2.png";
+      } else {
+        walk = "ZombieFlip.png";
+      }
       zWalk.start();
     }
     e1 = loadImage(walk);
