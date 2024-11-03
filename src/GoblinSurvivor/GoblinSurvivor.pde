@@ -165,6 +165,7 @@ void draw() {
     for (int i = 0; i < proj.size(); i++) {
       Projectile projs = proj.get(i);
       projs.fire();
+      projs.playerMovement();
       projs.display();
 
       if (projs.disappear == true) {
@@ -178,7 +179,7 @@ void draw() {
       enemy.zombiepoof();
       enemy.playerMovement();
       enemy.display();
-
+      
       if (enemy.poof == true) {
         enemies.remove(i);
         powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
