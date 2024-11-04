@@ -181,6 +181,7 @@ void draw() {
           enemy.health -= 100;
           if (enemy.health < 0) {
             enemies.remove(i);
+            panel.enemiesKilled = panel.enemiesKilled+1;
           }
         }
       }
