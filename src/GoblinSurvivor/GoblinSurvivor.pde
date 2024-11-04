@@ -168,18 +168,30 @@ void draw() {
       projs.playerMovement();
       projs.display();
 
+
       if (projs.disappear == true) {
         proj.remove(i);
       }
     }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
+      for (int n = 0; n < proj.size(); n++) {
+        Projectile projs = proj.get(n);
+        if (enemy.enemyPos.dist(projs.location)<10) {
+          enemy.health -= 100;
+          if (enemy.health < 0) {
+            enemies.remove(i);
+          }
+        }
+      }
+
 
       enemy.update();
       enemy.zombiepoof();
       enemy.playerMovement();
       enemy.display();
-      
+
+
       if (enemy.poof == true) {
         enemies.remove(i);
         powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));

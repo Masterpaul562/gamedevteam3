@@ -104,10 +104,5 @@ class Enemy {
     }
   }
 }
-//if (enemy.enemyPos.dist(projs.location)<10){
-//enemy.health -= 10;
-//if(enemy.health < 0) {
-//enemies.remove(i);
-//}
-//}
+
 // collision detection for zombie and arrow. not working because need to figure out way to access a vector form other class
