@@ -40,12 +40,13 @@ class Enemy {
     health = 100;
     speed = 5;
     dmg = 10;
-    type = 'b';
+    type = 'z';
   }
 
 
   // Member Methods
   void update() {
+     if (type == 'z') {
     if (enemyPos.x>width/2) {
       flip = true;
     } else {
@@ -56,6 +57,7 @@ class Enemy {
     direction.normalize();
     direction.mult(1.5);
     enemyPos.sub(direction);
+  }
   }
   void playerMovement() {
     if (keyPressed) {
@@ -72,7 +74,7 @@ class Enemy {
   }
 
   void display() {
-
+ if (type == 'z') {
     if (zWalk.isFinished() && enemyPos.x < width/2) {
       if (walk != "SCAMMER.png") {
         walk = "SCAMMER.png";
@@ -89,20 +91,20 @@ class Enemy {
       }
       zWalk.start();
     }
+ }
     e1 = loadImage(walk);
     imageMode(CENTER);
     e1.resize(100, 100);
     image(e1, enemyPos.x, enemyPos.y);
   }
   void zombiepoof() {
+    if (type == 'z') {
     if (enemyPos.dist(userPos)<10) {
       poof=true;
     }
-
+    }
     if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
       fall=true;
     }
   }
 }
-
-// collision detection for zombie and arrow. not working because need to figure out way to access a vector form other class
