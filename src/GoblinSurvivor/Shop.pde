@@ -13,7 +13,7 @@ class Shop {
     shopIcon = loadImage("Shoplogo.png");
     itemImages[0] = loadImage("Bananaproj.png"); // Replace with your item paths
     itemImages[1] = loadImage("BowCard.png");
-    itemImages[2] = loadImage("fireball.png");
+    itemImages[2] = loadImage("hammercard2.png");
     x = 250;
     y = 325;
 
