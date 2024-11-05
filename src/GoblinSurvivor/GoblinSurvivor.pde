@@ -156,7 +156,7 @@ void draw() {
 
     for (int i = 0; i < powUps.size(); i++) {
       PowUp powUp = powUps.get(i);
-      if (powUp.x < width/2+12 && powUp.x > width/2-12 && powUp.y < height/2+12 && powUp.y > height/2-12) {
+      if (powUp.x < width/2+15 && powUp.x > width/2-15 && powUp.y < height/2+25 && powUp.y > height/2-25) {
         powUps.remove(i);
         panel.xp +=1;
       }
@@ -173,6 +173,7 @@ void draw() {
         proj.remove(i);
       }
     }
+    g1.display();
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
       for (int n = 0; n < proj.size(); n++) {
@@ -181,6 +182,7 @@ void draw() {
           enemy.health -= 100;
           if (enemy.health < 0) {
             enemies.remove(i);
+            powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
             panel.enemiesKilled = panel.enemiesKilled+1;
           }
         }
