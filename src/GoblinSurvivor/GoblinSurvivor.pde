@@ -1,6 +1,7 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 import processing.sound.*;
 SoundFile background1;
+SoundFile bite1;
 Goblin g1;
 Projectile p1;
 PowUp o1;
@@ -19,6 +20,7 @@ PImage start1;
 PVector userPos;
 void setup() {
   background1 = new SoundFile(this, "backgroundMusic1.wav");
+  bite1 = new SoundFile(this, "bite.wav");
   background1.play();
   shootA = new Timer (4000);
   shootA.start();
@@ -201,6 +203,7 @@ void draw() {
 
       if (enemy.poof == true) {
         enemies.remove(i);
+        bite1.play();
         powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
