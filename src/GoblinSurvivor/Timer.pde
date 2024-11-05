@@ -1,5 +1,5 @@
 // Canon Unguren Paul Tokhtuev| Oct 8
-// Example 10-5: Object-oriented timer
+
 
 class Timer {
 

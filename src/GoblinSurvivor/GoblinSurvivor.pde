@@ -2,21 +2,22 @@
 Goblin g1;
 Projectile p1;
 PowUp o1;
-Timer eTimer, timer1, zWalk;
+Timer eTimer, timer1, zWalk, shootA;
 Shop shop1;
 Panel panel;
 Tile tile;
 int level;
 int speed = 5;
 
-ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play;
 PImage start1;
 PVector userPos;
 void setup() {
-
+  shootA = new Timer (4000);
+  shootA.start();
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
   zWalk = new Timer(500);
@@ -44,7 +45,10 @@ void draw() {
 
     startScreen();
   } else {
-
+    if (shootA.isFinished()) {
+      proj.add(new Projectile());
+      shootA.start();
+    }
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -158,21 +162,37 @@ void draw() {
       }
       powUp.display();
     }
+    for (int i = 0; i < proj.size(); i++) {
+      Projectile projs = proj.get(i);
+      projs.fire();
+      projs.playerMovement();
+      projs.display();
+
+
+      if (projs.disappear == true) {
+        proj.remove(i);
+      }
+    }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
-      if (zWalk.isFinished()) {
-        if (enemy.walk != "Zombie2.png") {
-          enemy.walk = "Zombie2.png";
-        } else {
-          enemy.walk =  "Zombie.png";
+      for (int n = 0; n < proj.size(); n++) {
+        Projectile projs = proj.get(n);
+        if (enemy.enemyPos.dist(projs.location)<20) {
+          enemy.health -= 100;
+          if (enemy.health < 0) {
+            enemies.remove(i);
+            panel.enemiesKilled = panel.enemiesKilled+1;
+          }
         }
-        zWalk.start();
       }
+
+
       enemy.update();
       enemy.zombiepoof();
       enemy.playerMovement();
-
       enemy.display();
+
+
       if (enemy.poof == true) {
         enemies.remove(i);
         powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
@@ -183,6 +203,8 @@ void draw() {
         enemies.remove(i);
       }
     }
+
+
     if (g1.health <= 0) {
       gameOver();
     }
