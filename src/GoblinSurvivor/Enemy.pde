@@ -40,7 +40,7 @@ class Enemy {
     health = 100;
     speed = 5;
     dmg = 10;
-    type = 'b';
+    type = 'z';
   }
 
 
