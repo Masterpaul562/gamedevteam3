@@ -18,6 +18,7 @@ class Projectile {
     aFireT = new Timer(4000);
     location = new PVector (width/2, height/2);
     velocity = new PVector (0, 0);
+    target = new PVector (width/2, 0);
 
     if (key == 'w' | key == 'W') {
       direction = "ArrowUP.png";
