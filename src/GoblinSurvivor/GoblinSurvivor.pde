@@ -1,4 +1,6 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
+import processing.sound.*;
+SoundFile background1;
 Goblin g1;
 Projectile p1;
 PowUp o1;
@@ -16,6 +18,8 @@ boolean play;
 PImage start1;
 PVector userPos;
 void setup() {
+  background1 = new SoundFile(this, "backgroundMusic1.wav");
+  background1.play();
   shootA = new Timer (4000);
   shootA.start();
   userPos = new PVector(width/2, height/2);
