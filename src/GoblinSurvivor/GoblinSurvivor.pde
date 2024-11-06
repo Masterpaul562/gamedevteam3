@@ -124,19 +124,12 @@ void draw() {
             g1.img1 =  "GoblinWalkLeft2.png";
           }
           timer1.start();
-        }
-      } else if (key == 'e' || key == 'E') {
-        if (frameRate == 0) {
-          frameRate(60);
-          shop1.shopOpen = false;
-        } else {
-          frameRate(0);
-          shop1.shopOpen = true;
+    
         }
         if (key == 'e' || key == 'E') {
           shop1.shopOpen = true;
         }
-        if (key == 'q' || key == 'Q') {
+        if (key == 'e' || key == 'E') && shop1.shopOpen = true; {
           shop1.shopOpen = false;
         }
       }
