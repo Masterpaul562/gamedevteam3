@@ -129,7 +129,7 @@ void draw() {
         if (key == 'e' || key == 'E') {
           shop1.shopOpen = true;
         }
-        if (key == 'e' || key == 'E') && shop1.shopOpen = true; {
+        if (key == 'e' || key == 'E') && shop1.shopOpen = true {
           shop1.shopOpen = false;
         }
       }
