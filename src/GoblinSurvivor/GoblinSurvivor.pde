@@ -66,12 +66,12 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.y = powUp.y+ speed;
-       
-          if(powUp.offScreen()) {
+
+          if (powUp.offScreen()) {
             powUps.remove(i);
           }
           powUp.display();
-        } 
+        }
         //o1.y = o1.y + speed;
         if (timer1.isFinished()) {
           if (g1.img1 != "GoblinWalkUp1.png") {
@@ -86,7 +86,7 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.y = powUp.y- speed;
-          if(powUp.offScreen()) {
+          if (powUp.offScreen()) {
             powUps.remove(i);
           }
           powUp.display();
@@ -105,7 +105,7 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.x = powUp.x- speed;
-          if(powUp.offScreen()) {
+          if (powUp.offScreen()) {
             powUps.remove(i);
           }
           powUp.display();
@@ -123,7 +123,7 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.x = powUp.x+ speed;
-          if(powUp.offScreen()) {
+          if (powUp.offScreen()) {
             powUps.remove(i);
           }
           powUp.display();
@@ -140,11 +140,13 @@ void draw() {
         }
       }
       if (key == 'e' || key == 'E') {
+        println("e");
         shop1.shopOpen = true;
-      }
-      if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
+      } else if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
         shop1.shopOpen = false;
+        println("e");
       }
+
 
       //if (keyCode == RIGHT) {
       //  mapOffsetX -= speed;
@@ -226,6 +228,7 @@ void draw() {
 
 
 void keyPressed() {
+
   if (keyCode == RIGHT) {
     mapOffsetX -= speed;
   } else if (keyCode == LEFT) {
