@@ -240,12 +240,12 @@ void draw() {
       end = true;
       play = false;
       gameOver();
-      
-        
-        gameoversound.play();
-        g1.health = 100;
-      
-      
+      for (int i = 0; i < enemies.size(); i++) {
+        enemies.remove(i);
+      }
+      background1.pause();
+      gameoversound.play();
+      g1.health = 100;
     }
   }
   if (!play && end) {
