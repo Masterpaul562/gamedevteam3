@@ -1,6 +1,6 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 import processing.sound.*;
-SoundFile background1;
+SoundFile background1, coin1, ouch1, gameoversound;
 SoundFile bite1;
 Goblin g1;
 Projectile p1;
@@ -15,13 +15,20 @@ int speed = 5;
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-boolean play;
+boolean play, end;
 PImage start1;
+PImage game1, over1, skull1, retry1;
+String retrying;
 PVector userPos;
 void setup() {
-  background1 = new SoundFile(this, "backgroundMusic1.wav");
+  retrying = "RetryButton.png";
+  end = false;
+  background1 = new SoundFile(this, "BGM1.wav");
   bite1 = new SoundFile(this, "bite.wav");
-  background1.play();
+  coin1 = new SoundFile(this, "coinCollect.mp3");
+  ouch1 = new SoundFile(this, "ouch.mp3");
+  gameoversound = new SoundFile(this, "gameover.wav");
+  background1.loop();
   shootA = new Timer (4000);
   shootA.start();
   userPos = new PVector(width/2, height/2);
@@ -44,10 +51,14 @@ void setup() {
   tile = new Tile();
 
   start1 = loadImage("GoblinStart.png");
+  game1 = loadImage("GAME.png");
+  over1 = loadImage("OVER.png");
+  skull1 = loadImage("Skull.png");
+  retry1 = loadImage(retrying);
 }
 
 void draw() {
-  if (!play) {
+  if (!play && !end) {
 
     startScreen();
   } else {
@@ -145,6 +156,8 @@ void draw() {
         shop1.shopOpen = false;
       } else if (key == 'q'  || key == 'Q') {
         shop1.shopOpen = false;
+      } else if (key == '|') {
+        g1.health = 0;
       }
 
 
@@ -170,6 +183,7 @@ void draw() {
       PowUp powUp = powUps.get(i);
       if (powUp.x < width/2+15 && powUp.x > width/2-15 && powUp.y < height/2+25 && powUp.y > height/2-25) {
         powUps.remove(i);
+        coin1.play();
         panel.xp +=1;
       }
       powUp.display();
@@ -211,6 +225,7 @@ void draw() {
       if (enemy.poof == true) {
         enemies.remove(i);
         bite1.play();
+        ouch1.play();
         powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
@@ -222,8 +237,20 @@ void draw() {
 
 
     if (g1.health <= 0) {
+      end = true;
+      play = false;
       gameOver();
+      
+        
+        gameoversound.play();
+        g1.health = 100;
+      
+      
     }
+  }
+  if (!play && end) {
+
+    gameOver();
   }
 }
 
@@ -250,9 +277,23 @@ void startScreen() {
 }
 
 void gameOver() {
+
+  retry1 = loadImage(retrying);
   background(0);
   fill(255);
-  textMode(CENTER);
-  text("Game Over", width/2, height/2);
-  noLoop();
+  imageMode(CENTER);
+  game1.resize(700, 400);
+  image(game1, width/2, 100);
+  over1.resize(700, 400);
+  image(over1, width/2, 300);
+  skull1.resize(200, 200);
+  image(skull1, width/2, 550);
+  println(mouseX, mouseY);
+  if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
+    retrying = "RetryButtonPressed.png";
+  } else {
+    retrying = "RetryButton.png";
+  }
+  retry1.resize(250, 250);
+  image(retry1, width/2, 750);
 }
