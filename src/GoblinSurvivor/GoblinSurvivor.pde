@@ -140,11 +140,9 @@ void draw() {
         }
       }
       if (key == 'e' || key == 'E') {
-        println("e");
         shop1.shopOpen = true;
       } else if (key == 'e' && shop1.shopOpen == true|| key == 'E' && shop1.shopOpen == true) {
         shop1.shopOpen = false;
-        println("E");
       } else if (key == 'q'  || key == 'Q') {
         shop1.shopOpen = false;
       }

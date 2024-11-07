@@ -37,8 +37,6 @@ class Shop {
         if (x >= 600) {
           x = 250;
           y +=150;
-        }else {
-          println("HEHEHEHE");
         }
       }
     }
