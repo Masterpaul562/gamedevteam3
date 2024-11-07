@@ -162,7 +162,7 @@ void draw() {
 
     tile.display();
     panel.display();
-    shop1.display();
+
     g1.display();
     p1.display();
 
@@ -205,6 +205,7 @@ void draw() {
       enemy.zombiepoof();
       enemy.playerMovement();
       enemy.display();
+      shop1.display();
 
 
       if (enemy.poof == true) {
