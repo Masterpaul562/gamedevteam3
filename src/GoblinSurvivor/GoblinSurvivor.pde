@@ -124,16 +124,14 @@ void draw() {
             g1.img1 =  "GoblinWalkLeft2.png";
           }
           timer1.start();
-    
-        }
-        if (key == 'e' || key == 'E') {
-          shop1.shopOpen = true;
-        }
-        if (key == 'e' || key == 'E') && shop1.shopOpen = true {
-          shop1.shopOpen = false;
         }
       }
-
+      if (key == 'e' || key == 'E') {
+        shop1.shopOpen = true;
+      }
+      if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
+        shop1.shopOpen = false;
+      }
 
       //if (keyCode == RIGHT) {
       //  mapOffsetX -= speed;
