@@ -19,6 +19,7 @@ class Enemy {
     e2 = new PImage[6];
 
     fireball = new Timer(5000);
+    
     wType = int(random(1, 3));
     if (wType == 1) {
       type = 'z';
@@ -62,6 +63,7 @@ class Enemy {
 
   // Member Methods
   void update() {
+    wizard = "Wizard.png";
     if (type == 'z') {
       if (enemyPos.x>width/2) {
         flip = true;
@@ -105,6 +107,10 @@ class Enemy {
   }
 
   void display() {
+    if (imageNum >= 6)
+    {
+      imageNum = 1;
+    }
     if (type == 'w')
     {
       if (enemyPos.x < width/2) {
@@ -113,22 +119,19 @@ class Enemy {
       if (enemyPos.x > width/2) {
         wizard = "WizardFlip.png";
       }
-      if (fireball.isFinished()) {
+     // if (fireball.isFinished()) {
         for (int i = 0; i< 6; i++)
         {
           wizard = "WizardCast" + imageNum + ".png";
           e2[i] = loadImage(wizard);
         }
-      }
+      //}
 
       imageMode(CENTER);
       frame = (frame+1) % 6;
       image(e2[frame], enemyPos.x, enemyPos.y);
       if (imageNum < 6)
         imageNum+=1;
-    } else if (imageNum > 6)
-    {
-      imageNum = 1;
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
