@@ -1,7 +1,7 @@
 // Axl Dain Paul Tokhtuev | 3 Oct 2024
 class Enemy {
   // Member Variables
-  Timer zWalk;
+  Timer zWalk, fireball;
   PImage e1, e2;
   float x, y, w, h, x2, y2, dist;
   int health, speed, dmg, side, wType;
@@ -14,6 +14,7 @@ class Enemy {
 
   // Constructor
   Enemy() {
+    fireball = new Timer(5000);
     wType = int(random(1, 3));
     if (wType == 1) {
       type = 'z';
@@ -84,7 +85,7 @@ class Enemy {
         }
       }
     }
-     if (type == 'z') {
+    if (type == 'z') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
           enemyPos.x = enemyPos.x + 2;
@@ -102,7 +103,11 @@ class Enemy {
   void display() {
     if (type == 'w')
     {
-      walk = "Wizard.png";
+      if (enemyPos.x < width/2) {
+        walk = "Wizard.png";
+      } 
+      if(enemyPos.x > width/2) {
+      walk = "WizardFlip.png";}
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
@@ -133,8 +138,15 @@ class Enemy {
         poof=true;
       }
     }
-    if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
-      fall=true;
+    if (type == 'z') {
+      if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
+        fall=true;
+      }
+      if (type == 'w') {
+        if (enemyPos.x > width+60 || enemyPos.x <-60||enemyPos.y < -60 || enemyPos.y > height +60) {
+          fall=true;
+        }
+      }
     }
   }
 }
