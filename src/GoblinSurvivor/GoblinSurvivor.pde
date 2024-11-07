@@ -66,8 +66,12 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.y = powUp.y+ speed;
+       
+          if(powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
-        }
+        } 
         //o1.y = o1.y + speed;
         if (timer1.isFinished()) {
           if (g1.img1 != "GoblinWalkUp1.png") {
@@ -82,6 +86,9 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.y = powUp.y- speed;
+          if(powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         //o1.y = o1.y - speed;
@@ -98,6 +105,9 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.x = powUp.x- speed;
+          if(powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         //o1.x = o1.x - speed;
@@ -113,6 +123,9 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.x = powUp.x+ speed;
+          if(powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         mapOffsetX += speed;
@@ -175,7 +188,7 @@ void draw() {
       Enemy enemy = enemies.get(i);
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        if (enemy.enemyPos.dist(projs.location)<20) {
+        if (enemy.enemyPos.dist(projs.location)<30) {
           enemy.health -= 100;
           if (enemy.health < 0) {
             enemies.remove(i);
