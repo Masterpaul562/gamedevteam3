@@ -1,6 +1,6 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 import processing.sound.*;
-SoundFile background1,coin1;
+SoundFile background1, coin1, ouch1, gameoversound;
 SoundFile bite1;
 Goblin g1;
 Projectile p1;
@@ -15,9 +15,9 @@ int speed = 5;
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-boolean play,end;
+boolean play, end;
 PImage start1;
-PImage game1,over1,skull1,retry1;
+PImage game1, over1, skull1, retry1;
 String retrying;
 PVector userPos;
 void setup() {
@@ -26,7 +26,9 @@ void setup() {
   background1 = new SoundFile(this, "BGM1.wav");
   bite1 = new SoundFile(this, "bite.wav");
   coin1 = new SoundFile(this, "coinCollect.mp3");
-  background1.play();
+  ouch1 = new SoundFile(this, "ouch.mp3");
+  gameoversound = new SoundFile(this, "gameover.wav");
+  background1.loop();
   shootA = new Timer (4000);
   shootA.start();
   userPos = new PVector(width/2, height/2);
@@ -154,7 +156,7 @@ void draw() {
         shop1.shopOpen = false;
       } else if (key == 'q'  || key == 'Q') {
         shop1.shopOpen = false;
-      }else if (key == '|') {
+      } else if (key == '|') {
         g1.health = 0;
       }
 
@@ -223,6 +225,7 @@ void draw() {
       if (enemy.poof == true) {
         enemies.remove(i);
         bite1.play();
+        ouch1.play();
         powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
         panel.enemiesKilled = panel.enemiesKilled+1;
         g1.health= g1.health - 15;
@@ -238,12 +241,17 @@ void draw() {
       play = false;
       gameOver();
       
+        
+        gameoversound.play();
+        g1.health = 100;
+      
+      
     }
   }
-  if(!play && end) {
+  if (!play && end) {
+
     gameOver();
   }
-  
 }
 
 
@@ -269,23 +277,23 @@ void startScreen() {
 }
 
 void gameOver() {
+
   retry1 = loadImage(retrying);
   background(0);
   fill(255);
   imageMode(CENTER);
-  game1.resize(700,400);
+  game1.resize(700, 400);
   image(game1, width/2, 100);
-  over1.resize(700,400);
+  over1.resize(700, 400);
   image(over1, width/2, 300);
-  skull1.resize(200,200);
-  image(skull1,width/2, 550);
-  println(mouseX,mouseY);
-  if(mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
+  skull1.resize(200, 200);
+  image(skull1, width/2, 550);
+  println(mouseX, mouseY);
+  if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
     retrying = "RetryButtonPressed.png";
-    
-  }else {
+  } else {
     retrying = "RetryButton.png";
   }
-  retry1.resize(250,250);
-  image(retry1,width/2,750);
+  retry1.resize(250, 250);
+  image(retry1, width/2, 750);
 }
