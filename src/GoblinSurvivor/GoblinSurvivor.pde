@@ -15,10 +15,14 @@ int speed = 5;
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-boolean play;
+boolean play,end;
 PImage start1;
+PImage game1,over1,skull1,retry1;
+String retrying;
 PVector userPos;
 void setup() {
+  retrying = "RetryButton.png";
+  end = false;
   background1 = new SoundFile(this, "backgroundMusic1.wav");
   bite1 = new SoundFile(this, "bite.wav");
   background1.play();
@@ -44,10 +48,14 @@ void setup() {
   tile = new Tile();
 
   start1 = loadImage("GoblinStart.png");
+  game1 = loadImage("GAME.png");
+  over1 = loadImage("OVER.png");
+  skull1 = loadImage("Skull.png");
+  retry1 = loadImage(retrying);
 }
 
 void draw() {
-  if (!play) {
+  if (!play && !end) {
 
     startScreen();
   } else {
@@ -145,6 +153,8 @@ void draw() {
         shop1.shopOpen = false;
       } else if (key == 'q'  || key == 'Q') {
         shop1.shopOpen = false;
+      }else if (key == '|') {
+        g1.health = 0;
       }
 
 
@@ -222,9 +232,16 @@ void draw() {
 
 
     if (g1.health <= 0) {
+      end = true;
+      play = false;
       gameOver();
+      
     }
   }
+  if(!play && end) {
+    gameOver();
+  }
+  
 }
 
 
@@ -250,9 +267,23 @@ void startScreen() {
 }
 
 void gameOver() {
+  retry1 = loadImage(retrying);
   background(0);
   fill(255);
-  textMode(CENTER);
-  text("Game Over", width/2, height/2);
-  noLoop();
+  imageMode(CENTER);
+  game1.resize(700,400);
+  image(game1, width/2, 100);
+  over1.resize(700,400);
+  image(over1, width/2, 300);
+  skull1.resize(200,200);
+  image(skull1,width/2, 550);
+  println(mouseX,mouseY);
+  if(mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
+    retrying = "RetryButtonPressed.png";
+    
+  }else {
+    retrying = "RetryButton.png";
+  }
+  retry1.resize(250,250);
+  image(retry1,width/2,750);
 }
