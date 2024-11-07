@@ -125,22 +125,13 @@ void draw() {
           }
           timer1.start();
         }
-      } else if (key == 'e' || key == 'E') {
-        if (frameRate == 0) {
-          frameRate(60);
-          shop1.shopOpen = false;
-        } else {
-          frameRate(0);
-          shop1.shopOpen = true;
-        }
-        if (key == 'e' || key == 'E') {
-          shop1.shopOpen = true;
-        }
-        if (key == 'q' || key == 'Q') {
-          shop1.shopOpen = false;
-        }
       }
-
+      if (key == 'e' || key == 'E') {
+        shop1.shopOpen = true;
+      }
+      if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
+        shop1.shopOpen = false;
+      }
 
       //if (keyCode == RIGHT) {
       //  mapOffsetX -= speed;
