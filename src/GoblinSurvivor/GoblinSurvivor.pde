@@ -1,6 +1,6 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 import processing.sound.*;
-SoundFile background1, coin1, ouch1, gameoversound;
+SoundFile background1, coin1, ouch1, gameoversound,arrow1;
 SoundFile bite1;
 Goblin g1;
 Projectile p1;
@@ -24,6 +24,7 @@ void setup() {
   retrying = "RetryButton.png";
   end = false;
   background1 = new SoundFile(this, "BGM1.wav");
+  arrow1 = new SoundFile(this, "Arrow.mp3");
   bite1 = new SoundFile(this, "bite.wav");
   coin1 = new SoundFile(this, "coinCollect.mp3");
   ouch1 = new SoundFile(this, "ouch.mp3");
@@ -63,6 +64,7 @@ void draw() {
     startScreen();
   } else {
     if (shootA.isFinished()) {
+      arrow1.play();
       proj.add(new Projectile());
       shootA.start();
     }
@@ -244,6 +246,11 @@ void draw() {
         enemies.remove(i);
       }
       background1.pause();
+      eTimer.paused = true;
+      timer1.paused = true;
+      zWalk. paused = true;
+      shootA.paused = true;
+      
       gameoversound.play();
       g1.health = 100;
     }
