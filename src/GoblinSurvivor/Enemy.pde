@@ -2,18 +2,22 @@
 class Enemy {
   // Member Variables
   Timer zWalk, fireball;
-  PImage e1, e2;
+  PImage e1;
+  PImage[] e2;
   float x, y, w, h, x2, y2, dist;
-  int health, speed, dmg, side, wType;
+  int health, speed, dmg, side, wType, frame, imageNum;
   boolean fall, poof, flip;
   char type;
   PVector enemyPos;
   PVector userPos;
   PVector direction;
-  String walk;
+  String walk, wizard;
 
   // Constructor
   Enemy() {
+    imageNum = 1;
+    e2 = new PImage[6];
+
     fireball = new Timer(5000);
     wType = int(random(1, 3));
     if (wType == 1) {
@@ -104,10 +108,27 @@ class Enemy {
     if (type == 'w')
     {
       if (enemyPos.x < width/2) {
-        walk = "Wizard.png";
-      } 
-      if(enemyPos.x > width/2) {
-      walk = "WizardFlip.png";}
+        wizard = "Wizard.png";
+      }
+      if (enemyPos.x > width/2) {
+        wizard = "WizardFlip.png";
+      }
+      if (fireball.isFinished()) {
+        for (int i = 0; i< 6; i++)
+        {
+          wizard = "WizardCast" + imageNum + ".png";
+          e2[i] = loadImage(wizard);
+        }
+      }
+
+      imageMode(CENTER);
+      frame = (frame+1) % 6;
+      image(e2[frame], enemyPos.x, enemyPos.y);
+      if (imageNum < 6)
+        imageNum+=1;
+    } else if (imageNum > 6)
+    {
+      imageNum = 1;
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
@@ -124,13 +145,14 @@ class Enemy {
         } else {
           walk = "ZombieFlip.png";
         }
+
         zWalk.start();
       }
+      e1 = loadImage(walk);
+      imageMode(CENTER);
+      e1.resize(100, 100);
+      image(e1, enemyPos.x, enemyPos.y);
     }
-    e1 = loadImage(walk);
-    imageMode(CENTER);
-    e1.resize(100, 100);
-    image(e1, enemyPos.x, enemyPos.y);
   }
   void zombiepoof() {
     if (type == 'z') {
