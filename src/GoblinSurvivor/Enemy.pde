@@ -37,8 +37,8 @@ class Enemy {
         enemyPos = new PVector (-10, random(height));
       }
     }
-     if (type == 'w') {
-     enemyPos = new PVector (random(width), (random(height)));
+    if (type == 'w') {
+      enemyPos = new PVector (random(width), (random(height)));
     }
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
@@ -71,15 +71,30 @@ class Enemy {
     }
   }
   void playerMovement() {
-    if (keyPressed) {
-      if (key == 'a'||key == 'A') {
-        enemyPos.x = enemyPos.x + 2;
-      } else if (key == 'd'||key == 'D') {
-        enemyPos.x = enemyPos.x - 2;
-      } else if (key == 'w'||key == 'W') {
-        enemyPos.y = enemyPos.y + 2;
-      } else if (key == 's'||key == 'S') {
-        enemyPos.y = enemyPos.y - 2;
+    if (type == 'w') {
+      if (keyPressed) {
+        if (key == 'a'||key == 'A') {
+          enemyPos.x = enemyPos.x + 5;
+        } else if (key == 'd'||key == 'D') {
+          enemyPos.x = enemyPos.x - 5;
+        } else if (key == 'w'||key == 'W') {
+          enemyPos.y = enemyPos.y + 5;
+        } else if (key == 's'||key == 'S') {
+          enemyPos.y = enemyPos.y - 5;
+        }
+      }
+    }
+     if (type == 'z') {
+      if (keyPressed) {
+        if (key == 'a'||key == 'A') {
+          enemyPos.x = enemyPos.x + 2;
+        } else if (key == 'd'||key == 'D') {
+          enemyPos.x = enemyPos.x - 2;
+        } else if (key == 'w'||key == 'W') {
+          enemyPos.y = enemyPos.y + 2;
+        } else if (key == 's'||key == 'S') {
+          enemyPos.y = enemyPos.y - 2;
+        }
       }
     }
   }
