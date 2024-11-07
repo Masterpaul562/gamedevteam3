@@ -140,11 +140,11 @@ void draw() {
         }
       }
       if (key == 'e' || key == 'E') {
-        println("e");
         shop1.shopOpen = true;
-      } else if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
+      } else if (key == 'e' && shop1.shopOpen == true|| key == 'E' && shop1.shopOpen == true) {
         shop1.shopOpen = false;
-        println("e");
+      } else if (key == 'q'  || key == 'Q') {
+        shop1.shopOpen = false;
       }
 
 
@@ -162,7 +162,7 @@ void draw() {
 
     tile.display();
     panel.display();
-    shop1.display();
+
     g1.display();
     p1.display();
 
@@ -205,6 +205,7 @@ void draw() {
       enemy.zombiepoof();
       enemy.playerMovement();
       enemy.display();
+      shop1.display();
 
 
       if (enemy.poof == true) {
