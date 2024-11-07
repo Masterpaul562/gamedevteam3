@@ -66,6 +66,10 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.y = powUp.y+ speed;
+
+          if (powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         //o1.y = o1.y + speed;
@@ -82,6 +86,9 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.y = powUp.y- speed;
+          if (powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         //o1.y = o1.y - speed;
@@ -98,6 +105,9 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.x = powUp.x- speed;
+          if (powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         //o1.x = o1.x - speed;
@@ -113,6 +123,9 @@ void draw() {
         for (int i = 0; i < powUps.size(); i++) {
           PowUp powUp = powUps.get(i);
           powUp.x = powUp.x+ speed;
+          if (powUp.offScreen()) {
+            powUps.remove(i);
+          }
           powUp.display();
         }
         mapOffsetX += speed;
@@ -127,11 +140,13 @@ void draw() {
         }
       }
       if (key == 'e' || key == 'E') {
+        println("e");
         shop1.shopOpen = true;
-      }
-      if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
+      } else if (key == 'e' || key == 'E' && shop1.shopOpen == true) {
         shop1.shopOpen = false;
+        println("e");
       }
+
 
       //if (keyCode == RIGHT) {
       //  mapOffsetX -= speed;
@@ -175,7 +190,7 @@ void draw() {
       Enemy enemy = enemies.get(i);
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        if (enemy.enemyPos.dist(projs.location)<20) {
+        if (enemy.enemyPos.dist(projs.location)<30) {
           enemy.health -= 100;
           if (enemy.health < 0) {
             enemies.remove(i);
@@ -213,6 +228,7 @@ void draw() {
 
 
 void keyPressed() {
+
   if (keyCode == RIGHT) {
     mapOffsetX -= speed;
   } else if (keyCode == LEFT) {
