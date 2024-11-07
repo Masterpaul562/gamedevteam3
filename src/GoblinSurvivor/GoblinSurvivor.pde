@@ -188,7 +188,7 @@ void draw() {
       Enemy enemy = enemies.get(i);
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        if (enemy.enemyPos.dist(projs.location)<20) {
+        if (enemy.enemyPos.dist(projs.location)<30) {
           enemy.health -= 100;
           if (enemy.health < 0) {
             enemies.remove(i);
