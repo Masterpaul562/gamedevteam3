@@ -5,21 +5,22 @@ class Enemy {
   PImage e1;
   PImage[] e2;
   float x, y, w, h, x2, y2, dist;
-  int health, speed, dmg, side, wType, frame, imageNum;
+  int health, speed, dmg, side, wType, frame, imageNum, imageCount;
   boolean fall, poof, flip;
   char type;
   PVector enemyPos;
   PVector userPos;
   PVector direction;
-  String walk, wizard;
+  String walk, wizard, cast;
 
   // Constructor
   Enemy() {
-    imageNum = 1;
-    e2 = new PImage[6];
+    imageNum = 0;
+    imageCount = 6;
+    e2 = new PImage[imageCount+2];
 
-    fireball = new Timer(5000);
-    
+    fireball = new Timer(3500);
+    fireball.start();
     wType = int(random(1, 3));
     if (wType == 1) {
       type = 'z';
@@ -58,6 +59,23 @@ class Enemy {
     health = 100;
     speed = 5;
     dmg = 10;
+  //  if (type == 'w') {
+  //    if (enemyPos.x<width/2) {
+  //      for (int i = 0; i< imageCount; i++)
+  //      {
+         
+  //        cast = "WizardCast" + nf(i, 6) + ".png";
+  //        e2[i] = loadImage(cast);
+  //      }
+  //    } else if (enemyPos.x>width/2) {
+  //      for (int i = 0; i< imageCount; i++)
+  //      {
+          
+  //        cast = "WizardCastFlip" + nf(i, 6) + ".png";
+  //        e2[i] = loadImage(cast);
+  //      }
+  //    }
+  //  }
   }
 
 
@@ -107,31 +125,48 @@ class Enemy {
   }
 
   void display() {
-    if (imageNum >= 6)
-    {
-      imageNum = 1;
-    }
+
     if (type == 'w')
     {
+      if (enemyPos.x<width/2) {
+        for (int i = 0; i< imageCount; i++)
+        {
+         
+          cast = "WizardCast" + nf(i, 6) + ".png";
+          e2[i] = loadImage(cast);
+        }
+      } else if (enemyPos.x>width/2) {
+        for (int i = 0; i< imageCount; i++)
+        {
+          
+          cast = "WizardCastFlip" + nf(i, 6) + ".png";
+          e2[i] = loadImage(cast);
+        }
+      }
       if (enemyPos.x < width/2) {
-        wizard = "Wizard.png";
+        e2[6] = loadImage ("Wizard.png");
+        image (e2[6], enemyPos.x, enemyPos.y);
       }
       if (enemyPos.x > width/2) {
-        wizard = "WizardFlip.png";
+        e2[7] = loadImage ("WizardFlip.png");
+        image (e2[7], enemyPos.x, enemyPos.y);
       }
-     // if (fireball.isFinished()) {
-        for (int i = 0; i< 6; i++)
-        {
-          wizard = "WizardCast" + imageNum + ".png";
-          e2[i] = loadImage(wizard);
+      if (fireball.isFinished()) {
+        
+       
+          imageMode(CENTER);
+          imageNum = (imageNum+1) % imageCount;
+       
+          image(e2[imageNum], enemyPos.x, enemyPos.y);
+          
+         
+        
+         
+      }
+      if ( imageNum == 5 && fireball.isFinished()) {
+      
+          fireball.start();
         }
-      //}
-
-      imageMode(CENTER);
-      frame = (frame+1) % 6;
-      image(e2[frame], enemyPos.x, enemyPos.y);
-      if (imageNum < 6)
-        imageNum+=1;
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
