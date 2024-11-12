@@ -25,11 +25,21 @@ class Projectile {
       frame =1;
       imageCount = 3;
       fireball= new PImage[imageCount];
+      if(ballP.x < width/2){
       for (int i = 0; i< 3; i++)
       {
 
         ballF = "Fireball" + nf(i, imageCount) + ".png";
         fireball[i] = loadImage(ballF);
+      }
+      }
+       if(ballP.x > width/2){
+      for (int i = 0; i< 3; i++)
+      {
+
+        ballF = "FireballFlip" + nf(i, imageCount) + ".png";
+        fireball[i] = loadImage(ballF);
+      }
       }
       type2 = 'w';
       ballPos= ballP.copy();
@@ -109,7 +119,20 @@ class Projectile {
     }
   }
   void playerMovement() {
-    if (type2 == 'a'| type2 == 'w') {
+    if (type2 == 'w') {
+     if (keyPressed) {
+        if (key == 'a'||key == 'A') {
+         ballPos.x = ballPos.x + 1;
+        } else if (key == 'd'||key == 'D') {
+          ballPos.x = ballPos.x - 1;
+        } else if (key == 'w'||key == 'W') {
+          ballPos.y = ballPos.y + 1;
+        } else if (key == 's'||key == 'S') {
+          ballPos.y = ballPos.y - 1;
+        }
+      }
+    }
+    if (type2 == 'a' ) {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
           location.x = location.x + 1;
