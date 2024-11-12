@@ -23,7 +23,7 @@ class Panel {
     } else {
       text("Time Alive: "+int(seconds/60)+":0"+seconds%60, width-250, 30);
     }
-    text("Money:"+xp, 30, 30);
+    text("Money:"+money, 30, 30);
     text("Kills: "+enemiesKilled, 200, 30);
     fill(255, 150);
     rect(400, 5, 200, 30, 10);
