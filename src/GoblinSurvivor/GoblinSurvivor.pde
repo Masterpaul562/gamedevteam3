@@ -41,7 +41,7 @@ void setup() {
   zWalk.start();
   eTimer = new Timer(5000);
   eTimer.start();
-  timer1 = new Timer(5000);
+  timer1 = new Timer(500);
   timer1.start();
   skullFrameSpeed = new Timer(500);
   skullFrameSpeed.start();
