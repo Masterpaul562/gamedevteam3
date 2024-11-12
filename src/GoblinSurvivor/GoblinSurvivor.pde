@@ -1,9 +1,9 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
 import processing.sound.*;
-SoundFile background1, coin1, ouch1, gameoversound,arrow1;
+SoundFile background1, coin1, ouch1, gameoversound, arrow1;
 SoundFile bite1;
 Goblin g1;
-Projectile p1;
+
 PowUp o1;
 Timer eTimer, timer1, zWalk, shootA;
 Shop shop1;
@@ -13,6 +13,7 @@ int level;
 int speed = 5;
 
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
+ArrayList<Projectile> Eproj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play, end;
@@ -45,7 +46,7 @@ void setup() {
   t1 = loadImage("Tile.png");
   userPos = new PVector(width/2, height/2);
   g1 = new Goblin();
-  p1 = new Projectile();
+
   shop1 = new Shop();
   panel = new Panel();
   play = false;
@@ -59,15 +60,13 @@ void setup() {
 }
 
 void draw() {
+
   if (!play && !end) {
 
     startScreen();
   } else {
-    if (shootA.isFinished()) {
-      arrow1.play();
-      proj.add(new Projectile());
-      shootA.start();
-    }
+
+   
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -161,17 +160,6 @@ void draw() {
       } else if (key == '|') {
         g1.health = 0;
       }
-
-
-      //if (keyCode == RIGHT) {
-      //  mapOffsetX -= speed;
-      //} else if (keyCode == LEFT) {
-      //  mapOffsetX += speed;
-      //} else if (keyCode == UP) {
-      //  mapOffsetY += speed;
-      //} else if (keyCode == DOWN) {
-      //  mapOffsetY -= speed;
-      //}
     }
     //you are playing the game!
 
@@ -179,7 +167,7 @@ void draw() {
     panel.display();
 
     g1.display();
-    p1.display();
+
 
     for (int i = 0; i < powUps.size(); i++) {
       PowUp powUp = powUps.get(i);
@@ -190,30 +178,34 @@ void draw() {
       }
       powUp.display();
     }
-    for (int i = 0; i < proj.size(); i++) {
-      Projectile projs = proj.get(i);
-      projs.fire();
-      projs.playerMovement();
-      projs.display();
 
-
-      if (projs.disappear == true) {
-        proj.remove(i);
-      }
-    }
     g1.display();
+    if (shootA.isFinished()) {
+      arrow1.play();
+      proj.add(new Projectile('a', new PVector (width/2, height/2)));
+      shootA.start();
+    }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        if (enemy.enemyPos.dist(projs.location)<30) {
-          enemy.health -= 100;
-          if (enemy.health < 0) {
-            enemies.remove(i);
-            powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
-            panel.enemiesKilled = panel.enemiesKilled+1;
+        
+          projs.fire();
+          projs.playerMovement();
+          projs.display();
+          if (enemy.enemyPos.dist(projs.location)<30) {
+            enemy.health -= 100;
+            if (enemy.health < 0) {
+              enemies.remove(i);
+              proj.remove(n);
+              powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
+              panel.enemiesKilled = panel.enemiesKilled+1;
+            }
           }
-        }
+          if (projs.disappear == true) {
+            proj.remove(n);
+          }
+        
       }
 
 
@@ -236,8 +228,31 @@ void draw() {
         enemies.remove(i);
       }
     }
+    for (int i = 0; i < enemies.size(); i++) {
+      Enemy enemy = enemies.get(i);
 
+      if (enemy.fireball.isFinished()) {
+        enemy.fireball.start();
+        if (enemy.type == 'w') {
+          Eproj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
+        }
+      }
+      for (int n = 0; n < Eproj.size(); n++) {
+        Projectile Eprojs = Eproj.get(n);
 
+        Eprojs.playerMovement();
+        Eprojs.fire();
+        Eprojs.display();
+        if (Eprojs.ballPos.dist(userPos)<20) {
+          Eproj.remove(n);
+          ouch1.play();
+          g1.health -= 10;
+        }
+        if (Eprojs.Bdisappear == true) {
+          Eproj.remove(n);
+        }
+      }
+    }
     if (g1.health <= 0) {
       end = true;
       play = false;
@@ -250,7 +265,7 @@ void draw() {
       timer1.paused = true;
       zWalk. paused = true;
       shootA.paused = true;
-      
+
       gameoversound.play();
       g1.health = 100;
     }
