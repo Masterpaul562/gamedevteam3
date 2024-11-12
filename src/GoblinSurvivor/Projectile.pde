@@ -126,9 +126,9 @@ class Projectile {
         } else if (key == 'd'||key == 'D') {
           ballPos.x = ballPos.x - 1;
         } else if (key == 'w'||key == 'W') {
-          ballPos.y = ballPos.y + 1;
-        } else if (key == 's'||key == 'S') {
           ballPos.y = ballPos.y - 1;
+        } else if (key == 's'||key == 'S') {
+          ballPos.y = ballPos.y + 1;
         }
       }
     }
