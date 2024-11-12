@@ -5,12 +5,13 @@ SoundFile bite1;
 Goblin g1;
 
 PowUp o1;
-Timer eTimer, timer1, zWalk, shootA;
+Timer eTimer, timer1, zWalk, shootA, skullFrameSpeed;
 Shop shop1;
 Panel panel;
 Tile tile;
 int level;
 int speed = 5;
+int skullFrame;
 
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<Projectile> Eproj = new ArrayList<Projectile>();
@@ -19,6 +20,7 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play, end;
 PImage start1;
 PImage game1, over1, skull1, retry1;
+PImage[] skulls = new PImage[8];
 String retrying;
 PVector userPos;
 void setup() {
@@ -39,14 +41,16 @@ void setup() {
   zWalk.start();
   eTimer = new Timer(5000);
   eTimer.start();
-  timer1 = new Timer(300);
+  timer1 = new Timer(5000);
   timer1.start();
+  skullFrameSpeed = new Timer(500);
+  skullFrameSpeed.start();
   size(1000, 1000);
   level = 1;
   t1 = loadImage("Tile.png");
   userPos = new PVector(width/2, height/2);
   g1 = new Goblin();
-
+  skullFrame = 0;
   shop1 = new Shop();
   panel = new Panel();
   play = false;
@@ -65,7 +69,9 @@ void draw() {
 
     startScreen();
   } else {
-
+    for (int i = 0; i < 8; i++) {
+      skulls[i] = loadImage("Impact" + i + ".png");  // Load each frame as a separate image
+    }
 
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
@@ -299,18 +305,33 @@ void startScreen() {
 }
 
 void gameOver() {
-
-  retry1 = loadImage(retrying);
   background(0);
+ //<>//
+  retry1 = loadImage(retrying);
+
   fill(255);
   imageMode(CENTER);
   game1.resize(700, 400);
   image(game1, width/2, 100);
   over1.resize(700, 400);
   image(over1, width/2, 300);
-  skull1.resize(200, 200);
-  image(skull1, width/2, 550);
-  println(mouseX, mouseY);
+
+  skullFrameSpeed.start();
+
+  skulls[skullFrame].resize(200,200);
+  image(skulls[skullFrame],width/2,550);
+  for(int i = 0; i<7; i++) {
+    frameRate(1);
+    image(skulls[skullFrame], width/2, 550);
+    println("done",skullFrame);
+    skullFrameSpeed.start();
+    if (skullFrame<=6) { //<>//
+      skullFrame  +=1;
+    } else {
+      skull1.resize(200, 200);
+      image(skull1, width/2, 550);
+    }
+  }
   if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
     retrying = "RetryButtonPressed.png";
   } else {
