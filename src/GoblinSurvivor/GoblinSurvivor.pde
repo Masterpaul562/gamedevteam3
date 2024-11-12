@@ -66,7 +66,7 @@ void draw() {
     startScreen();
   } else {
 
-   
+
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
       eTimer.start();
@@ -151,11 +151,11 @@ void draw() {
           timer1.start();
         }
       }
-      if (key == 'e' || key == 'E') {
+      if (key == 'z' || key == 'Z') {
         shop1.shopOpen = true;
-      } else if (key == 'e' && shop1.shopOpen == true|| key == 'E' && shop1.shopOpen == true) {
+      } else if (key == 'z' && shop1.shopOpen == true|| key == 'Z' && shop1.shopOpen == true) {
         shop1.shopOpen = false;
-      } else if (key == 'q'  || key == 'Q') {
+      } else if (key == 'x'  || key == 'X') {
         shop1.shopOpen = false;
       } else if (key == '|') {
         g1.health = 0;
@@ -171,10 +171,10 @@ void draw() {
 
     for (int i = 0; i < powUps.size(); i++) {
       PowUp powUp = powUps.get(i);
-      if (powUp.x < width/2+15 && powUp.x > width/2-15 && powUp.y < height/2+25 && powUp.y > height/2-25) {
+      if (dist(width/2, height/2, powUp.x, powUp.y)<20) {
         powUps.remove(i);
         coin1.play();
-        panel.xp +=1;
+        panel.money +=1;
       }
       powUp.display();
     }
@@ -189,23 +189,23 @@ void draw() {
       Enemy enemy = enemies.get(i);
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        
-          projs.fire();
-          projs.playerMovement();
-          projs.display();
-          if (enemy.enemyPos.dist(projs.location)<30) {
-            enemy.health -= 100;
-            if (enemy.health < 0) {
-              enemies.remove(i);
-              proj.remove(n);
-              powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
-              panel.enemiesKilled = panel.enemiesKilled+1;
-            }
-          }
-          if (projs.disappear == true) {
+
+        projs.fire();
+        projs.playerMovement();
+        projs.display();
+        if (enemy.enemyPos.dist(projs.location)<30) {
+          enemy.health -= 100;
+          if (enemy.health < 0) {
+            enemies.remove(i);
             proj.remove(n);
+            powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
+            panel.enemiesKilled = panel.enemiesKilled+1;
+            panel.xp+=1;
           }
-        
+        }
+        if (projs.disappear == true) {
+          proj.remove(n);
+        }
       }
 
 
