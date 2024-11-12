@@ -2,48 +2,84 @@
 class Projectile {
   // Memebr Varibles
   PImage arrow;
+  PImage[] fireball;
   int x, y, w, h;
-  int speed, damage, range, atkSpeed;
-  boolean unlocked, disappear;
-  char type;
-  String direction;
-  Timer aFireT;
-  PVector target, velocity, acceleration;
-  public PVector location;
+  int speed, damage, range, atkSpeed, imageCount, frame;
+  boolean unlocked, disappear,Bdisappear;
+  char type2;
+  String direction, ballF;
+  Timer aFireT ;
+  PVector target, velocity, acceleration, location, ballPos, fireballT;
+
 
 
   // Constructor
-  Projectile() {
-    direction = "ArrowUP.png";
-    aFireT = new Timer(4000);
-    location = new PVector (width/2, height/2);
-    velocity = new PVector (0, 0);
-    target = new PVector (width/2, 0);
+  Projectile(char type, PVector ballP ) {
+    
 
-    if (key == 'w' | key == 'W') {
+
+    if (type == 'a') {
+      type2 = 'a';
+    }
+    if (type == 'w') {
+      frame =1;
+      imageCount = 3;
+      fireball= new PImage[imageCount];
+      if(ballP.x < width/2){
+      for (int i = 0; i< 3; i++)
+      {
+
+        ballF = "Fireball" + nf(i, imageCount) + ".png";
+        fireball[i] = loadImage(ballF);
+      }
+      }
+       if(ballP.x > width/2){
+      for (int i = 0; i< 3; i++)
+      {
+
+        ballF = "FireballFlip" + nf(i, imageCount) + ".png";
+        fireball[i] = loadImage(ballF);
+      }
+      }
+      type2 = 'w';
+      ballPos= ballP.copy();
+      fireballT = new PVector (width/2, height/2);
+      fireballT.sub(ballPos);
+      fireballT.normalize();
+      fireballT.mult(5);
+    }
+    print(type);
+    if (type2 == 'a') {
       direction = "ArrowUP.png";
-    }
-    if (key == 's' | key == 'S') {
-      direction = "ArrowDown.png";
-    }
-    if (key == 'd' | key == 'D') {
-      direction = "ArrowRight.png";
-    }
-    if (key == 'a' | key == 'A') {
-      direction = "ArrowLeft.png";
-    }
-    if (aFireT.isFinished()) {
+      aFireT = new Timer(4000);
+      location = new PVector (width/2, height/2);
+      velocity = new PVector (0, 0);
+      target = new PVector (width/2, 0);
       if (key == 'w' | key == 'W') {
-        target = new PVector (width/2, 0);
+        direction = "ArrowUP.png";
       }
       if (key == 's' | key == 'S') {
-        target = new PVector (width/2, height);
+        direction = "ArrowDown.png";
       }
       if (key == 'd' | key == 'D') {
-        target = new PVector (width, height/2);
+        direction = "ArrowRight.png";
       }
       if (key == 'a' | key == 'A') {
-        target = new PVector (0, height/2);
+        direction = "ArrowLeft.png";
+      }
+      if (aFireT.isFinished()) {
+        if (key == 'w' | key == 'W') {
+          target = new PVector (width/2, 0);
+        }
+        if (key == 's' | key == 'S') {
+          target = new PVector (width/2, height);
+        }
+        if (key == 'd' | key == 'D') {
+          target = new PVector (width, height/2);
+        }
+        if (key == 'a' | key == 'A') {
+          target = new PVector (0, height/2);
+        }
       }
     }
   }
@@ -51,33 +87,62 @@ class Projectile {
   // Member Methods
 
   void fire () {
-
-    PVector acceleration = PVector.sub(target, location);
-    acceleration.setMag(0.2);
-    velocity.add(acceleration);
-    location.add(velocity);
+    if (type2 == 'w') {
+      ballPos.add(fireballT);
+    }
+    if (type2 == 'a') {
+      PVector acceleration = PVector.sub(target, location);
+      acceleration.setMag(0.2);
+      velocity.add(acceleration);
+      location.add(velocity);
+    }
   }
 
   void display() {
-
-    arrow = loadImage(direction);
-    imageMode(CENTER);
-    arrow.resize(50, 50);
-    image(arrow, location.x, location.y);
-    if (location.x > width+40 || location.x <-40||location.y < -40 || location.y > height +40) {
-      disappear=true;
+    if (type2 == 'w') {
+    frame = (frame+1) % imageCount;
+    image(fireball[frame], ballPos.x, ballPos.y);
+  
+       if (ballPos.x > width+40 || ballPos.x <-40||ballPos.y < -40 || ballPos.y > height +40) {
+        Bdisappear=true;
+      }
+      
+    }
+    if (type2 == 'a') {
+      arrow = loadImage(direction);
+      imageMode(CENTER);
+      arrow.resize(50, 50);
+      image(arrow, location.x, location.y);
+      if (location.x > width+40 || location.x <-40||location.y < -40 || location.y > height +40) {
+        disappear=true;
+      }
     }
   }
   void playerMovement() {
-    if (keyPressed) {
-      if (key == 'a'||key == 'A') {
-        location.x = location.x + 2;
-      } else if (key == 'd'||key == 'D') {
-        location.x = location.x - 2;
-      } else if (key == 'w'||key == 'W') {
-        location.y = location.y + 2;
-      } else if (key == 's'||key == 'S') {
-        location.y = location.y - 2;
+    if (type2 == 'w') {
+     if (keyPressed) {
+        if (key == 'a'||key == 'A') {
+         ballPos.x = ballPos.x + 1;
+        } else if (key == 'd'||key == 'D') {
+          ballPos.x = ballPos.x - 1;
+        } else if (key == 'w'||key == 'W') {
+          ballPos.y = ballPos.y + 1;
+        } else if (key == 's'||key == 'S') {
+          ballPos.y = ballPos.y - 1;
+        }
+      }
+    }
+    if (type2 == 'a' ) {
+      if (keyPressed) {
+        if (key == 'a'||key == 'A') {
+          location.x = location.x + 1;
+        } else if (key == 'd'||key == 'D') {
+          location.x = location.x - 1;
+        } else if (key == 'w'||key == 'W') {
+          location.y = location.y + 1;
+        } else if (key == 's'||key == 'S') {
+          location.y = location.y - 1;
+        }
       }
     }
   }
