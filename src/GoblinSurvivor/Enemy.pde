@@ -138,10 +138,7 @@ class Enemy {
        
       }
    
-      //if ( imageNum == 5 && fireball.isFinished()) {
-         
-      //  fireball.start();      
-      //}
+      
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
