@@ -151,11 +151,11 @@ void draw() {
           timer1.start();
         }
       }
-      if (key == 'e' || key == 'E') {
+      if (key == 'z' || key == 'Z') {
         shop1.shopOpen = true;
-      } else if (key == 'e' && shop1.shopOpen == true|| key == 'E' && shop1.shopOpen == true) {
+      } else if (key == 'z' && shop1.shopOpen == true|| key == 'Z' && shop1.shopOpen == true) {
         shop1.shopOpen = false;
-      } else if (key == 'q'  || key == 'Q') {
+      } else if (key == 'x'  || key == 'X') {
         shop1.shopOpen = false;
       } else if (key == '|') {
         g1.health = 0;
