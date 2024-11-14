@@ -21,8 +21,8 @@ class Projectile {
     if (t == 'a') {
       type = 'a';
     }
-    if (type == 'a'){
-        direction = "ArrowUP.png";
+    if (type == 'a') {
+      direction = "ArrowUP.png";
       location = new PVector (width/2, height/2);
 
       target = new PVector (width/2, 0);
@@ -55,15 +55,14 @@ class Projectile {
         target.sub(location);
         target.normalize();
         target.mult(5);
-        
       }
     }
-    
+
     if (t == 'w') {
       type = 'w';
-  }
-  if(type == 'w') {
-   frame =0;
+    }
+    if (type == 'w') {
+      frame =0;
       imageCount = 3;
       fireball= new PImage[imageCount];
       if (ballP.x < width/2) {
@@ -82,23 +81,28 @@ class Projectile {
           fireball[i] = loadImage(ballF);
         }
       }
-     
+
       ballPos= ballP.copy();
       fireballT = new PVector (width/2, height/2);
       fireballT.sub(ballPos);
       fireballT.normalize();
       fireballT.mult(5);
     }
-  
   }
   // Member Methods
 
   void fire () {
     if (type == 'w') {
       ballPos.add(fireballT);
+      if (ballPos.x > width+40 || ballPos.x <-40||ballPos.y < -40 || ballPos.y > height +40) {
+        Bdisappear=true;
+      }
     }
     if (type == 'a') {
       location.add(target);
+      if (location.x > width+40 || location.x <-40||location.y < -40 || location.y > height +40) {
+        disappear=true;
+      }
     }
   }
 
@@ -106,19 +110,12 @@ class Projectile {
     if (type == 'w') {
       frame = (frame+1) % imageCount;
       image(fireball[frame], ballPos.x, ballPos.y);
-
-      if (ballPos.x > width+40 || ballPos.x <-40||ballPos.y < -40 || ballPos.y > height +40) {
-        Bdisappear=true;
-      }
     }
     if (type == 'a') {
       arrow = loadImage(direction);
       imageMode(CENTER);
       arrow.resize(50, 50);
       image(arrow, location.x, location.y);
-      if (location.x > width+40 || location.x <-40||location.y < -40 || location.y > height +40) {
-        disappear=true;
-      }
     }
   }
   void playerMovement() {
