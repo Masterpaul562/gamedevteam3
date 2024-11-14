@@ -6,7 +6,7 @@ class Projectile {
   int x, y, w, h;
   int speed, damage, range, atkSpeed, imageCount, frame;
   boolean unlocked, disappear, Bdisappear;
-  char type2;
+  char type;
   String direction, ballF;
 
   PVector target, location, ballPos, fireballT;
@@ -14,14 +14,15 @@ class Projectile {
 
 
   // Constructor
-  Projectile(char type, PVector ballP ) {
+  Projectile(char t, PVector ballP ) {
 
 
 
-    if (type == 'a') {
-      type2 = 'a';
-      direction = "ArrowUP.png";
-    
+    if (t == 'a') {
+      type = 'a';
+    }
+    if (type == 'a'){
+        direction = "ArrowUP.png";
       location = new PVector (width/2, height/2);
 
       target = new PVector (width/2, 0);
@@ -57,8 +58,12 @@ class Projectile {
         
       }
     }
-    if (type == 'w') {
-      frame =0;
+    
+    if (t == 'w') {
+      type = 'w';
+  }
+  if(type == 'w') {
+   frame =0;
       imageCount = 3;
       fireball= new PImage[imageCount];
       if (ballP.x < width/2) {
@@ -77,31 +82,28 @@ class Projectile {
           fireball[i] = loadImage(ballF);
         }
       }
-      type2 = 'w';
+     
       ballPos= ballP.copy();
       fireballT = new PVector (width/2, height/2);
       fireballT.sub(ballPos);
       fireballT.normalize();
       fireballT.mult(5);
     }
+  
   }
-
   // Member Methods
 
   void fire () {
-    if (type2 == 'w') {
+    if (type == 'w') {
       ballPos.add(fireballT);
     }
-    if (type2 == 'a') {
-
-
-
+    if (type == 'a') {
       location.add(target);
     }
   }
 
   void display() {
-    if (type2 == 'w') {
+    if (type == 'w') {
       frame = (frame+1) % imageCount;
       image(fireball[frame], ballPos.x, ballPos.y);
 
@@ -109,7 +111,7 @@ class Projectile {
         Bdisappear=true;
       }
     }
-    if (type2 == 'a') {
+    if (type == 'a') {
       arrow = loadImage(direction);
       imageMode(CENTER);
       arrow.resize(50, 50);
@@ -120,7 +122,7 @@ class Projectile {
     }
   }
   void playerMovement() {
-    if (type2 == 'w') {
+    if (type == 'w') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
           ballPos.x = ballPos.x + 1;
@@ -133,7 +135,7 @@ class Projectile {
         }
       }
     }
-    if (type2 == 'a' ) {
+    if (type == 'a' ) {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
           location.x = location.x + 1;
