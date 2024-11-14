@@ -1,11 +1,11 @@
 // Axl Dain Paul Tokhtuev | 3 Oct 2024
 class Enemy {
   // Member Variables
-  Timer zWalk, fireball;
+  Timer zWalk, fireball, fireballFramespeed;
   PImage e1;
   PImage[] e2;
   float  dist;
-  int health, speed, dmg, side, wType, frame, imageNum, imageNumF, imageCountWC, imageCountF;
+  int health, speed, dmg, side, wType, frame, castFrame, castFrameF, imageCountWC, imageCountF;
   boolean fall, poof, flip, shoot;
   char type;
   PVector enemyPos, userPos, direction;
@@ -13,12 +13,14 @@ class Enemy {
 
   // Constructor
   Enemy() {
-    imageNum = 0;
+    
     imageCountWC = 6;
    
  
     e2 = new PImage[imageCountWC+2];
-   
+    fireballFramespeed = new Timer(300);
+  fireballFramespeed.start();
+  castFrame = 0;
     fireball = new Timer(3500);
    
     wType = int(random(1, 3));
@@ -111,15 +113,13 @@ class Enemy {
         for (int i = 0; i< imageCountWC; i++)
         {
 
-          cast = "WizardCast" + nf(i, 6) + ".png";
-          e2[i] = loadImage(cast);
+          
+          e2[i] = loadImage("WizardCast"+i+".png");
         }
       } else if (enemyPos.x>width/2) {
-        for (int i = 0; i< imageCountWC; i++)
-        {
-
-          cast = "WizardCastFlip" + nf(i, 6) + ".png";
-          e2[i] = loadImage(cast);
+        for (int i = 1; i< imageCountWC; i++)
+        {        
+          e2[i] = loadImage("WizardCastFlip" + i + ".png");
         }
       }
       if (enemyPos.x < width/2) {
@@ -133,8 +133,8 @@ class Enemy {
       if (fireball.isFinished()) {
         shoot = true; 
         imageMode(CENTER);
-        imageNum = (imageNum+1) % imageCountWC;
-        image(e2[imageNum], enemyPos.x, enemyPos.y);
+        castFrame = (castFrame+1) % imageCountWC;
+        image(e2[castFrame], enemyPos.x, enemyPos.y);
        
       }
    
