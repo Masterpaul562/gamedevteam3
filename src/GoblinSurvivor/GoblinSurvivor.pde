@@ -1,4 +1,4 @@
-// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024
+// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>//
 import processing.sound.*;
 SoundFile background1, coin1, ouch1, gameoversound, arrow1;
 SoundFile bite1;
@@ -43,7 +43,7 @@ void setup() {
   eTimer.start();
   timer1 = new Timer(500);
   timer1.start();
-  skullFrameSpeed = new Timer(500);
+  skullFrameSpeed = new Timer(300);
   skullFrameSpeed.start();
   size(1000, 1000);
   level = 1;
@@ -236,10 +236,9 @@ void draw() {
     }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
-
+if (enemy.type == 'w') {
       if (enemy.fireball.isFinished()) {
-        enemy.fireball.start();
-        if (enemy.type == 'w') {
+        enemy.fireball.start();        
           Eproj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
         }
       }
@@ -306,7 +305,7 @@ void startScreen() {
 
 void gameOver() {
   background(0);
- //<>//
+
   retry1 = loadImage(retrying);
 
   fill(255);
@@ -316,21 +315,18 @@ void gameOver() {
   over1.resize(700, 400);
   image(over1, width/2, 300);
 
-  skullFrameSpeed.start();
 
-  skulls[skullFrame].resize(200,200);
-  image(skulls[skullFrame],width/2,550);
-  for(int i = 0; i<7; i++) {
 
+  skulls[skullFrame].resize(200, 200);
+  image(skulls[skullFrame], width/2, 550);
+  if (skullFrameSpeed.isFinished()) {
+    skulls[skullFrame].resize(200, 200);
     image(skulls[skullFrame], width/2, 550);
-    println("done",skullFrame);
+    println("done", skullFrame);
     skullFrameSpeed.start();
-    if (skullFrame<=6) { //<>//
+    if (skullFrame<=6) {
       skullFrame  +=1;
-    } else {
-      skull1.resize(200, 200);
-      image(skull1, width/2, 550);
-    }
+    } 
   }
   if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
     retrying = "RetryButtonPressed.png";
