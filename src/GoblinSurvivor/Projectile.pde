@@ -66,18 +66,18 @@ class Projectile {
       imageCount = 3;
       fireball= new PImage[imageCount];
       if (ballP.x < width/2) {
-        for (int i = 0; i<= 3; i++)
+        for (int i = 0; i< 3; i++)
         {
 
-          ballF = "Fireball" + i + ".png";
+          ballF = "Fireball" + nf(i, imageCount) + ".png";
           fireball[i] = loadImage(ballF);
         }
       }
       if (ballP.x > width/2) {
-        for (int i = 0; i<=3; i++)
+        for (int i = 0; i< 3; i++)
         {
 
-          ballF = "FireballFlip" + i + ".png";
+          ballF = "FireballFlip" + nf(i, imageCount) + ".png";
           fireball[i] = loadImage(ballF);
         }
       }
