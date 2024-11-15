@@ -237,8 +237,9 @@ void draw() {
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
 if (enemy.type == 'w') {
-      if (enemy.fireball.isFinished()) {
-        enemy.fireball.start();        
+      if (enemy.shoot == true) {
+        //enemy.fireball.start();     
+        enemy.shoot = false;
           Eproj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
         }
       }
