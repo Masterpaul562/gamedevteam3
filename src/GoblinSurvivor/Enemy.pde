@@ -1,11 +1,11 @@
 // Axl Dain Paul Tokhtuev | 3 Oct 2024
 class Enemy {
   // Member Variables
-  Timer zWalk, fireball;
+  Timer zWalk, fireball, fireballFramespeed;
   PImage e1;
   PImage[] e2;
   float  dist;
-  int health, speed, dmg, side, wType, frame, imageNum, imageNumF, imageCountWC, imageCountF;
+  int health, speed, dmg, side, wType, frame, castFrame, castFrameF, imageCountWC, imageCountF;
   boolean fall, poof, flip, shoot;
   char type;
   PVector enemyPos, userPos, direction;
@@ -13,12 +13,14 @@ class Enemy {
 
   // Constructor
   Enemy() {
-    imageNum = 0;
-    imageCountWC = 6;
+    
+    imageCountWC = 5;
    
  
-    e2 = new PImage[imageCountWC+2];
-   
+    e2 = new PImage[imageCountWC+3];
+    fireballFramespeed = new Timer(300);
+  fireballFramespeed.start();
+  castFrame = 0;
     fireball = new Timer(3500);
    
     wType = int(random(1, 3));
@@ -108,21 +110,18 @@ class Enemy {
     if (type == 'w')
     {
       if (enemyPos.x<width/2) {
-        for (int i = 0; i< imageCountWC; i++)
-        {
-
-          cast = "WizardCast" + nf(i, 6) + ".png";
-          e2[i] = loadImage(cast);
+        for (int i = 0; i< 6; i++)
+        { 
+      
+          e2[i] = loadImage("WizardCast"+i+".png");
         }
       } else if (enemyPos.x>width/2) {
-        for (int i = 0; i< imageCountWC; i++)
-        {
-
-          cast = "WizardCastFlip" + nf(i, 6) + ".png";
-          e2[i] = loadImage(cast);
+        for (int i = 0; i< 6; i++)
+        {        
+          e2[i] = loadImage("WizardCastFlip" + i + ".png");
         }
       }
-      if (enemyPos.x < width/2) {
+          if (enemyPos.x < width/2) {
         e2[6] = loadImage ("Wizard.png");
         image (e2[6], enemyPos.x, enemyPos.y);
       }
@@ -131,14 +130,29 @@ class Enemy {
         image (e2[7], enemyPos.x, enemyPos.y);
       }
       if (fireball.isFinished()) {
-        shoot = true; 
-        imageMode(CENTER);
-        imageNum = (imageNum+1) % imageCountWC;
-        image(e2[imageNum], enemyPos.x, enemyPos.y);
        
+     //  if (castFrame>imageCountWC) {castFrame =0;}
+        imageMode(CENTER);        
+        image(e2[castFrame], enemyPos.x, enemyPos.y);
+        if(fireballFramespeed.isFinished()) {
+        image(e2[castFrame],enemyPos.x,enemyPos.y);
+        fireballFramespeed.start();
+        }
+        if (castFrame < imageCountWC+1)
+        {
+          print(castFrame);
+        castFrame++;
+        print(castFrame);
+        }
+       if(castFrame >= imageCountWC+1) {
+         shoot = true;
+       fireball.start();
+       castFrame = 0;
+       }
       }
+ 
    
-      
+  
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
