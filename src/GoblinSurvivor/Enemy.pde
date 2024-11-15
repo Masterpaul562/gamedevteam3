@@ -6,7 +6,7 @@ class Enemy {
   PImage[] e2;
   float  dist;
   int health, speed, dmg, side, wType, frame, castFrame, castFrameF, imageCountWC, imageCountF;
-  boolean fall, poof, flip, shoot;
+  boolean fall, poof, flip, shoot, begone;
   char type;
   PVector enemyPos, userPos, direction;
   String walk, wizard, cast, fBall;
@@ -140,9 +140,9 @@ class Enemy {
         }
         if (castFrame < imageCountWC+1)
         {
-          print(castFrame);
+         
         castFrame++;
-        print(castFrame);
+       
         }
        if(castFrame >= imageCountWC+1) {
          shoot = true;
@@ -186,13 +186,16 @@ class Enemy {
     }
     if (type == 'z') {
       if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
+        
         fall=true;
       }
-      if (type == 'w') {
-        if (enemyPos.x > width+60 || enemyPos.x <-60||enemyPos.y < -60 || enemyPos.y > height +60) {
-          fall=true;
-        }
-      }
     }
+      if (type == 'w') {
+       if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
+        print("yay");
+        begone=true;
+      }
+      }
+    
   }
 }
