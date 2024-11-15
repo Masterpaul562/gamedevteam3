@@ -193,6 +193,28 @@ void draw() {
     }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
+
+      enemy.update();
+      enemy.zombiepoof();
+      enemy.playerMovement();
+      enemy.display();
+      shop1.display();
+
+
+      if (enemy.poof == true) {
+        enemies.remove(i);
+        bite1.play();
+        ouch1.play();
+        powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
+        panel.enemiesKilled = panel.enemiesKilled+1;
+        g1.health= g1.health - 15;
+      }
+      if (enemy.fall == true) {
+        enemies.remove(i);
+      }
+      if (enemy.begone == true) {
+        enemies.remove(i);
+      }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
 
@@ -213,33 +235,13 @@ void draw() {
           proj.remove(n);
         }
       }
-
-
-      enemy.update();
-      enemy.zombiepoof();
-      enemy.playerMovement();
-      enemy.display();
-      shop1.display();
-
-
-      if (enemy.poof == true) {
-        enemies.remove(i);
-        bite1.play();
-        ouch1.play();
-        powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
-        panel.enemiesKilled = panel.enemiesKilled+1;
-        g1.health= g1.health - 15;
-      }
-      if (enemy.fall == true) {
-        enemies.remove(i);
-      }
     }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
-if (enemy.type == 'w') {
-      if (enemy.shoot == true) {
-        //enemy.fireball.start();     
-        enemy.shoot = false;
+      if (enemy.type == 'w') {
+        if (enemy.shoot == true) {
+          //enemy.fireball.start();
+          enemy.shoot = false;
           Eproj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
         }
       }
@@ -327,7 +329,7 @@ void gameOver() {
     skullFrameSpeed.start();
     if (skullFrame<=6) {
       skullFrame  +=1;
-    } 
+    }
   }
   if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY > 725 && mouseY< 816 && mousePressed) {
     retrying = "RetryButtonPressed.png";
