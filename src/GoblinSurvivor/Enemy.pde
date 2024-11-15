@@ -192,7 +192,7 @@ class Enemy {
     }
       if (type == 'w') {
        if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
-        print("yay");
+        
         begone=true;
       }
       }
