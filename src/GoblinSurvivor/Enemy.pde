@@ -1,28 +1,20 @@
 // Axl Dain Paul Tokhtuev | 3 Oct 2024
 class Enemy {
   // Member Variables
-  Timer zWalk, fireball, fireballFramespeed;
+  Timer zWalk, fireball, fireballFramespeed, spawnF;
   PImage e1;
-  PImage[] e2;
+  PImage[] e2, spawnA;
   float  dist;
-  int health, speed, dmg, side, wType, frame, castFrame, castFrameF, imageCountWC, imageCountF;
-  boolean fall, poof, flip, shoot, begone;
+  int health, speed, dmg, side, wType, frame, castFrame, castFrameF,frameS, imageCountWC, imageCountF;
+  boolean fall, poof, flip, shoot, begone, spawn;
   char type;
   PVector enemyPos, userPos, direction;
   String walk, wizard, cast, fBall;
 
   // Constructor
   Enemy() {
-    
-    imageCountWC = 5;
-   
- 
-    e2 = new PImage[imageCountWC+3];
-    fireballFramespeed = new Timer(300);
-  fireballFramespeed.start();
-  castFrame = 0;
-    fireball = new Timer(3500);
-   
+
+
     wType = int(random(1, 3));
     if (wType == 1) {
       type = 'z';
@@ -47,22 +39,35 @@ class Enemy {
       }
     }
     if (type == 'w') {
+      spawn = true;
+      frameS=0;
+      imageCountWC = 5;
+      spawnA = new PImage[11];
+      spawnF = new Timer(200);
+     //  if (enemyPos.x<width/2) {
+        for (int i = 0; i< 11; i++)
+        {
+          spawnA[i] = loadImage("WizardSpawn"+i+".png");
+        }
+    //  }
+      e2 = new PImage[imageCountWC+3];
+      fireballFramespeed = new Timer(300);
+      fireballFramespeed.start();
+      castFrame = 0;
+      fireball = new Timer(3500);
       enemyPos = new PVector (random(width), (random(height)));
-       fireball.start();
     }
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
     health = 100;
     speed = 5;
     dmg = 10;
-    
-    
   }
 
 
   // Member Methods
   void update() {
-  
+
     if (type == 'z') {
       if (enemyPos.x>width/2) {
         flip = true;
@@ -109,19 +114,37 @@ class Enemy {
 
     if (type == 'w')
     {
+      if (spawn == true) {
+        image(spawnA[frameS], enemyPos.x, enemyPos.y);
+        if (spawnF.isFinished()) {
+          image(spawnA[frameS], enemyPos.x, enemyPos.y);
+          spawnF.start();
+        }
+        if (frameS < 11)
+        {
+          print(frameS);
+          frameS++;
+           print(frameS);
+        }
+        if (frameS >= 11) {
+         fireball.start();
+          spawn = false;
+          
+        }
+      }else if (spawn == false) {
       if (enemyPos.x<width/2) {
         for (int i = 0; i< 6; i++)
-        { 
-      
+        {
+
           e2[i] = loadImage("WizardCast"+i+".png");
         }
       } else if (enemyPos.x>width/2) {
         for (int i = 0; i< 6; i++)
-        {        
+        {
           e2[i] = loadImage("WizardCastFlip" + i + ".png");
         }
       }
-          if (enemyPos.x < width/2) {
+      if (enemyPos.x < width/2) {
         e2[6] = loadImage ("Wizard.png");
         image (e2[6], enemyPos.x, enemyPos.y);
       }
@@ -130,29 +153,26 @@ class Enemy {
         image (e2[7], enemyPos.x, enemyPos.y);
       }
       if (fireball.isFinished()) {
-       
-     //  if (castFrame>imageCountWC) {castFrame =0;}
-        imageMode(CENTER);        
+
+        //  if (castFrame>imageCountWC) {castFrame =0;}
+        imageMode(CENTER);
         image(e2[castFrame], enemyPos.x, enemyPos.y);
-        if(fireballFramespeed.isFinished()) {
-        image(e2[castFrame],enemyPos.x,enemyPos.y);
-        fireballFramespeed.start();
+        if (fireballFramespeed.isFinished()) {
+          image(e2[castFrame], enemyPos.x, enemyPos.y);
+          fireballFramespeed.start();
         }
         if (castFrame < imageCountWC+1)
         {
-         
-        castFrame++;
-       
+
+          castFrame++;
         }
-       if(castFrame >= imageCountWC+1) {
-         shoot = true;
-       fireball.start();
-       castFrame = 0;
-       }
+        if (castFrame >= imageCountWC+1) {
+          shoot = true;
+          fireball.start();
+          castFrame = 0;
+        }
       }
- 
-   
-  
+    }
     }
     if (type == 'z') {
       if (zWalk.isFinished() && enemyPos.x < width/2) {
@@ -186,16 +206,15 @@ class Enemy {
     }
     if (type == 'z') {
       if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
-        
+
         fall=true;
       }
     }
-      if (type == 'w') {
-       if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
-        
+    if (type == 'w') {
+      if (enemyPos.x > width+40 || enemyPos.x <-40||enemyPos.y < -40 || enemyPos.y > height +40) {
+
         begone=true;
       }
-      }
-    
+    }
   }
 }
