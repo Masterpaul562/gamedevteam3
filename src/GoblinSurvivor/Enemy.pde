@@ -39,23 +39,29 @@ class Enemy {
       }
     }
     if (type == 'w') {
+        enemyPos = new PVector (random(width), (random(height)));
       spawn = true;
       frameS=0;
       imageCountWC = 5;
       spawnA = new PImage[11];
       spawnF = new Timer(200);
-     //  if (enemyPos.x<width/2) {
+      if (enemyPos.x<width/2) {
         for (int i = 0; i< 11; i++)
         {
           spawnA[i] = loadImage("WizardSpawn"+i+".png");
         }
-    //  }
+      }else if  (enemyPos.x>width/2) {
+        for (int i = 0; i< 11; i++)
+        {
+          spawnA[i] = loadImage("WizardSpawnFlip"+i+".png");
+        }
+      }
       e2 = new PImage[imageCountWC+3];
       fireballFramespeed = new Timer(300);
       fireballFramespeed.start();
       castFrame = 0;
       fireball = new Timer(3500);
-      enemyPos = new PVector (random(width), (random(height)));
+    
     }
     userPos = new PVector(width/2, height/2);
     direction = enemyPos.copy();
@@ -98,13 +104,13 @@ class Enemy {
     if (type == 'z') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
-          enemyPos.x = enemyPos.x + 2;
+          enemyPos.x = enemyPos.x + 4;
         } else if (key == 'd'||key == 'D') {
-          enemyPos.x = enemyPos.x - 2;
+          enemyPos.x = enemyPos.x - 4;
         } else if (key == 'w'||key == 'W') {
-          enemyPos.y = enemyPos.y + 2;
+          enemyPos.y = enemyPos.y + 4;
         } else if (key == 's'||key == 'S') {
-          enemyPos.y = enemyPos.y - 2;
+          enemyPos.y = enemyPos.y - 4;
         }
       }
     }
@@ -115,16 +121,16 @@ class Enemy {
     if (type == 'w')
     {
       if (spawn == true) {
-        image(spawnA[frameS], enemyPos.x, enemyPos.y);
+        image(spawnA[frameS], enemyPos.x, enemyPos.y-50);
         if (spawnF.isFinished()) {
-          image(spawnA[frameS], enemyPos.x, enemyPos.y);
+          image(spawnA[frameS], enemyPos.x, enemyPos.y-50);
           spawnF.start();
         }
         if (frameS < 11)
         {
-          print(frameS);
+         
           frameS++;
-           print(frameS);
+         
         }
         if (frameS >= 11) {
          fireball.start();
