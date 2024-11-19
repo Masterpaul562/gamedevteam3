@@ -1,6 +1,7 @@
 // Aiden Felt, Canon Unguren, Paul Tokhtuev| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
+  Timer fireballframeSpeed;
   PImage arrow;
   PImage[] fireball;
   int x, y, w, h;
@@ -62,27 +63,26 @@ class Projectile {
       type = 'w';
     }
     if (type == 'w') {
+       ballPos= ballP.copy();
+       fireballframeSpeed = new Timer(300);
+       fireballframeSpeed.start();
       frame =0;
       imageCount = 3;
-      fireball= new PImage[imageCount];
-      if (ballP.x < width/2) {
+      fireball= new PImage[3];
+      if (ballPos.x<width/2) {
         for (int i = 0; i< 3; i++)
-        {
-
-          ballF = "Fireball" + nf(i, imageCount) + ".png";
-          fireball[i] = loadImage(ballF);
+        { 
+      
+          fireball[i] = loadImage("Fireball"+i+".png");
         }
-      }
-      if (ballP.x > width/2) {
+      } else if (ballPos.x>width/2) {
         for (int i = 0; i< 3; i++)
-        {
-
-          ballF = "FireballFlip" + nf(i, imageCount) + ".png";
-          fireball[i] = loadImage(ballF);
+        {        
+          fireball[i] = loadImage("FireballFlip" + i + ".png");
         }
       }
 
-      ballPos= ballP.copy();
+     
       fireballT = new PVector (width/2, height/2);
       fireballT.sub(ballPos);
       fireballT.normalize();
@@ -108,8 +108,19 @@ class Projectile {
 
   void display() {
     if (type == 'w') {
-      frame = (frame+1) % imageCount;
+      
       image(fireball[frame], ballPos.x, ballPos.y);
+      if (fireballframeSpeed.isFinished()) {
+      image(fireball[frame], ballPos.x, ballPos.y);
+      fireballframeSpeed.start();
+      }
+      if (frame < 3)
+        {         
+        frame++;       
+        }
+        if (frame == 3) {
+        frame = 0;
+        }
     }
     if (type == 'a') {
       arrow = loadImage(direction);
