@@ -3,7 +3,7 @@ class Projectile {
   // Memebr Varibles
   Timer fireballframeSpeed;
   PImage arrow;
-  PImage[] fireball;
+  PImage[] fireball, lightbeam;
   int x, y, w, h;
   int speed, damage, range, atkSpeed, imageCount, frame;
   boolean unlocked, disappear, Bdisappear;
@@ -17,7 +17,11 @@ class Projectile {
   // Constructor
   Projectile(char t, PVector ballP ) {
 
-
+    if (t == 'l') {
+      lightbeam= new PImage[5];
+     type = 'l'; 
+     lightbeam[4] = loadImage ("AimCircle.png");
+    }
 
     if (t == 'a') {
       type = 'a';
@@ -107,6 +111,10 @@ class Projectile {
   }
 
   void display() {
+    if (type == 'l') {
+      
+    image(lightbeam[4],mouseX,mouseY);
+    }
     if (type == 'w') {
       
       image(fireball[frame], ballPos.x, ballPos.y);

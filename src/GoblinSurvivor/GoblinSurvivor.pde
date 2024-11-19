@@ -217,10 +217,13 @@ void draw() {
       }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-
+        if (mousePressed) { 
+        proj.add(new Projectile('l', new PVector (0, 0)));
+        }
         projs.fire();
         projs.playerMovement();
         projs.display();
+        if (projs.type == 'a'){
         if (enemy.enemyPos.dist(projs.location)<30) {
           enemy.health -= 100;
           if (enemy.health < 0) {
@@ -231,6 +234,7 @@ void draw() {
             panel.xp+=1;
           }
         }
+      }
         if (projs.disappear == true) {
           proj.remove(n);
         }
