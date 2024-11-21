@@ -5,7 +5,7 @@ SoundFile bite1;
 Goblin g1;
 
 PowUp o1;
-Timer eTimer, timer1, zWalk, shootA, skullFrameSpeed;
+Timer eTimer, timer1, zWalk, shootA, skullFrameSpeed, lF, lC;
 Shop shop1;
 Panel panel;
 Tile tile;
@@ -14,7 +14,6 @@ int speed = 5;
 int skullFrame;
 
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
-ArrayList<Projectile> Eproj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play, end;
@@ -43,6 +42,9 @@ void setup() {
   eTimer.start();
   timer1 = new Timer(500);
   timer1.start();
+  lF = new Timer(5000);
+  lC = new Timer(10000);
+  lC.start();
   skullFrameSpeed = new Timer(300);
   skullFrameSpeed.start();
   size(1000, 1000);
@@ -193,14 +195,22 @@ void draw() {
     }
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
+      if (enemy.type == 'w') {
+        if (enemy.shoot == true) {
+          enemy.shoot = false;
+          proj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
+        }
+      }
+    }
+
+    for (int i = 0; i < enemies.size(); i++) {
+      Enemy enemy = enemies.get(i);
 
       enemy.update();
       enemy.zombiepoof();
       enemy.playerMovement();
       enemy.display();
       shop1.display();
-
-
       if (enemy.poof == true) {
         enemies.remove(i);
         bite1.play();
@@ -217,50 +227,50 @@ void draw() {
       }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-
-        projs.fire();
-        projs.playerMovement();
-        projs.display();
-        if (enemy.enemyPos.dist(projs.location)<30) {
-          enemy.health -= 100;
-          if (enemy.health < 0) {
-            enemies.remove(i);
+        if (projs.type == 'w') {
+          if (projs.ballPos.dist(userPos)<20) {
             proj.remove(n);
-            powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
-            panel.enemiesKilled = panel.enemiesKilled+1;
-            panel.xp+=1;
+            ouch1.play();
+            g1.health -= 10;
+          }
+          if (projs.Bdisappear == true) {
+            proj.remove(n);
           }
         }
-        if (projs.disappear == true) {
-          proj.remove(n);
-        }
-      }
-    }
-    for (int i = 0; i < enemies.size(); i++) {
-      Enemy enemy = enemies.get(i);
-      if (enemy.type == 'w') {
-        if (enemy.shoot == true) {
-          //enemy.fireball.start();
-          enemy.shoot = false;
-          Eproj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
-        }
-      }
-      for (int n = 0; n < Eproj.size(); n++) {
-        Projectile Eprojs = Eproj.get(n);
+        if (projs.type == 'a') {
+          if (enemy.enemyPos.dist(projs.location)<30) {
+            enemy.health -= 100;
+            if (enemy.health < 0) {
+              enemies.remove(i);
+              proj.remove(n);
+              powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
+              panel.enemiesKilled = panel.enemiesKilled+1;
+              panel.xp+=1;
+            }
+          }
 
-        Eprojs.playerMovement();
-        Eprojs.fire();
-        Eprojs.display();
-        if (Eprojs.ballPos.dist(userPos)<20) {
-          Eproj.remove(n);
-          ouch1.play();
-          g1.health -= 10;
-        }
-        if (Eprojs.Bdisappear == true) {
-          Eproj.remove(n);
+          if (projs.disappear == true) {
+            proj.remove(n);
+          }
         }
       }
     }
+    if (mousePressed && lC.isFinished()) {
+
+      proj.add(new Projectile('l', new PVector (0, 0)));
+      lC.start();
+      lF.start();
+    }
+    for (int n = 0; n < proj.size(); n++) {
+      Projectile projs = proj.get(n);
+      //if (lF.isFinished()) {
+      //  proj.remove(n);
+      //}
+      projs.fire();
+      projs.playerMovement();
+      projs.display();
+    }
+
     if (g1.health <= 0) {
       end = true;
       play = false;

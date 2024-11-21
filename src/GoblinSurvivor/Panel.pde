@@ -15,6 +15,7 @@ class Panel {
     fill(0,0,255);
     rect(0,0,xp*(width/levelUpXp),40);
     if(xp == levelUpXp) {
+        shootA = new Timer (2000);
       level+=1;
       levelUpXp *=2;
       xp = 0;
