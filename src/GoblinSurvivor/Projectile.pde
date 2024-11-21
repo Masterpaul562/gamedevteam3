@@ -5,8 +5,8 @@ class Projectile {
   PImage arrow;
   PImage[] fireball, lightbeam;
   int x, y, w, h;
-  int speed, damage, range, atkSpeed, imageCount, frame;
-  boolean unlocked, disappear, Bdisappear;
+  int speed, damage, range, atkSpeed, imageCount, frame,lx,ly;
+  boolean unlocked, disappear, Bdisappear,aim;
   char type;
   String direction, ballF;
 
@@ -19,10 +19,12 @@ class Projectile {
    
   
     if (t == 'l') {
-
+      aim = true;
       lightbeam= new PImage[5];
       type = 'l';
       lightbeam[0] = loadImage ("AimCircle.png");
+      lx=mouseX;
+      ly=mouseY;
     }
 
     if (t == 'a') {
@@ -114,7 +116,12 @@ class Projectile {
 
   void display() {
     if (type == 'l') {
+      if(aim == true) {
       image(lightbeam[0], mouseX, mouseY);
+      }
+      if(aim ==false) {
+      image(lightbeam[0], lx, ly);
+      }
     }
     if (type == 'w') {
 
@@ -159,9 +166,9 @@ class Projectile {
         } else if (key == 'd'||key == 'D') {
           location.x = location.x - 1;
         } else if (key == 'w'||key == 'W') {
-          location.y = location.y + 1;
-        } else if (key == 's'||key == 'S') {
           location.y = location.y - 1;
+        } else if (key == 's'||key == 'S') {
+          location.y = location.y + 1;
         }
       }
     }

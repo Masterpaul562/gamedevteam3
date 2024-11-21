@@ -255,17 +255,27 @@ void draw() {
         }
       }
     }
-    if (mousePressed && lC.isFinished()) {
 
-      proj.add(new Projectile('l', new PVector (0, 0)));
-      lC.start();
+    for (int n = 0; n < proj.size(); n++) {
+      Projectile projs = proj.get(n);
+      if (keyPressed) {
+        if (key == 'q' && lC.isFinished()) {
+          projs.aim = true;
+          proj.add(new Projectile('l', new PVector (0, 0)));
+          lC.start();
+        }
+      }
+      if(mousePressed && projs.aim == true) {
+      projs.aim = false;
       lF.start();
+      }
+      if (lF.isFinished()&&projs.type == 'l') {
+        proj.remove(n);
+      }
     }
     for (int n = 0; n < proj.size(); n++) {
       Projectile projs = proj.get(n);
-      //if (lF.isFinished()) {
-      //  proj.remove(n);
-      //}
+
       projs.fire();
       projs.playerMovement();
       projs.display();
