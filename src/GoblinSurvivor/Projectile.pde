@@ -1,9 +1,9 @@
 // Aiden Felt, Canon Unguren, Paul Tokhtuev| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
-  Timer fireballframeSpeed;
+  Timer fireballframeSpeed ;
   PImage arrow;
-  PImage[] fireball;
+  PImage[] fireball, lightbeam;
   int x, y, w, h;
   int speed, damage, range, atkSpeed, imageCount, frame;
   boolean unlocked, disappear, Bdisappear;
@@ -16,8 +16,14 @@ class Projectile {
 
   // Constructor
   Projectile(char t, PVector ballP ) {
+   
+  
+    if (t == 'l') {
 
-
+      lightbeam= new PImage[5];
+      type = 'l';
+      lightbeam[0] = loadImage ("AimCircle.png");
+    }
 
     if (t == 'a') {
       type = 'a';
@@ -63,26 +69,26 @@ class Projectile {
       type = 'w';
     }
     if (type == 'w') {
-       ballPos= ballP.copy();
-       fireballframeSpeed = new Timer(300);
-       fireballframeSpeed.start();
+      ballPos= ballP.copy();
+      fireballframeSpeed = new Timer(300);
+      fireballframeSpeed.start();
       frame =0;
       imageCount = 3;
       fireball= new PImage[3];
       if (ballPos.x<width/2) {
         for (int i = 0; i< 3; i++)
-        { 
-      
+        {
+
           fireball[i] = loadImage("Fireball"+i+".png");
         }
       } else if (ballPos.x>width/2) {
         for (int i = 0; i< 3; i++)
-        {        
+        {
           fireball[i] = loadImage("FireballFlip" + i + ".png");
         }
       }
 
-     
+
       fireballT = new PVector (width/2, height/2);
       fireballT.sub(ballPos);
       fireballT.normalize();
@@ -107,20 +113,23 @@ class Projectile {
   }
 
   void display() {
+    if (type == 'l') {
+      image(lightbeam[0], mouseX, mouseY);
+    }
     if (type == 'w') {
-      
+
       image(fireball[frame], ballPos.x, ballPos.y);
       if (fireballframeSpeed.isFinished()) {
-      image(fireball[frame], ballPos.x, ballPos.y);
-      fireballframeSpeed.start();
+        image(fireball[frame], ballPos.x, ballPos.y);
+        fireballframeSpeed.start();
       }
       if (frame < 3)
-        {         
-        frame++;       
-        }
-        if (frame == 3) {
+      {
+        frame++;
+      }
+      if (frame == 3) {
         frame = 0;
-        }
+      }
     }
     if (type == 'a') {
       arrow = loadImage(direction);
