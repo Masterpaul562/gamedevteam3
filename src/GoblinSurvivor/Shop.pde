@@ -1,6 +1,7 @@
 //Aiden Felt | Oct 23
 class Shop {
-  PImage [] itemImages = new PImage [6];
+  int tot = 6;
+  PImage [] itemImages = new PImage [tot];
   String[] itemNames = {"Bananaproj.png", "enemy.png", "hammercard2.png", "swordcard.png", "axecard.png",
 "longbowcard"}; // Item names
   boolean shopOpen = false; // Shop state
@@ -33,10 +34,13 @@ class Shop {
       x = 250;
       y = 325;
       rect(200, 250, shopWidth, shopHeight);
-      for (int i = 0; i<=5; i++) {
-
+      for (int i = 0; i<=tot-1; i++) {
         itemImages[i].resize(100, 150);
         image(itemImages[i], x, y);
+        if(mouseX>x-50 && mouseX<x+50 && mouseY>y-75 && mouseY<y+75 && mousePressed){
+          if(i == 0) {
+          }
+        }
         x = x+100;
         if (x >= 800) {
           x = 250;
