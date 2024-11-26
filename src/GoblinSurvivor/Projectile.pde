@@ -160,13 +160,13 @@ class Projectile {
     if (type == 'w') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
-          ballPos.x = ballPos.x + 1;
+          ballPos.x = ballPos.x + 4.5;
         } else if (key == 'd'||key == 'D') {
-          ballPos.x = ballPos.x - 1;
+          ballPos.x = ballPos.x - 4.5;
         } else if (key == 'w'||key == 'W') {
-          ballPos.y = ballPos.y + 1;
+          ballPos.y = ballPos.y + 4.5;
         } else if (key == 's'||key == 'S') {
-          ballPos.y = ballPos.y - 1;
+          ballPos.y = ballPos.y - 4.5;
         }
       }
     }
@@ -186,13 +186,13 @@ class Projectile {
     if (type == 'a' ) {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
-          location.x = location.x + 1;
+          location.x = location.x + 4.5;
         } else if (key == 'd'||key == 'D') {
-          location.x = location.x - 1;
+          location.x = location.x - 4.5;
         } else if (key == 'w'||key == 'W') {
-          location.y = location.y - 1;
+          location.y = location.y + 4.5;
         } else if (key == 's'||key == 'S') {
-          location.y = location.y + 1;
+          location.y = location.y - 4.5;
         }
       }
     }
