@@ -82,7 +82,7 @@ void draw() {
       enemies.add(new Enemy());
       if (etime >= 50) {
         println(etime);
-        etime -= 1;
+        etime -= 5;
         eTimer = new Timer(etime);
       }
 
