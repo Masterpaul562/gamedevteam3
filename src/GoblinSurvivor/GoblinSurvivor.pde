@@ -1,4 +1,4 @@
-// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>//
+// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>//
 import processing.sound.*;
 SoundFile background1, coin1, ouch1, gameoversound, arrow1;
 SoundFile bite1;
@@ -16,13 +16,15 @@ int skullFrame;
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-boolean play, end, lD,lFired;
+boolean play, end, lD, lFired;
 PImage start1;
 PImage game1, over1, skull1, retry1;
 PImage[] skulls = new PImage[8];
 String retrying;
 PVector userPos;
+int etime;
 void setup() {
+  etime = 5000;
   retrying = "RetryButton.png";
   end = false;
   lFired = false;
@@ -39,7 +41,7 @@ void setup() {
   enemies.add (new Enemy());
   zWalk = new Timer(500);
   zWalk.start();
-  eTimer = new Timer(5000);
+  eTimer = new Timer(etime);
   eTimer.start();
   timer1 = new Timer(500);
   timer1.start();
@@ -78,6 +80,12 @@ void draw() {
 
     if (eTimer.isFinished()) {
       enemies.add(new Enemy());
+      if (etime >= 50) {
+        println(etime);
+        etime -= 1;
+        eTimer = new Timer(etime);
+      }
+
       eTimer.start();
     }
     background(115);
@@ -279,7 +287,7 @@ void draw() {
         if (lF.isFinished()&&projs.type == 'l'&&lD==true) {
           proj.remove(n);
           lD= false;
-          lFired = false; 
+          lFired = false;
         }
         if (projs.type == 'l') {
 
@@ -287,7 +295,7 @@ void draw() {
             enemy.health =- 100;
             if (enemy.health < 0) {
               enemies.remove(i);
-              
+
               powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
               panel.enemiesKilled = panel.enemiesKilled+1;
               panel.xp+=1;
