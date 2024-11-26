@@ -18,7 +18,7 @@ class Projectile {
   // Constructor
   Projectile(char t, PVector ballP ) {
    
-  
+   lP = new PVector (0,0);
     if (t == 'l') {
       lFS = new Timer(200);
       lFS.start();
@@ -29,7 +29,7 @@ class Projectile {
       lightbeam[i] = loadImage ("PurifyBeam"+i+".png");
       }
       lightbeam[4] = loadImage ("AimCircle.png");
-      lP = new PVector (0,0);
+     
     }
 
     if (t == 'a') {
@@ -125,9 +125,9 @@ class Projectile {
       image(lightbeam[4], mouseX, mouseY);
       }
       if(aim ==false) {
-      image(lightbeam[lF], lP.x, lP.y);
+      image(lightbeam[lF], lP.x, lP.y-100);
       if(lFS.isFinished()){
-      image(lightbeam[lF], lP.x,lP.y);
+      image(lightbeam[lF], lP.x,lP.y-100);
       lFS.start();
       }
       if (lF <4) {lF++;}
@@ -173,9 +173,9 @@ class Projectile {
     if (type == 'l') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
-          lP.y = lP.x + 5;
+          lP.x = lP.x + 5;
         } else if (key == 'd'||key == 'D') {
-          lP.y = lP.x - 5;
+          lP.x = lP.x - 5;
         } else if (key == 'w'||key == 'W') {
           lP.y = lP.y + 5;
         } else if (key == 's'||key == 'S') {
