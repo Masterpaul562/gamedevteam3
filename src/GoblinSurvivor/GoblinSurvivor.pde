@@ -16,7 +16,7 @@ int skullFrame;
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-boolean play, end;
+boolean play, end, lD;
 PImage start1;
 PImage game1, over1, skull1, retry1;
 PImage[] skulls = new PImage[8];
@@ -237,6 +237,13 @@ void draw() {
             proj.remove(n);
           }
         }
+        if (projs.type == 'l') {
+          if (mousePressed) {
+            if (enemy.enemyPos.dist(projs.lP)<100) {
+              enemies.remove(i);
+            }
+          }
+        }
         if (projs.type == 'a') {
           if (enemy.enemyPos.dist(projs.location)<30) {
             enemy.health -= 100;
@@ -255,17 +262,31 @@ void draw() {
         }
       }
     }
-    if (mousePressed && lC.isFinished()) {
 
-      proj.add(new Projectile('l', new PVector (0, 0)));
-      lC.start();
-      lF.start();
+    for (int n = 0; n < proj.size(); n++) {
+      Projectile projs = proj.get(n);
+      if (keyPressed) {
+        if (key == 'q' && lC.isFinished()) {          
+          proj.add(new Projectile('l', new PVector (0, 0)));
+          projs.aim = true;
+          lC.start();
+        }
+      }
+      if (mousePressed && projs.aim == true) {
+        projs.aim = false;
+        projs.lP.x = mouseX;
+        projs.lP.y = mouseY-100;
+        lD = true;
+        lF.start();
+       
+      }
+      if (lF.isFinished()&&projs.type == 'l'&&lD==true) {
+        proj.remove(n);
+      }
     }
     for (int n = 0; n < proj.size(); n++) {
       Projectile projs = proj.get(n);
-      //if (lF.isFinished()) {
-      //  proj.remove(n);
-      //}
+
       projs.fire();
       projs.playerMovement();
       projs.display();

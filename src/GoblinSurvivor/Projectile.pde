@@ -1,16 +1,17 @@
 // Aiden Felt, Canon Unguren, Paul Tokhtuev| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
-  Timer fireballframeSpeed ;
+  Timer fireballframeSpeed,lFS ;
   PImage arrow;
   PImage[] fireball, lightbeam;
   int x, y, w, h;
-  int speed, damage, range, atkSpeed, imageCount, frame;
-  boolean unlocked, disappear, Bdisappear;
+  int speed, damage, range, atkSpeed, imageCount, frame,lF;
+ 
+  boolean unlocked, disappear, Bdisappear,aim;
   char type;
   String direction, ballF;
 
-  PVector target, location, ballPos, fireballT;
+  PVector target, location, ballPos, fireballT,lP;
 
 
 
@@ -19,10 +20,16 @@ class Projectile {
    
   
     if (t == 'l') {
-
+      lFS = new Timer(200);
+      lFS.start();
+      aim = true;
       lightbeam= new PImage[5];
       type = 'l';
-      lightbeam[0] = loadImage ("AimCircle.png");
+      for(int i =0; i<4;i++) {
+      lightbeam[i] = loadImage ("PurifyBeam"+i+".png");
+      }
+      lightbeam[4] = loadImage ("AimCircle.png");
+      lP = new PVector (0,0);
     }
 
     if (t == 'a') {
@@ -114,7 +121,18 @@ class Projectile {
 
   void display() {
     if (type == 'l') {
-      image(lightbeam[0], mouseX, mouseY);
+      if(aim == true) {
+      image(lightbeam[4], mouseX, mouseY);
+      }
+      if(aim ==false) {
+      image(lightbeam[lF], lP.x, lP.y);
+      if(lFS.isFinished()){
+      image(lightbeam[lF], lP.x,lP.y);
+      lFS.start();
+      }
+      if (lF <4) {lF++;}
+      if (lF == 4) {lF = 0;}
+      }
     }
     if (type == 'w') {
 
@@ -146,9 +164,22 @@ class Projectile {
         } else if (key == 'd'||key == 'D') {
           ballPos.x = ballPos.x - 1;
         } else if (key == 'w'||key == 'W') {
-          ballPos.y = ballPos.y - 1;
-        } else if (key == 's'||key == 'S') {
           ballPos.y = ballPos.y + 1;
+        } else if (key == 's'||key == 'S') {
+          ballPos.y = ballPos.y - 1;
+        }
+      }
+    }
+    if (type == 'l') {
+      if (keyPressed) {
+        if (key == 'a'||key == 'A') {
+          lP.y = lP.x + 5;
+        } else if (key == 'd'||key == 'D') {
+          lP.y = lP.x - 5;
+        } else if (key == 'w'||key == 'W') {
+          lP.y = lP.y + 5;
+        } else if (key == 's'||key == 'S') {
+          lP.y = lP.y - 5;
         }
       }
     }
@@ -159,9 +190,9 @@ class Projectile {
         } else if (key == 'd'||key == 'D') {
           location.x = location.x - 1;
         } else if (key == 'w'||key == 'W') {
-          location.y = location.y + 1;
-        } else if (key == 's'||key == 'S') {
           location.y = location.y - 1;
+        } else if (key == 's'||key == 'S') {
+          location.y = location.y + 1;
         }
       }
     }
