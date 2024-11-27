@@ -1,7 +1,7 @@
 // Aiden Felt, Canon Unguren, Paul Tokhtuev| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
-  Timer fireballframeSpeed,lFS ;
+  Timer fireballframeSpeed,lFS,hammerTime ;
   PImage arrow;
   PImage[] fireball, lightbeam;
   int x, y, w, h;
@@ -11,7 +11,7 @@ class Projectile {
   char type;
   String direction, ballF;
 
-  PVector target, location, ballPos, fireballT,lP;
+  PVector target, location, ballPos, fireballT,lP,hammer;
 
 
 

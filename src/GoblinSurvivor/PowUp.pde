@@ -1,13 +1,19 @@
 // Oskar Szajnuk, Canon Unguren| October 3 2024
 class PowUp {
   // Member Variables
-  PImage orb;
-  int x, y, w, h, xp;
+  Timer spin;
+  PImage[] coin;
+  int x, y, w, h, xp,frame;
   char type;
 
   // Constructor
   PowUp(int x, int y) {
-    orb = loadImage("Orb.png");
+    spin = new Timer(200); 
+    spin.start();
+    coin = new PImage[13];
+    for (int i = 0; i <12; i++) {
+    coin[i] = loadImage("CoinSpin" + i +".png");
+    }
     this.x = x;
     this.y = y;
     w = 50;
@@ -19,8 +25,16 @@ class PowUp {
   // Member Methods
   void display() {
     imageMode(CENTER);
-    orb.resize(25, 25);
-    image(orb, x, y);
+    image(coin[frame], x, y);
+    if (spin.isFinished()) {
+    image(coin[frame], x, y);
+    spin.start();
+    }
+    if (frame <12) {
+    frame++;
+    
+    }
+    if (frame ==12){frame=0;}
   }
   void collect() {
   }
