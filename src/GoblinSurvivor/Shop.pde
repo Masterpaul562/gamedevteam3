@@ -46,7 +46,6 @@ class Shop {
         image(itemImages[i], x, y);
         if (mouseX>x-80 && mouseX<x+80 && mouseY>y-125 && mouseY<y+125 && mousePressed) {
           if (i == 0 && !$banana) {
-            panel.money +=10;
             $banana = true;
             println("banana");
           } else if (i == 1 && !$bow && panel.money >= 10) {
