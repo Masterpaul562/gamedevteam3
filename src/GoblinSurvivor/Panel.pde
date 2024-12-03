@@ -1,8 +1,8 @@
 //Canon Unguren | 25 Oct 2024
 
 class Panel {
-  int seconds,minutes,enemiesKilled,xp,money,levelUpXp;
-  
+  int seconds, minutes, enemiesKilled, xp, money, levelUpXp;
+
   Panel() {
     seconds = millis()/1000;
     minutes = 0;
@@ -11,11 +11,11 @@ class Panel {
     money = 0;
   }
   void display() {
-    
-    fill(0,0,255);
-    rect(0,0,xp*(width/levelUpXp),40);
-    if(xp == levelUpXp) {
-        shootA = new Timer (2000);
+
+    fill(0, 0, 255);
+    rect(0, 0, xp*(width/levelUpXp), 40);
+    if (xp == levelUpXp) {
+      shootA = new Timer (2000);
       level+=1;
       levelUpXp *=2;
       xp = 0;
