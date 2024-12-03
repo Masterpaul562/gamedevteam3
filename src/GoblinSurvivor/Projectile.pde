@@ -7,7 +7,7 @@ class Projectile {
   int x, y, w, h;
   int speed, damage, range, atkSpeed, imageCount, frame,lF;
  
-  boolean unlocked, disappear, Bdisappear,aim;
+  boolean unlocked, disappear, Bdisappear,aim, LBPlaced;
   char type;
   String direction, ballF;
 

@@ -274,13 +274,16 @@ void draw() {
             proj.add(new Projectile('l', new PVector (0, 0)));
             projs.aim = true;
             lFired = true;
+            projs.LBPlaced = false; 
           }
         }
-        if (mousePressed && lFired == true) {
+        if (mousePressed && lFired == true && projs.LBPlaced == false) {
           projs.aim = false;
+          projs.LBPlaced = true; 
           lC.start();
           projs.lP.x = mouseX;
           projs.lP.y = mouseY;
+         
           lD = true;
           lF.start();
         }
