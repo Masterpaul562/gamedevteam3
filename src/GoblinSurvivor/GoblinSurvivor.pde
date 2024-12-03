@@ -202,6 +202,8 @@ void draw() {
       proj.add(new Projectile('a', new PVector (width/2, height/2)));
       shootA.start();
     }
+    
+
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
       if (enemy.type == 'w') {
@@ -210,11 +212,6 @@ void draw() {
           proj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
         }
       }
-    }
-
-    for (int i = 0; i < enemies.size(); i++) {
-      Enemy enemy = enemies.get(i);
-
       enemy.update();
       enemy.zombiepoof();
       enemy.playerMovement();
@@ -263,27 +260,22 @@ void draw() {
             proj.remove(n);
           }
         }
-      }
-    }
-    for (int i = 0; i < enemies.size(); i++) {
-      Enemy enemy = enemies.get(i);
-      for (int n = 0; n < proj.size(); n++) {
-        Projectile projs = proj.get(n);
+
         if (keyPressed) {
           if (key == 'q' && lC.isFinished()&& lFired == false) {
             proj.add(new Projectile('l', new PVector (0, 0)));
             projs.aim = true;
             lFired = true;
-            projs.LBPlaced = false; 
+            projs.LBPlaced = false;
           }
         }
         if (mousePressed && lFired == true && projs.LBPlaced == false) {
           projs.aim = false;
-          projs.LBPlaced = true; 
+          projs.LBPlaced = true;
           lC.start();
           projs.lP.x = mouseX;
           projs.lP.y = mouseY;
-         
+
           lD = true;
           lF.start();
         }
@@ -309,7 +301,6 @@ void draw() {
     }
     for (int n = 0; n < proj.size(); n++) {
       Projectile projs = proj.get(n);
-
       projs.fire();
       projs.playerMovement();
       projs.display();
