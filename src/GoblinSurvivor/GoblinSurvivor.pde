@@ -1,4 +1,4 @@
-// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>//
+// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>// //<>//
 import processing.sound.*;
 SoundFile background1, coin1, ouch1, gameoversound, arrow1;
 SoundFile bite1;
@@ -201,7 +201,7 @@ void draw() {
 
     g1.display();
 
-    if (shootA.isFinished()) {
+    if (shootA.isFinished() && shop1.$bow) {
       arrow1.play();
       proj.add(new Projectile('a', new PVector (width/2, height/2)));
       shootA.start();
@@ -239,7 +239,7 @@ void draw() {
       }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        if (shootB.isFinished()) {
+        if (shootB.isFinished() && shop1.$banana) {
         
          
             
