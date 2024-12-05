@@ -104,13 +104,13 @@ class Enemy {
     if (type == 'z') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
-          enemyPos.x = enemyPos.x + 4;
+          enemyPos.x = enemyPos.x + 5;
         } else if (key == 'd'||key == 'D') {
-          enemyPos.x = enemyPos.x - 4;
+          enemyPos.x = enemyPos.x - 5;
         } else if (key == 'w'||key == 'W') {
-          enemyPos.y = enemyPos.y + 4;
+          enemyPos.y = enemyPos.y + 5;
         } else if (key == 's'||key == 'S') {
-          enemyPos.y = enemyPos.y - 4;
+          enemyPos.y = enemyPos.y - 5;
         }
       }
     }

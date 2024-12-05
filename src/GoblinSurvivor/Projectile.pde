@@ -202,13 +202,13 @@ class Projectile {
     if(type =='b') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
-          bP.x = bP.x + 4.5;
+          bP.x = bP.x + 5;
         } else if (key == 'd'||key == 'D') {
-          bP.x = bP.x - 4.5;
+          bP.x = bP.x - 5;
         } else if (key == 'w'||key == 'W') {
-          bP.y = bP.y + 4.5;
+          bP.y = bP.y + 5;
         } else if (key == 's'||key == 'S') {
-          bP.y = bP.y - 4.5;
+          bP.y = bP.y - 5;
         }
       }
     }
