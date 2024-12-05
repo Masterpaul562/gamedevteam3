@@ -210,11 +210,7 @@ void draw() {
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
    int indexofCE=getIndexOfClosestEnemy();
-      //println("hello",mindistance, indexofCE,enemies.size());
-       //ArrayList<Float> Edistance= new ArrayList<Float>(enemies.size());
-       //     Edistance.add ( PVector.dist(enemies.get(i).enemyPos,enemy.userPos));
-       //     float minEDist=min(Edistance);
-       //   int indexE = Edistance.indexOf(minEDist);
+      
            
       if (enemy.type == 'w') {
         if (enemy.shoot == true) {
