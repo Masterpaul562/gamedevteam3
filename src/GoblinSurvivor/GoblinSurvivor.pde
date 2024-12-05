@@ -5,14 +5,14 @@ SoundFile bite1;
 Goblin g1;
 
 PowUp o1;
-Timer eTimer, timer1, zWalk, shootA, skullFrameSpeed, lF, lC;
+Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC;
 Shop shop1;
 Panel panel;
 Tile tile;
 int level;
 int speed = 5;
 int skullFrame;
-
+float[] Edistance;
 ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -36,6 +36,8 @@ void setup() {
   gameoversound = new SoundFile(this, "gameover.wav");
   background1.loop();
   shootA = new Timer (4000);
+  shootB = new Timer (6000);
+  shootB.start();
   shootA.start();
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
@@ -188,6 +190,7 @@ void draw() {
 
     for (int i = 0; i < powUps.size(); i++) {
       PowUp powUp = powUps.get(i);
+    
       if (dist(width/2, height/2, powUp.x, powUp.y)<20) {
         powUps.remove(i);
         coin1.play();
@@ -197,24 +200,28 @@ void draw() {
     }
 
     g1.display();
+
     if (shootA.isFinished()) {
       arrow1.play();
       proj.add(new Projectile('a', new PVector (width/2, height/2)));
       shootA.start();
     }
+
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
+   int indexofCE=getIndexOfClosestEnemy();
+      //println("hello",mindistance, indexofCE,enemies.size());
+       //ArrayList<Float> Edistance= new ArrayList<Float>(enemies.size());
+       //     Edistance.add ( PVector.dist(enemies.get(i).enemyPos,enemy.userPos));
+       //     float minEDist=min(Edistance);
+       //   int indexE = Edistance.indexOf(minEDist);
+           
       if (enemy.type == 'w') {
         if (enemy.shoot == true) {
           enemy.shoot = false;
           proj.add(new Projectile('w', new PVector (enemy.enemyPos.x+5, enemy.enemyPos.y-20)));
         }
       }
-    }
-
-    for (int i = 0; i < enemies.size(); i++) {
-      Enemy enemy = enemies.get(i);
-
       enemy.update();
       enemy.zombiepoof();
       enemy.playerMovement();
@@ -236,6 +243,16 @@ void draw() {
       }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
+        if (shootB.isFinished()) {
+        
+         
+            
+          proj.add(new Projectile('b', enemies.get(indexofCE).enemyPos.copy()));
+          shootB.start();
+        }
+        if(projs.type == 'b' && projs.bananaD == true) {
+         proj.remove(n); 
+        }
         if (projs.type == 'w') {
           if (projs.ballPos.dist(userPos)<20) {
             proj.remove(n);
@@ -263,24 +280,22 @@ void draw() {
             proj.remove(n);
           }
         }
-      }
-    }
-    for (int i = 0; i < enemies.size(); i++) {
-      Enemy enemy = enemies.get(i);
-      for (int n = 0; n < proj.size(); n++) {
-        Projectile projs = proj.get(n);
+
         if (keyPressed) {
           if (key == 'q' && lC.isFinished()&& lFired == false) {
             proj.add(new Projectile('l', new PVector (0, 0)));
             projs.aim = true;
             lFired = true;
+            projs.LBPlaced = false;
           }
         }
-        if (mousePressed && lFired == true) {
+        if (mousePressed && lFired == true && projs.LBPlaced == false) {
           projs.aim = false;
+          projs.LBPlaced = true;
           lC.start();
           projs.lP.x = mouseX;
           projs.lP.y = mouseY;
+
           lD = true;
           lF.start();
         }
@@ -306,7 +321,6 @@ void draw() {
     }
     for (int n = 0; n < proj.size(); n++) {
       Projectile projs = proj.get(n);
-
       projs.fire();
       projs.playerMovement();
       projs.display();
@@ -389,4 +403,22 @@ void gameOver() {
   }
   retry1.resize(250, 250);
   image(retry1, width/2, 750);
+}
+
+
+int getIndexOfClosestEnemy() {
+float mindistance = 1000000000;
+int indexofCE = -1; 
+    for (int i = 0; i < enemies.size(); i++) {
+      Enemy enemy = enemies.get(i);
+      float dist = PVector.dist(enemy.enemyPos, userPos);
+      if (dist < mindistance) {
+        
+        mindistance = dist;
+        indexofCE = i;
+        
+      }
+
+}
+return indexofCE;
 }
