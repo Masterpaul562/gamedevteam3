@@ -190,7 +190,7 @@ void draw() {
 
     for (int i = 0; i < powUps.size(); i++) {
       PowUp powUp = powUps.get(i);
-    
+
       if (dist(width/2, height/2, powUp.x, powUp.y)<20) {
         powUps.remove(i);
         coin1.play();
@@ -209,9 +209,9 @@ void draw() {
 
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
-   int indexofCE=getIndexOfClosestEnemy();
-      
-           
+      int indexofCE=getIndexOfClosestEnemy();
+
+
       if (enemy.type == 'w') {
         if (enemy.shoot == true) {
           enemy.shoot = false;
@@ -240,14 +240,24 @@ void draw() {
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
         if (shootB.isFinished() && shop1.$banana) {
-        
-         
-            
+
+
+
           proj.add(new Projectile('b', enemies.get(indexofCE).enemyPos.copy()));
           shootB.start();
         }
-        if(projs.type == 'b' && projs.bananaD == true) {
-         proj.remove(n); 
+        if (projs.type == 'b' && enemy.enemyPos.dist(projs.bP)<30) {
+          proj.remove(n);
+          enemy.health -= 1000;
+          if (enemy.health <0) {
+            enemies.remove(i);
+            powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
+            panel.enemiesKilled = panel.enemiesKilled+1;
+            panel.xp+=1;
+          }
+        }
+        if (projs.type == 'b' && projs.bananaD == true) {
+          proj.remove(n);
         }
         if (projs.type == 'w') {
           if (projs.ballPos.dist(userPos)<20) {
@@ -403,18 +413,16 @@ void gameOver() {
 
 
 int getIndexOfClosestEnemy() {
-float mindistance = 1000000000;
-int indexofCE = -1; 
-    for (int i = 0; i < enemies.size(); i++) {
-      Enemy enemy = enemies.get(i);
-      float dist = PVector.dist(enemy.enemyPos, userPos);
-      if (dist < mindistance) {
-        
-        mindistance = dist;
-        indexofCE = i;
-        
-      }
+  float mindistance = 1000000000;
+  int indexofCE = -1;
+  for (int i = 0; i < enemies.size(); i++) {
+    Enemy enemy = enemies.get(i);
+    float dist = PVector.dist(enemy.enemyPos, userPos);
+    if (dist < mindistance) {
 
-}
-return indexofCE;
+      mindistance = dist;
+      indexofCE = i;
+    }
+  }
+  return indexofCE;
 }
