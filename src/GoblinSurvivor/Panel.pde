@@ -17,9 +17,12 @@ class Panel {
     rect(0, 0, xp*(width/levelUpXp), 40);
     if (xp == levelUpXp) {
       shootA = new Timer (arSpeed);
-      arSpeed -= 500;
+      if (arSpeed > 500) {
+        arSpeed -= 500;
+      }
+
       level+=1;
-      levelUpXp *=2;
+      levelUpXp *=1.5;
       xp = 0;
     }
     seconds = millis()/1000;
