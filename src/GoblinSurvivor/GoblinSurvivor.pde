@@ -1,15 +1,15 @@
-// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>// //<>//
+// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>// //<>// //<>//
 import processing.sound.*;
 SoundFile background1, coin1, ouch1, gameoversound, arrow1;
 SoundFile bite1;
 Goblin g1;
 
 PowUp o1;
-Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC;
+Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC, welcomeTime, transTimer;
 Shop shop1;
 Panel panel;
 Tile tile;
-int level;
+int level, welcomeCounter, transCount;
 int speed = 5;
 int skullFrame;
 float[] Edistance;
@@ -49,7 +49,11 @@ void setup() {
   timer1.start();
   lF = new Timer(5000);
   lC = new Timer(10000);
+  transTimer = new Timer(2000);
   lC.start();
+  welcomeTime = new Timer(1000);
+  welcomeTime.start();
+  welcomeCounter = 0;
   skullFrameSpeed = new Timer(300);
   skullFrameSpeed.start();
   size(1000, 1000);
@@ -62,7 +66,7 @@ void setup() {
   panel = new Panel();
   play = false;
   tile = new Tile();
-
+  transCount = 0;
   start1 = loadImage("GoblinStart.png");
   game1 = loadImage("GAME.png");
   over1 = loadImage("OVER.png");
@@ -370,12 +374,77 @@ void keyPressed() {
 }
 
 void startScreen() {
-  start1.resize(1000, 1000);
-  image(start1, 0, 0);
+  background(0);
+  fill(255);
+  //start1.resize(1000, 1000);
+  //image(start1, 0, 0);
   if (keyPressed || mousePressed) {
     play = true;
   }
+  if (welcomeTime.isFinished()) {
+    welcomeTime.start();
+    welcomeCounter++;
+  }
+  switch(welcomeCounter) {
+  case 0:
+    text("Once the world lived in harmony", 200, 100);
+    fill(255);
+    break;
+  case 1:
+    text("Until a dark and evil force came", 100, 100);
+    break;
+  case 2:
+    text("His name, was MR. EVILS MUNCHKIN MAN", 100, 100);
+    break;
+  case 3:
+    text("The goblins together were the only thing that could stop him", 100, 100);
+    break;
+  case 4:
+    text("but he separated them one by one, killing them all", 100, 100);
+    break;
+  case 5:
+    text("Until only one remained", 100, 100);
+    break;
+  case 6:
+    text("The last and strongest one made a stand", 100, 100);
+    break;
+  case 7:
+    text("Too strong for MR. EVILS MUNCHKIN MAN to face head on", 100, 100);
+    break;
+  case 8:
+    text("So he devised a devious plan to trap the goblin", 100, 100);
+    break;
+  case 9:
+    text("to trap him in the prison realm and have his acolytes wear him down", 100, 100);
+    break;
+  case 10:
+    text("the plan succeeded and the goblin was trapped", 100, 100);
+    break;
+  case 11:
+    text("but will that be enough to stop...", 100, 100);
+    break;
+  case 12:
+    text("THE GOBLIN SURIVIOR", 100, 100);
+    transTimer.start();
+
+    break;
+  default:
+    if (transTimer.isFinished() && transCount<=255) {
+      image(start1, 0, 0);
+      print(transCount);
+      transCount += 20;
+      tint(255, transCount);
+      start1.resize(1000, 1000);
+      image(start1, 0, 0);
+      transTimer.start();
+    }
+
+
+  }
+
+
 }
+
 
 void gameOver() {
   background(0);
