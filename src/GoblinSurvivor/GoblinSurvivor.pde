@@ -17,7 +17,7 @@ ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play, end, lD, lFired;
-PImage start1;
+PImage start1, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12,intro13;
 PImage game1, over1, skull1, retry1;
 PImage[] skulls = new PImage[8];
 String retrying;
@@ -51,7 +51,7 @@ void setup() {
   lC = new Timer(10000);
   transTimer = new Timer(2000);
   lC.start();
-  welcomeTime = new Timer(1000);
+  welcomeTime = new Timer(5000);
   welcomeTime.start();
   welcomeCounter = 0;
   skullFrameSpeed = new Timer(300);
@@ -72,6 +72,19 @@ void setup() {
   over1 = loadImage("OVER.png");
   skull1 = loadImage("Skull.png");
   retry1 = loadImage(retrying);
+  intro1 = loadImage("FirstIntoPage.png");
+  intro2 = loadImage("SecondIntoPage.png");
+  intro3 = loadImage("FirstIntoPage.png");
+  intro4 = loadImage("FirstIntoPage.png");
+  intro5 = loadImage("FirstIntoPage.png");
+  intro6 = loadImage("FirstIntoPage.png");
+  intro7 = loadImage("FirstIntoPage.png");
+  intro8 = loadImage("FirstIntoPage.png");
+  intro9 = loadImage("FirstIntoPage.png");
+  intro10 = loadImage("FirstIntoPage.png");
+  intro11 = loadImage("FirstIntoPage.png");
+  intro12 = loadImage("FirstIntoPage.png");
+  intro13 = loadImage("FirstIntoPage.png");
 }
 
 void draw() {
@@ -374,7 +387,7 @@ void keyPressed() {
 }
 
 void startScreen() {
-  
+
   background(0);
   fill(255);
   //start1.resize(1000, 1000);
@@ -389,55 +402,81 @@ void startScreen() {
   switch(welcomeCounter) {
   case 0:
     textSize(50);
+    intro1.resize(1000, 1000);
+    image(intro1, 0, 0);
     text("Once the world lived in harmony", 150, 100);
     fill(255);
     break;
   case 1:
+    intro2.resize(1000, 1000);
+    image(intro2, 0, 0);
     text("Until a dark and evil force came", 150, 100);
     break;
   case 2:
+    intro3.resize(1000, 1000);
+    image(intro3, 0, 0);
     text("His name, was MR. EVILS MUNCHKIN MAN", 75, 100);
     break;
   case 3:
+    intro4.resize(1000, 1000);
+    image(intro4, 0, 0);
     textSize(40);
     text("The goblins together were the only thing that could stop him", 0, 100);
     break;
   case 4:
+    intro5.resize(1000, 1000);
+    image(intro5, 0, 0);
     text("but he separated them one by one, killing them all", 50, 100);
     break;
   case 5:
-  textSize(50);
+    intro6.resize(1000, 1000);
+    image(intro6, 0, 0);
+    textSize(50);
     text("Until only one remained", 250, 100);
     break;
   case 6:
+    intro7.resize(1000, 1000);
+    image(intro7, 0, 0);
     text("The last and strongest one made a stand", 75, 100);
     break;
   case 7:
+    intro8.resize(1000, 1000);
+    image(intro8, 0, 0);
     textSize(40);
     text("Too strong for MR. EVILS MUNCHKIN MAN to face head on", 25, 100);
     break;
   case 8:
+    intro9.resize(1000, 1000);
+    image(intro9, 0, 0);
     text("So he devised a devious plan to trap the goblin", 100, 100);
     break;
   case 9:
+    intro10.resize(1000, 1000);
+    image(intro10, 0, 0);
     textSize(30);
     text("to trap him in the prison realm and have his acolytes wear him down", 75, 100);
     break;
   case 10:
+    intro11.resize(1000, 1000);
+    image(intro11, 0, 0);
     textSize(50);
     text("the plan succeeded and the goblin was trapped", 0, 100);
     break;
   case 11:
+    intro12.resize(1000, 1000);
+    image(intro12, 0, 0);
     text("but will that be enough to stop...", 150, 100);
     break;
   case 12:
+    intro13.resize(1000, 1000);
+    image(intro13, 0, 0);
     text("THE GOBLIN SURIVIOR", 300, 100);
     transTimer.start();
 
     break;
   default:
-  background(255);
-  start1.resize(1000,1000);
+    background(255);
+    start1.resize(1000, 1000);
     image(start1, 0, 0);
     //if (transTimer.isFinished() && transCount<=255) {
     //  image(start1, 0, 0);
