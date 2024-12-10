@@ -1,13 +1,13 @@
 // Aiden Felt, Canon Unguren, Paul Tokhtuev| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
-  Timer fireballframeSpeed, lFS, BFS, hammerTime ;
+  Timer fireballframeSpeed, lFS, BFS, hammerTime, hammerFPS ;
   PImage arrow;
-  PImage[] fireball, lightbeam, banana;
-  int x, y, w, h;
+  PImage[] fireball, lightbeam, banana, hammerF;
+  int x, y, w, h, hF;
   int speed, damage, range, atkSpeed, imageCount, frame, lF, bF;
 
-  boolean unlocked, disappear, Bdisappear,bananaD, aim, LBPlaced;
+  boolean unlocked, disappear, Bdisappear, bananaD, aim, LBPlaced;
   char type;
   String direction, ballF;
 
@@ -19,16 +19,28 @@ class Projectile {
   Projectile(char t, PVector ballP ) {
 
     lP = new PVector (0, 0);
+    if (t== 'h') {
+      hammerF = new PImage[4];
+      for (int i =0; i<4; i++) {
+        hammerF[i] = loadImage ("hammer"+i+".png");
+      }
+      hammer = ballP.copy();
+      hammerTime = new Timer(8000);
+      type = 'h';
+      hammerFPS= new Timer (200);
+      hammerTime.start();
+      hammerFPS.start();
+    }
     if (t == 'b') {
       bananaTarget = ballP.copy();
-     
+
       bP =  new PVector (width/2, height/2);
-     
-     
+
+
       bananaTarget.sub(bP);
       bananaTarget.normalize();
       bananaTarget.mult(5);
-       
+
       type = 'b';
       BFS = new Timer (1000);
       BFS.start();
@@ -125,7 +137,7 @@ class Projectile {
     if (type == 'b') {
 
       bP.add(bananaTarget);
-       if (bP.x > width+40 || bP.x <-40||bP.y < -40 || bP.y > height +40) {
+      if (bP.x > width+40 || bP.x <-40||bP.y < -40 || bP.y > height +40) {
         bananaD=true;
       }
     }
@@ -144,6 +156,19 @@ class Projectile {
   }
 
   void display() {
+    if ( type == 'h') {
+      image(hammerF[hF], hammer.x, hammer.y);
+      if (hammerFPS.isFinished()) {
+        image(hammerF[hF], hammer.x, hammer.y);
+        hammerFPS.start();
+      }
+      if (hF<4) {
+        hF++;
+      }
+      if (hF==4) {
+        hF=0;
+      }
+    }
     if (type =='b') {
 
       image(banana[bF], bP.x, bP.y);
@@ -199,7 +224,7 @@ class Projectile {
     }
   }
   void playerMovement() {
-    if(type =='b') {
+    if (type =='b') {
       if (keyPressed) {
         if (key == 'a'||key == 'A') {
           bP.x = bP.x + 5;
