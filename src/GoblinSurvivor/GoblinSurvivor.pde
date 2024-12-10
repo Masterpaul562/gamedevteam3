@@ -72,7 +72,7 @@ void setup() {
   over1 = loadImage("OVER.png");
   skull1 = loadImage("Skull.png");
   retry1 = loadImage(retrying);
-  intro1 = loadImage("FirstIntoPage.png");
+  intro1 = loadImage("FirstIntoPageOld.png");
   intro2 = loadImage("SecondIntoPage.png");
   intro3 = loadImage("FirstIntoPage.png");
   intro4 = loadImage("FirstIntoPage.png");
