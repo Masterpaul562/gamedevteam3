@@ -72,7 +72,7 @@ void setup() {
   over1 = loadImage("OVER.png");
   skull1 = loadImage("Skull.png");
   retry1 = loadImage(retrying);
-  intro1 = loadImage("FirstIntoPageOld.png");
+  intro1 = loadImage("FirstIntoPage.png");
   intro2 = loadImage("SecondIntoPage.png");
   intro3 = loadImage("FirstIntoPage.png");
   intro4 = loadImage("FirstIntoPage.png");
@@ -402,34 +402,34 @@ void startScreen() {
   switch(welcomeCounter) {
   case 0:
     textSize(50);
-    intro1.resize(1000, 1000);
+
     image(intro1, 0, 0);
     text("Once the world lived in harmony", 150, 100);
     fill(255);
     break;
   case 1:
-    intro2.resize(1000, 1000);
+    //intro2.resize(1000, 1000);
     image(intro2, 0, 0);
     text("Until a dark and evil force came", 150, 100);
     break;
   case 2:
-    intro3.resize(1000, 1000);
+    //intro3.resize(1000, 1000);
     image(intro3, 0, 0);
     text("His name, was MR. EVILS MUNCHKIN MAN", 75, 100);
     break;
   case 3:
-    intro4.resize(1000, 1000);
+    //intro4.resize(1000, 1000);
     image(intro4, 0, 0);
     textSize(40);
     text("The goblins together were the only thing that could stop him", 0, 100);
     break;
   case 4:
-    intro5.resize(1000, 1000);
+    //intro5.resize(1000, 1000);
     image(intro5, 0, 0);
     text("but he separated them one by one, killing them all", 50, 100);
     break;
   case 5:
-    intro6.resize(1000, 1000);
+    //intro6.resize(1000, 1000);
     image(intro6, 0, 0);
     textSize(50);
     text("Until only one remained", 250, 100);
