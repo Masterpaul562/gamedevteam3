@@ -374,6 +374,7 @@ void keyPressed() {
 }
 
 void startScreen() {
+  
   background(0);
   fill(255);
   //start1.resize(1000, 1000);
@@ -387,62 +388,67 @@ void startScreen() {
   }
   switch(welcomeCounter) {
   case 0:
-    text("Once the world lived in harmony", 200, 100);
+    textSize(50);
+    text("Once the world lived in harmony", 150, 100);
     fill(255);
     break;
   case 1:
-    text("Until a dark and evil force came", 100, 100);
+    text("Until a dark and evil force came", 150, 100);
     break;
   case 2:
-    text("His name, was MR. EVILS MUNCHKIN MAN", 100, 100);
+    text("His name, was MR. EVILS MUNCHKIN MAN", 75, 100);
     break;
   case 3:
-    text("The goblins together were the only thing that could stop him", 100, 100);
+    textSize(40);
+    text("The goblins together were the only thing that could stop him", 0, 100);
     break;
   case 4:
-    text("but he separated them one by one, killing them all", 100, 100);
+    text("but he separated them one by one, killing them all", 50, 100);
     break;
   case 5:
-    text("Until only one remained", 100, 100);
+  textSize(50);
+    text("Until only one remained", 250, 100);
     break;
   case 6:
-    text("The last and strongest one made a stand", 100, 100);
+    text("The last and strongest one made a stand", 75, 100);
     break;
   case 7:
-    text("Too strong for MR. EVILS MUNCHKIN MAN to face head on", 100, 100);
+    textSize(40);
+    text("Too strong for MR. EVILS MUNCHKIN MAN to face head on", 25, 100);
     break;
   case 8:
     text("So he devised a devious plan to trap the goblin", 100, 100);
     break;
   case 9:
-    text("to trap him in the prison realm and have his acolytes wear him down", 100, 100);
+    textSize(30);
+    text("to trap him in the prison realm and have his acolytes wear him down", 75, 100);
     break;
   case 10:
-    text("the plan succeeded and the goblin was trapped", 100, 100);
+    textSize(50);
+    text("the plan succeeded and the goblin was trapped", 0, 100);
     break;
   case 11:
-    text("but will that be enough to stop...", 100, 100);
+    text("but will that be enough to stop...", 150, 100);
     break;
   case 12:
-    text("THE GOBLIN SURIVIOR", 100, 100);
+    text("THE GOBLIN SURIVIOR", 300, 100);
     transTimer.start();
 
     break;
   default:
-    if (transTimer.isFinished() && transCount<=255) {
-      image(start1, 0, 0);
-      print(transCount);
-      transCount += 20;
-      tint(255, transCount);
-      start1.resize(1000, 1000);
-      image(start1, 0, 0);
-      transTimer.start();
-    }
-
-
+  background(255);
+  start1.resize(1000,1000);
+    image(start1, 0, 0);
+    //if (transTimer.isFinished() && transCount<=255) {
+    //  image(start1, 0, 0);
+    //  print(transCount);
+    //  transCount += 20;
+    //  tint(255, transCount);
+    //  start1.resize(1000, 1000);
+    //  image(start1, 0, 0);
+    //  transTimer.start();
+    //}
   }
-
-
 }
 
 
