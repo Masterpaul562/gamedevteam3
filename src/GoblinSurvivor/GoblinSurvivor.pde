@@ -1,6 +1,6 @@
 // Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>// //<>// //<>//
 import processing.sound.*;
-SoundFile background1, coin1, ouch1, gameoversound, arrow1;
+SoundFile background1, coin1, ouch1, gameoversound, arrow1, ominous1;
 SoundFile bite1;
 Goblin g1;
 
@@ -17,14 +17,16 @@ ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play, end, lD, lFired;
-PImage start1, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12,intro13;
+PImage start1, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12, intro13;
 PImage game1, over1, skull1, retry1;
 PImage[] skulls = new PImage[8];
 String retrying;
 PVector userPos;
 int etime;
+boolean isPlay;
 void setup() {
   etime = 5000;
+  isPlay = false;
   retrying = "RetryButton.png";
   end = false;
   lFired = false;
@@ -34,6 +36,7 @@ void setup() {
   coin1 = new SoundFile(this, "coinCollect.mp3");
   ouch1 = new SoundFile(this, "ouch.mp3");
   gameoversound = new SoundFile(this, "gameover.wav");
+  ominous1 = new SoundFile(this, "Ominous.wav");
   background1.loop();
   shootA = new Timer (4000);
   shootB = new Timer (6000);
@@ -74,17 +77,17 @@ void setup() {
   retry1 = loadImage(retrying);
   intro1 = loadImage("FirstIntoPage.png");
   intro2 = loadImage("SecondIntoPage.png");
-  intro3 = loadImage("FirstIntoPage.png");
-  intro4 = loadImage("FirstIntoPage.png");
-  intro5 = loadImage("FirstIntoPage.png");
-  intro6 = loadImage("FirstIntoPage.png");
-  intro7 = loadImage("FirstIntoPage.png");
-  intro8 = loadImage("FirstIntoPage.png");
-  intro9 = loadImage("FirstIntoPage.png");
-  intro10 = loadImage("FirstIntoPage.png");
-  intro11 = loadImage("FirstIntoPage.png");
-  intro12 = loadImage("FirstIntoPage.png");
-  intro13 = loadImage("FirstIntoPage.png");
+  intro3 = loadImage("MunchkinIntro2.png");
+  intro4 = loadImage("MunchkinIntro2.png");
+  intro5 = loadImage("MunchkinIntro2.png");
+  intro6 = loadImage("MunchkinIntro2.png");
+  intro7 = loadImage("MunchkinIntro2.png");
+  intro8 = loadImage("MunchkinIntro2.png");
+  intro9 = loadImage("MunchkinIntro2.png");
+  intro10 = loadImage("MunchkinIntro2.png");
+  intro11 = loadImage("MunchkinIntro2.png");
+  intro12 = loadImage("MunchkinIntro2.png");
+  intro13 = loadImage("MunchkinIntro2.png");
 }
 
 void draw() {
@@ -398,6 +401,7 @@ void startScreen() {
   if (welcomeTime.isFinished()) {
     welcomeTime.start();
     welcomeCounter++;
+    isPlay = false;
   }
   switch(welcomeCounter) {
   case 0:
@@ -410,49 +414,54 @@ void startScreen() {
   case 1:
     //intro2.resize(1000, 1000);
     image(intro2, 0, 0);
+    if (!isPlay) {
+      ominous1.loop();
+      isPlay = true;
+      background1.pause();
+    }
     text("Until a dark and evil force came", 150, 100);
     break;
   case 2:
     //intro3.resize(1000, 1000);
-    image(intro3, 0, 0);
+    image(intro3, 0, 200);
     text("His name, was MR. EVILS MUNCHKIN MAN", 75, 100);
     break;
   case 3:
     //intro4.resize(1000, 1000);
-    image(intro4, 0, 0);
+    image(intro4, 0, 200);
     textSize(40);
     text("The goblins together were the only thing that could stop him", 0, 100);
     break;
   case 4:
     //intro5.resize(1000, 1000);
-    image(intro5, 0, 0);
+    image(intro5, 0, 200);
     text("but he separated them one by one, killing them all", 50, 100);
     break;
   case 5:
     //intro6.resize(1000, 1000);
-    image(intro6, 0, 0);
+    image(intro6, 0, 200);
     textSize(50);
     text("Until only one remained", 250, 100);
     break;
   case 6:
     intro7.resize(1000, 1000);
-    image(intro7, 0, 0);
+    image(intro7, 0, 200);
     text("The last and strongest one made a stand", 75, 100);
     break;
   case 7:
     intro8.resize(1000, 1000);
-    image(intro8, 0, 0);
+    image(intro8, 0, 200);
     textSize(40);
     text("Too strong for MR. EVILS MUNCHKIN MAN to face head on", 25, 100);
     break;
   case 8:
     intro9.resize(1000, 1000);
-    image(intro9, 0, 0);
+    image(intro9, 0, 200);
     text("So he devised a devious plan to trap the goblin", 100, 100);
     break;
   case 9:
     intro10.resize(1000, 1000);
-    image(intro10, 0, 0);
+    image(intro10, 0, 200);
     textSize(30);
     text("to trap him in the prison realm and have his acolytes wear him down", 75, 100);
     break;

@@ -22,7 +22,7 @@ class Projectile {
     if (t== 'h') {
       hammerF = new PImage[4];
       for (int i =0; i<4; i++) {
-        hammerF[i] = loadImage ("hammer"+i+".png");
+        hammerF[i] = loadImage ("HammerAnimation"+i+".png");
       }
       hammer = ballP.copy();
       hammerTime = new Timer(8000);
