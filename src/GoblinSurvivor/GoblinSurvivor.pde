@@ -1,11 +1,11 @@
-// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>// //<>// //<>//
+// Canon Unguren, Axl Dain, Paul Tokhtuevm, Oskar Szajnuk, Aiden Felt| Oct 3 2024 //<>// //<>// //<>// //<>// //<>// //<>//
 import processing.sound.*;
 SoundFile background1, coin1, ouch1, gameoversound, arrow1, ominous1;
 SoundFile bite1;
 Goblin g1;
 
 PowUp o1;
-Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC, welcomeTime, transTimer;
+Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC, welcomeTime, transTimer,hammer;
 Shop shop1;
 Panel panel;
 Tile tile;
@@ -54,6 +54,8 @@ void setup() {
   lC = new Timer(10000);
   transTimer = new Timer(2000);
   lC.start();
+  hammer = new Timer(5000);
+  hammer.start();
   welcomeTime = new Timer(5000);
   welcomeTime.start();
   welcomeCounter = 0;
@@ -259,6 +261,10 @@ void draw() {
       }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
+        if(hammer.isFinished() && shop1.$hammer == true)
+        {
+          proj.add(new Projectile('h', new PVector (width/2, height/2)));
+        }
         if (shootB.isFinished() && shop1.$banana) {
 
 
