@@ -65,9 +65,9 @@ class Shop {
 
         if (i == 2 ) {
           if (mouseX>251+160+160 && mouseX<395+160+160 && mouseY<440 && mouseY>210 && mousePressed ) {
-            if (!$hammer && panel.money >= 0) {
+            if (!$hammer && panel.money >= 10) {
               $hammer = true;
-              panel.money -= 20;
+              panel.money -= 10;
               println("hammer");
             }
           }
