@@ -56,7 +56,7 @@ class Shop {
               bowUp = true;
               println("bow");
             } else if (bowUp == true && panel.money >= 10) {
-              panel.money -= 5;
+              panel.money -= 10;
               bowUp = false;
               bowUpHap = true;
             }
