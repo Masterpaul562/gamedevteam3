@@ -1,13 +1,13 @@
 // Aiden Felt, Canon Unguren, Paul Tokhtuev| 3 Oct 2024
 class Projectile {
   // Memebr Varibles
-  Timer fireballframeSpeed, lFS, BFS, hammerTime, hammerFPS ;
+  Timer fireballframeSpeed, lFS, BFS,  hammerFPS ;
   PImage arrow;
   PImage[] fireball, lightbeam, banana, hammerF;
   int x, y, w, h, hF;
   int speed, damage, range, atkSpeed, imageCount, frame, lF, bF;
 
-  boolean unlocked, disappear, Bdisappear, bananaD, aim, LBPlaced;
+  boolean unlocked, disappear, Bdisappear, bananaD, aim, LBPlaced,hG;
   char type;
   String direction, ballF;
 
@@ -20,15 +20,15 @@ class Projectile {
 
     lP = new PVector (0, 0);
     if (t== 'h') {
-      hammerF = new PImage[4];
-      for (int i =0; i<4; i++) {
+      hammerF = new PImage[5];
+      for (int i =0; i<4; i++) {  
+        hG=false;
         hammerF[i] = loadImage ("HammerAnimation"+i+".png");
+         hammerF[i].resize(450, 450);
       }
-      hammer = ballP.copy();
-      hammerTime = new Timer(8000);
+      hammer = ballP.copy();     
       type = 'h';
-      hammerFPS= new Timer (200);
-      hammerTime.start();
+      hammerFPS= new Timer (1000);
       hammerFPS.start();
     }
     if (t == 'b') {
@@ -67,8 +67,7 @@ class Projectile {
     if (type == 'a') {
       direction = "ArrowUP.png";
       location = new PVector (width/2, height/2);
-
-      target = new PVector (width/2, 0);
+      target =ballP.copy();
       if (key == 'w' | key == 'W') {
         direction = "ArrowUP.png";
       }
@@ -81,24 +80,7 @@ class Projectile {
       if (key == 'a' | key == 'A') {
         direction = "ArrowLeft.png";
       }
-      if (shootA.isFinished()) {
-
-        if (key == 'w' | key == 'W') {
-          target = new PVector (width/2, -40);
-        }
-        if (key == 's' | key == 'S') {
-          target = new PVector (width/2, height+40);
-        }
-        if (key == 'd' | key == 'D') {
-          target = new PVector (width+40, height/2);
-        }
-        if (key == 'a' | key == 'A') {
-          target = new PVector (-40, height/2);
-        }
-        target.sub(location);
-        target.normalize();
-        target.mult(5);
-      }
+      
     }
 
     if (t == 'w') {
@@ -157,9 +139,9 @@ class Projectile {
 
   void display() {
     if ( type == 'h') {
-      image(hammerF[hF], hammer.x, hammer.y);
+      image(hammerF[hF], hammer.x-5, hammer.y+30);
       if (hammerFPS.isFinished()) {
-        image(hammerF[hF], hammer.x, hammer.y);
+        image(hammerF[hF], hammer.x-5, hammer.y+30);
         hammerFPS.start();
       }
       if (hF<4) {
@@ -167,6 +149,7 @@ class Projectile {
       }
       if (hF==4) {
         hF=0;
+        hG =true;
       }
     }
     if (type =='b') {

@@ -5,7 +5,7 @@ SoundFile bite1;
 Goblin g1;
 
 PowUp o1;
-Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC, welcomeTime, transTimer,hammer;
+Timer eTimer, timer1, zWalk, shootA, shootB, skullFrameSpeed, lF, lC, welcomeTime, transTimer, hammer;
 Shop shop1;
 Panel panel;
 Tile tile;
@@ -22,9 +22,13 @@ PImage game1, over1, skull1, retry1;
 PImage[] skulls = new PImage[8];
 String retrying;
 PVector userPos;
+PVector location,locationUp;
+PVector target, targetUp;
 int etime;
-boolean isPlay;
+boolean isPlay, startTimers;
 void setup() {
+  
+  startTimers = false;
   etime = 5000;
   isPlay = false;
   retrying = "RetryButton.png";
@@ -40,27 +44,19 @@ void setup() {
   background1.loop();
   shootA = new Timer (4000);
   shootB = new Timer (6000);
-  shootB.start();
-  shootA.start();
   userPos = new PVector(width/2, height/2);
   enemies.add (new Enemy());
   zWalk = new Timer(500);
-  zWalk.start();
   eTimer = new Timer(etime);
-  eTimer.start();
   timer1 = new Timer(500);
-  timer1.start();
   lF = new Timer(5000);
   lC = new Timer(10000);
   transTimer = new Timer(2000);
-  lC.start();
-  hammer = new Timer(5000);
-  hammer.start();
+  hammer = new Timer(8000);
   welcomeTime = new Timer(5000);
   welcomeTime.start();
   welcomeCounter = 0;
   skullFrameSpeed = new Timer(300);
-  skullFrameSpeed.start();
   size(1000, 1000);
   level = 1;
   t1 = loadImage("Tile.png");
@@ -98,6 +94,22 @@ void draw() {
 
     startScreen();
   } else {
+    if (startTimers == false)
+    {
+      key ='w';
+      location = new PVector (width/2, height/2);
+      locationUp = new PVector (width/2+10, height/2);
+      hammer.start();
+      shootB.start();
+      shootA.start();
+      zWalk.start();
+      eTimer.start();
+      timer1.start();
+      lC.start();
+      skullFrameSpeed.start();
+      startTimers = true;
+    }
+    
     for (int i = 0; i < 8; i++) {
       skulls[i] = loadImage("Impact" + i + ".png");  // Load each frame as a separate image
     }
@@ -207,7 +219,7 @@ void draw() {
     tile.display();
     panel.display();
 
-    g1.display();
+
 
 
     for (int i = 0; i < powUps.size(); i++) {
@@ -225,7 +237,64 @@ void draw() {
 
     if (shootA.isFinished() && shop1.$bow) {
       arrow1.play();
-      proj.add(new Projectile('a', new PVector (width/2, height/2)));
+     if(key == 'z')
+       {key = 'w';}
+      if (shop1.bowUpHap==true) {        
+        
+        if (key == 'w' | key == 'W'|key == 's' | key == 'S') {
+          location = new PVector (width/2+10, height/2);
+        }
+        if (key == 'a' | key == 'A'|key == 'd' | key == 'D') {
+          location = new PVector (width/2, height/2+20);
+        }
+        if (key == 'w' | key == 'W') {
+          target = new PVector (width/2+10, -40);
+        } else if (key == 's' | key == 'S') {
+          target = new PVector (width/2+10, height+40);
+        } else if (key == 'd' | key == 'D') {
+          target = new PVector (width+40, height/2+10);
+        } else if (key == 'a' | key == 'A') {
+          target = new PVector (-40, height/2+10);
+        }
+        target.sub(location);
+        target.normalize();
+        target.mult(5);               
+         if (key == 'w' | key == 'W'|key == 's' | key == 'S') {
+          locationUp = new PVector (width/2-10, height/2);
+        }
+        if (key == 'a' | key == 'A'|key == 'd' | key == 'D') {
+          locationUp = new PVector (width/2, height/2-20);
+        }
+        if (key == 'w' | key == 'W') {
+          targetUp = new PVector (width/2+10, -40);
+        } else if (key == 's' | key == 'S') {
+          targetUp = new PVector (width/2+10, height+40);
+        } else if (key == 'd' | key == 'D') {
+          targetUp = new PVector (width+40, height/2-10);
+        } else if (key == 'a' | key == 'A') {
+          targetUp = new PVector (-40, height/2-10);
+        }
+        targetUp.sub(locationUp);
+        targetUp.normalize();
+        targetUp.mult(5);  
+        proj.add(new Projectile('a', target));
+        proj.add(new Projectile('a', targetUp));
+      } else {
+         
+        if (key == 'w' | key == 'W') {
+          target = new PVector (width/2, -40);
+        } else if (key == 's' | key == 'S') {
+          target = new PVector (width/2, height+40);
+        } else if (key == 'd' | key == 'D') {
+          target = new PVector (width+40, height/2);
+        } else if (key == 'a' | key == 'A') {
+          target = new PVector (-40, height/2);
+        }     
+        target.sub(location);
+        target.normalize();
+        target.mult(5);
+        proj.add(new Projectile('a', target));
+      }
       shootA.start();
     }
 
@@ -245,6 +314,7 @@ void draw() {
       enemy.playerMovement();
       enemy.display();
       shop1.display();
+
       if (enemy.poof == true) {
         enemies.remove(i);
         bite1.play();
@@ -261,16 +331,26 @@ void draw() {
       }
       for (int n = 0; n < proj.size(); n++) {
         Projectile projs = proj.get(n);
-        if(hammer.isFinished() && shop1.$hammer == true)
+        if (hammer.isFinished() && shop1.$hammer)
         {
           proj.add(new Projectile('h', new PVector (width/2, height/2)));
+          hammer.start();
+        }
+        if (projs.type == 'h'&& projs.hG == true) {
+          proj.remove(n);
         }
         if (shootB.isFinished() && shop1.$banana) {
-
-
-
           proj.add(new Projectile('b', enemies.get(indexofCE).enemyPos.copy()));
           shootB.start();
+        }
+        if (projs.type == 'h' && enemy.enemyPos.dist(projs.hammer)<200) {          
+          enemy.health -= 1000;
+          if (enemy.health <0) {
+            enemies.remove(i);
+            powUps.add(new PowUp(int(enemy.enemyPos.x), int(enemy.enemyPos.y)));
+            panel.enemiesKilled = panel.enemiesKilled+1;
+            panel.xp+=1;
+          }
         }
         if (projs.type == 'b' && enemy.enemyPos.dist(projs.bP)<30) {
           proj.remove(n);
@@ -357,7 +437,7 @@ void draw() {
       projs.playerMovement();
       projs.display();
     }
-
+    g1.display();
     if (g1.health <= 0) {
       end = true;
       play = false;
