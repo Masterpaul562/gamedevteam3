@@ -17,7 +17,7 @@ ArrayList<Projectile> proj = new ArrayList<Projectile>();
 ArrayList<PowUp> powUps = new ArrayList<PowUp>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 boolean play, end, lD, lFired;
-PImage start1, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12, intro13;
+PImage qButton,start1, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12, intro13;
 PImage game1, over1, skull1, retry1;
 PImage[] skulls = new PImage[8];
 String retrying;
@@ -86,6 +86,7 @@ void setup() {
   intro11 = loadImage("MunchkinIntro2.png");
   intro12 = loadImage("MunchkinIntro2.png");
   intro13 = loadImage("MunchkinIntro2.png");
+  qButton = loadImage("ButtonQ.png");
 }
 
 void draw() {
@@ -455,6 +456,17 @@ void draw() {
       g1.health = 100;
     }
   }
+  image (qButton,950,900);
+  if (keyPressed) {
+    if (key == 'q'){
+      qButton = loadImage ("ButtonQPress.png");
+    image (qButton,950,900);
+    }
+     if (key!= 'q') {
+  qButton = loadImage ("ButtonQ.png");
+  image (qButton,950,900);}
+  }
+  
   if (!play && end) {
 
     gameOver();
