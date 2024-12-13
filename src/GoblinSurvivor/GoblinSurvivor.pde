@@ -483,6 +483,8 @@ void startScreen() {
   //image(start1, 0, 0);
   if (keyPressed || mousePressed) {
     play = true;
+    ominous1.stop();
+   
   }
   if (welcomeTime.isFinished()) {
     welcomeTime.start();
@@ -530,40 +532,40 @@ void startScreen() {
     text("Until only one remained", 250, 100);
     break;
   case 6:
-    intro7.resize(1000, 1000);
+
     image(intro7, 0, 200);
     text("The last and strongest one made a stand", 75, 100);
     break;
   case 7:
-    intro8.resize(1000, 1000);
+
     image(intro8, 0, 200);
     textSize(40);
     text("Too strong for MR. EVILS MUNCHKIN MAN to face head on", 25, 100);
     break;
   case 8:
-    intro9.resize(1000, 1000);
+
     image(intro9, 0, 200);
     text("So he devised a devious plan to trap the goblin", 100, 100);
     break;
   case 9:
-    intro10.resize(1000, 1000);
+
     image(intro10, 0, 200);
     textSize(30);
     text("to trap him in the prison realm and have his acolytes wear him down", 75, 100);
     break;
   case 10:
-    intro11.resize(1000, 1000);
+
     image(intro11, 0, 0);
     textSize(50);
     text("the plan succeeded and the goblin was trapped", 0, 100);
     break;
   case 11:
-    intro12.resize(1000, 1000);
+
     image(intro12, 0, 0);
     text("but will that be enough to stop...", 150, 100);
     break;
   case 12:
-    intro13.resize(1000, 1000);
+
     image(intro13, 0, 0);
     text("THE GOBLIN SURIVIOR", 300, 100);
     transTimer.start();
